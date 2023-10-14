@@ -71,14 +71,15 @@
 
                                         <p>
                                             Generar Reporte:
-                                            <button href="@Url.Action("Index","Inventory")" id="miBotonPDF" class="btn btn-warning">PDF</button>
-                                            <button href="@Url.Action("Index","Inventory")" id="miBotonEx" class="btn btn-warning">Excel</button>
+                                            <a href="@Url.Action("ExportProductsToExcel","Product")" id="miBotonEx" class="btn btn-warning"> Excel </a>
+                                           @* <button href="@Url.Action("ExportProductsToExcel","Product")" id="miBotonEx" class="btn btn-warning">Excel</button>*@
+                                            @*<button href="@Url.Action("Index","Inventory")" id="miBotonPDF" class="btn btn-warning">PDF</button>*@
                                         </p>
                                     </tbody>
                                 </table>
-                                <div>
+                                @*<div>
                                     <a href="" class="btn btn-info btn-block waves-effect waves-light"> Cargar más productos </a>
-                                </div>
+                                </div>*@
                             </div>
 
                         </div> <!-- end card-body-->
@@ -90,7 +91,7 @@
         </div> <!-- container-fluid -->
     </div>
     </div>
-    <script>
+    @*<script>
         const miBoton = document.getElementById("miBoton");
 
         miBoton.addEventListener("click", (event) => {
@@ -173,7 +174,7 @@
                 }
             });
         });
-    </script>
+    </script>*@
 </body>
 </html>
 
