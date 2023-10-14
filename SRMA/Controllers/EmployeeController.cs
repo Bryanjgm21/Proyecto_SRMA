@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SRMA.Entities;
 using SRMA.Interfaces;
+using static Dapper.SqlMapper;
 
 namespace SRMA.Controllers
 {
@@ -20,11 +22,19 @@ namespace SRMA.Controllers
             var users = _userModel.ListUsers(2);
             return View(users);
         }
-
+                
         [HttpGet]
-        public IActionResult Absence()
+        public IActionResult EmployeeInfo(long IdUser)
         {
-            return View();
+           
+            var result = _userModel.ConsultAcc(IdUser);
+
+            if (result != null)
+            {
+                return View(result);
+            }
+
+            return NotFound(); // Maneja el caso en el que el usuario no se encuentre
         }
 
         [HttpGet]
@@ -33,14 +43,66 @@ namespace SRMA.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult Edit()
+        // Register user with rol of employee
+        [HttpPost]
+        public IActionResult RegisterEmployee(UserEntity entity)
         {
-            return View();
+            entity.IdRol = 2;
+            entity.statusU = true;
+            entity.passwordU = "password1";
+
+            var resultado = _userModel.RegisterUser(entity);
+
+            if (resultado != null)
+            {
+                return RedirectToAction("Index", "Employee");
+            }
+            else
+            {
+                return RedirectToAction("Create", "Employee");
+            }
         }
 
+        [HttpPost]
+        public IActionResult Edit(UserEntity entity)
+        {
+           
+
+            var resultado = _userModel.UpdateUser(entity, entity.IdUser);
+
+
+            if (resultado != null)
+            {
+                return RedirectToAction("Index", "Employee");
+            }
+            else
+            {
+                return RedirectToAction("EmployeeInfo", "Employee");
+            }
+        }
+
+
+        [HttpPost]
+        public IActionResult DeleteAcc(int IdUser)
+        {
+           
+            long UserId = (long)IdUser;
+
+            var result = _userModel.DeleteAcc(UserId);
+
+            if (result != null)
+            {
+                return RedirectToAction("Index", "Employee");
+            }
+            else
+            {
+                return RedirectToAction("LogIn", "Login");
+            }
+        }
+
+
         [HttpGet]
-        public IActionResult EmployeeInfo()
+        public IActionResult Absence()
         {
             return View();
         }

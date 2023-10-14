@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "GetUsers";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 
@@ -20,8 +20,10 @@
                         <div class="card-body">
 
                             <h4 class="card-title">Empleados</h4>
-                            <div>
+                            <div class ="input-group">
+                                <div class="input-group-append">
                                 <a href="@Url.Action("Create","Employee")" class="btn btn-success btn-block waves-effect waves-light"> Agregar empleado </a>
+                                </div>
                             </div>
                             <form class="p-3">
                                 <div class="form-group m-0">
@@ -34,52 +36,50 @@
                                 </div>
                             </form>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table table-centered table-striped table-nowrap">
                                     <thead>
                                         <tr>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.userName)
+                                               Nombre
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.lastName)
+                                               Apellido
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.email)
+                                                Correo
                                             </th>
                                             
                                             <th>
-                                                @Html.DisplayNameFor(model => model.Id)
+                                              Cedula
                                             </th>
                                             <th>
-                                                @Html.DisplayNameFor(model => model.cellphone)
+                                               Celular
                                             </th>
                                             
-                                            <th></th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach (var item in Model)
                                         {
                                             <tr>
+                                                <td class="table-user">@item.userName</td>
+                                                  
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.userName)
+                                                    @item.lastName
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.lastName)
+                                                    @item.email
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.email)
+                                                    @item.Id
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.Id)
+                                                    @item.cellphone
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.cellphone)
-                                                </td>
-                                                <td>
-                                                    @Html.ActionLink("Edit", "Employee", new { id = item.IdUser })|
-                                                    @Html.ActionLink("EmployeeInfo", "Employee", new { id = item.IdUser }) |
-                                                    @Html.ActionLink("Index", "Employee", new { id = item.IdUser })"
+                                                    <a href="@Url.Action("EmployeeInfo","Employee", new { IdUser = item.IdUser })" class="btn btn-secondary"> Ver Empleado </a>
+
                                                 </td>
                                             </tr>
                                         }
