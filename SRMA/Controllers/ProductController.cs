@@ -17,7 +17,8 @@ namespace SRMA.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var data = _productModel.ListProducts();
+            return View(data);
         }
 
         [HttpGet]
@@ -31,5 +32,7 @@ namespace SRMA.Controllers
         {
             return View();
         }
+
+
     }
 }

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<SRMA.Entities.ProductEntity>
+
+@{
     ViewData["Title"] = "Inventario";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
@@ -30,6 +32,8 @@
                                     </div>
                                 </div>
                             </form>
+
+
                             <div class="table-responsive">
                                 <table class="table table-centered table-striped table-nowrap">
                                     <thead>
@@ -39,207 +43,32 @@
                                             <th>Cantidad</th>
                                             <th>Disponibilidad</th>
                                             <th>Estado</th>
+                                            <th>Precio</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="table-user">
-                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">0123</a>
-                                            </td>
-                                            <td>
-                                                Carne
-                                            </td>
-                                            <td>
-                                                30
-                                            </td>
-                                            <td>
-                                                Sí
-                                            </td>
-                                            <td>
-                                                Disponible
-                                            </td>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td class="table-user">@item.IdProduct</td>
+                                                <td>@item.productName</td>
+                                                <td>@item.stock</td>
+                                                <td>@item.details</td>
+                                                <td>@item.productStatus</td>
+                                                <td>@item.price</td>
+                                                <td>
+                                                    <div>
+                                                        <a href="@Url.Action("Edit","Product")" class="btn btn-outline-secondary"> Editar </a>
+                                                        <a href="@Url.Action("Index","Product")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
 
-                                            <td>
-                                                <div>
-                                                    <a href="@Url.Action("Edit","Product")" class="btn btn-outline-secondary"> Editar </a>
-                                                    <a href="@Url.Action("Index","Product")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="table-user">
-                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">2345</a>
-                                            </td>
-                                            <td>
-                                                Lechuga
-                                            </td>
-                                            <td>
-                                                4
-                                            </td>
-                                            <td>
-                                                No
-                                            </td>
-                                            <td>
-                                                Solicitar
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <a href="@Url.Action("Edit","Inventory")" class="btn btn-outline-secondary"> Editar </a>
-                                                    <a href="@Url.Action("Index","Inventory")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        }
 
-                                        <!-- Ingrediente 2 -->
-                                        <tr>
-                                            <td class="table-user">
-                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">6789</a>
-                                            </td>
-                                            <td>
-                                                Tomate
-                                            </td>
-                                            <td>
-                                                25
-                                            </td>
-                                            <td>
-                                                Sí
-                                            </td>
-                                            <td>
-                                                Disponible
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <a href="@Url.Action("Edit","Inventory")" class="btn btn-outline-secondary"> Editar </a>
-                                                    <a href="@Url.Action("Index","Inventory")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
-                                                </div>
-                                            </td>
-                                        </tr>
 
-                                        <!-- Ingrediente 3 -->
-                                        <tr>
-                                            <td class="table-user">
-                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">9876</a>
-                                            </td>
-                                            <td>
-                                                Queso
-                                            </td>
-                                            <td>
-                                                50
-                                            </td>
-                                            <td>
-                                                Sí
-                                            </td>
-                                            <td>
-                                                Disponible
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <a href="@Url.Action("Edit","Inventory")" class="btn btn-outline-secondary"> Editar </a>
-                                                    <a href="@Url.Action("Index","Inventory")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
-                                                </div>
-                                            </td>
-                                        </tr>
 
-                                        <!-- Ingrediente 4 -->
-                                        <tr>
-                                            <td class="table-user">
-                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">5432</a>
-                                            </td>
-                                            <td>
-                                                Pollo
-                                            </td>
-                                            <td>
-                                                20
-                                            </td>
-                                            <td>
-                                                Sí
-                                            </td>
-                                            <td>
-                                                Disponible
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <a href="@Url.Action("Edit","Inventory")" class="btn btn-outline-secondary"> Editar </a>
-                                                    <a href="@Url.Action("Index","Inventory")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <!-- Ingrediente 5 -->
-                                        <tr>
-                                            <td class="table-user">
-                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">7654</a>
-                                            </td>
-                                            <td>
-                                                Cebolla
-                                            </td>
-                                            <td>
-                                                0
-                                            </td>
-                                            <td>
-                                                No
-                                            </td>
-                                            <td>
-                                                Agotado
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <a href="@Url.Action("Edit","Inventory")" class="btn btn-outline-secondary"> Editar </a>
-                                                    <a href="@Url.Action("Index","Inventory")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <!-- Ingrediente 6 -->
-                                        <tr>
-                                            <td class="table-user">
-                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">3210</a>
-                                            </td>
-                                            <td>
-                                                Jamón
-                                            </td>
-                                            <td>
-                                                5
-                                            </td>
-                                            <td>
-                                                Sí
-                                            </td>
-                                            <td>
-                                                Solicitar
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <a href="@Url.Action("Edit","Inventory")" class="btn btn-outline-secondary"> Editar </a>
-                                                    <a href="@Url.Action("Index","Inventory")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <!-- Ingrediente 7 -->
-                                        <tr>
-                                            <td class="table-user">
-                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">8765</a>
-                                            </td>
-                                            <td>
-                                                Champiñones
-                                            </td>
-                                            <td>
-                                                28
-                                            </td>
-                                            <td>
-                                                Sí
-                                            </td>
-                                            <td>
-                                                Disponible
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <a href="@Url.Action("Edit","Inventory")" class="btn btn-outline-secondary"> Editar </a>
-                                                    <a href="@Url.Action("Index","Inventory")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
-                                                </div>
-                                            </td>
-                                        </tr>
                                         <p>
                                             Generar Reporte:
                                             <button href="@Url.Action("Index","Inventory")" id="miBotonPDF" class="btn btn-warning">PDF</button>
