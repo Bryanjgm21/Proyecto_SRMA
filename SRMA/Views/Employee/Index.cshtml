@@ -1,0 +1,101 @@
+﻿@model IEnumerable<SRMA.Entities.UserEntity>
+
+@{
+    ViewData["Title"] = "GetUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<html>
+<body>
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+            </div>
+            <div class="row">
+                <div class="col-xl-10">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="card-title">Empleados</h4>
+                            <div>
+                                <a href="@Url.Action("Create","Employee")" class="btn btn-success btn-block waves-effect waves-light"> Agregar empleado </a>
+                            </div>
+                            <form class="p-3">
+                                <div class="form-group m-0">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Buscar empleado ..." aria-label="Employee Search">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.userName)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.lastName)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.email)
+                                            </th>
+                                            
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Id)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.cellphone)
+                                            </th>
+                                            
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.userName)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.lastName)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.email)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Id)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.cellphone)
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink("Edit", "Employee", new { id = item.IdUser })|
+                                                    @Html.ActionLink("EmployeeInfo", "Employee", new { id = item.IdUser }) |
+                                                    @Html.ActionLink("Index", "Employee", new { id = item.IdUser })"
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+            </div>
+            <!-- end row-->
+
+        </div> <!-- container-fluid -->
+    </div>
+    </div>
+    
+</body>
+</html>

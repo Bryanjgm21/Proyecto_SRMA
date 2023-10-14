@@ -1,0 +1,355 @@
+﻿
+@{
+    ViewData["Title"] = "Inventario";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<html>
+<body>
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+            </div>
+            <div class="row">
+                <div class="col-xl-10">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="card-title">Inventario</h4>
+                            <div>
+                                <a href="/Inventory/Create" class="btn btn-success btn-block waves-effect waves-light"> Agregar producto </a>
+                            </div>
+                            <form class="p-3">
+                                <div class="form-group m-0">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Buscar Producto ..." aria-label="Product Search">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="table-responsive">
+                                <table class="table table-centered table-striped table-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo</th>
+                                            <th>Nombre</th>
+                                            <th>Cantidad</th>
+                                            <th>Disponibilidad</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="table-user">
+                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">0123</a>
+                                            </td>
+                                            <td>
+                                                Carne
+                                            </td>
+                                            <td>
+                                                30
+                                            </td>
+                                            <td>
+                                                Sí
+                                            </td>
+                                            <td>
+                                                Disponible
+                                            </td>
+
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("Edit","Inventory")" class="btn btn-outline-secondary"> Editar </a>
+                                                    <a href="@Url.Action("Index","Inventory")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-user">
+                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">2345</a>
+                                            </td>
+                                            <td>
+                                                Lechuga
+                                            </td>
+                                            <td>
+                                                4
+                                            </td>
+                                            <td>
+                                                No
+                                            </td>
+                                            <td>
+                                                Solicitar
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("Edit","Inventory")" class="btn btn-outline-secondary"> Editar </a>
+                                                    <a href="@Url.Action("Index","Inventory")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Ingrediente 2 -->
+                                        <tr>
+                                            <td class="table-user">
+                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">6789</a>
+                                            </td>
+                                            <td>
+                                                Tomate
+                                            </td>
+                                            <td>
+                                                25
+                                            </td>
+                                            <td>
+                                                Sí
+                                            </td>
+                                            <td>
+                                                Disponible
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("Edit","Inventory")" class="btn btn-outline-secondary"> Editar </a>
+                                                    <a href="@Url.Action("Index","Inventory")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Ingrediente 3 -->
+                                        <tr>
+                                            <td class="table-user">
+                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">9876</a>
+                                            </td>
+                                            <td>
+                                                Queso
+                                            </td>
+                                            <td>
+                                                50
+                                            </td>
+                                            <td>
+                                                Sí
+                                            </td>
+                                            <td>
+                                                Disponible
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("Edit","Inventory")" class="btn btn-outline-secondary"> Editar </a>
+                                                    <a href="@Url.Action("Index","Inventory")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Ingrediente 4 -->
+                                        <tr>
+                                            <td class="table-user">
+                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">5432</a>
+                                            </td>
+                                            <td>
+                                                Pollo
+                                            </td>
+                                            <td>
+                                                20
+                                            </td>
+                                            <td>
+                                                Sí
+                                            </td>
+                                            <td>
+                                                Disponible
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("Edit","Inventory")" class="btn btn-outline-secondary"> Editar </a>
+                                                    <a href="@Url.Action("Index","Inventory")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Ingrediente 5 -->
+                                        <tr>
+                                            <td class="table-user">
+                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">7654</a>
+                                            </td>
+                                            <td>
+                                                Cebolla
+                                            </td>
+                                            <td>
+                                                0
+                                            </td>
+                                            <td>
+                                                No
+                                            </td>
+                                            <td>
+                                                Agotado
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("Edit","Inventory")" class="btn btn-outline-secondary"> Editar </a>
+                                                    <a href="@Url.Action("Index","Inventory")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Ingrediente 6 -->
+                                        <tr>
+                                            <td class="table-user">
+                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">3210</a>
+                                            </td>
+                                            <td>
+                                                Jamón
+                                            </td>
+                                            <td>
+                                                5
+                                            </td>
+                                            <td>
+                                                Sí
+                                            </td>
+                                            <td>
+                                                Solicitar
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("Edit","Inventory")" class="btn btn-outline-secondary"> Editar </a>
+                                                    <a href="@Url.Action("Index","Inventory")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Ingrediente 7 -->
+                                        <tr>
+                                            <td class="table-user">
+                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">8765</a>
+                                            </td>
+                                            <td>
+                                                Champiñones
+                                            </td>
+                                            <td>
+                                                28
+                                            </td>
+                                            <td>
+                                                Sí
+                                            </td>
+                                            <td>
+                                                Disponible
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("Edit","Inventory")" class="btn btn-outline-secondary"> Editar </a>
+                                                    <a href="@Url.Action("Index","Inventory")" id="miBoton2" class="btn btn-outline-danger "> Eliminar </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <p>
+                                            Generar Reporte:
+                                            <button href="@Url.Action("Index","Inventory")" id="miBotonPDF" class="btn btn-warning">PDF</button>
+                                            <button href="@Url.Action("Index","Inventory")" id="miBotonEx" class="btn btn-warning">Excel</button>
+                                        </p>
+                                    </tbody>
+                                </table>
+                                <div>
+                                    <a href="" class="btn btn-info btn-block waves-effect waves-light"> Cargar más productos </a>
+                                </div>
+                            </div>
+
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+            </div>
+            <!-- end row-->
+
+        </div> <!-- container-fluid -->
+    </div>
+    </div>
+    <script>
+        const miBoton = document.getElementById("miBoton");
+
+        miBoton.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevenir la redirección predeterminada del enlace
+
+            Swal.fire({
+                title: '¿Deseas generar el reporte del inventario?',
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Sí, generar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = miBoton.getAttribute('href'); // Redireccionar si se confirma
+                }
+            });
+        });
+    </script>
+    <script>
+        const miBoton2 = document.getElementById("miBoton2");
+
+        miBoton2.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevenir la redirección predeterminada del enlace
+
+            Swal.fire({
+                title: '¿Deseas eliminar producto?',
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: '¡Sí, eliminar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = miBoton2.getAttribute('href'); // Redireccionar si se confirma
+                }
+            });
+        });
+    </script>
+    <script>
+        const miBotonPDF = document.getElementById("miBotonPDF");
+
+        miBotonPDF.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevenir la redirección predeterminada del enlace
+
+            Swal.fire({
+                title: '¿Deseas generar el reporte del inventario en PDF?',
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Sí, generar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = miBotonPDF.getAttribute('href'); // Redireccionar si se confirma
+                }
+            });
+        });
+    </script>
+    <script>
+        const miBotonEx = document.getElementById("miBotonEx");
+
+        miBotonEx.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevenir la redirección predeterminada del enlace
+
+            Swal.fire({
+                title: '¿Deseas generar el reporte del inventario en Excel?',
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Sí, generar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = miBotonEx.getAttribute('href'); // Redireccionar si se confirma
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+

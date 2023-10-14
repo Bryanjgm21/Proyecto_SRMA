@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewData["Title"] = "Reservaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<body>
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+            </div>
+            <div class="row">
+                <div class="col-xl-10">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Reservaciones</h4>
+                            <div>
+                                <a href="@Url.Action("Create","Reservation")" class="btn btn-success"> Nueva Reservación</a>
+                            </div>
+                            <form class="p-3">
+                                <div class="form-group m-0">
+                                    <div class="input-group">
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="table-responsive">
+                                <table class="table table-centered table-striped table-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha Reservación</th>
+                                            <th>Hora</th>
+                                            <th>Personas</th>
+                                            <th>Menu</th>
+                                            <th>Observaciones</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                19/04/2023
+                                            </td>
+                                            <td>
+                                                13:00
+                                            </td>
+                                            <td>
+                                                6
+                                            </td>
+                                            <td>
+                                                Casados del dia
+                                            </td>
+                                            <td>
+                                                1 persona vegetariana
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("Details","Reservation")" class="btn btn-outline-primary"> Editar </a>
+                                                    <a href="@Url.Action("Index","Reservation")" id="miBoton" class="btn btn-outline-danger"> Eliminar </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                21/06/2023
+                                            </td>
+                                            <td>
+                                                12:00
+                                            </td>
+                                            <td>
+                                                4
+                                            </td>
+                                            <td>
+                                                Menu especial del día
+                                            </td>
+                                            <td>
+                                                Ninguna
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("Details","Reservation")" class="btn btn-outline-primary"> Editar </a>
+                                                    <a href="@Url.Action("Index","Reservation")" id="miBoton" class="btn btn-outline-danger"> Eliminar </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+            </div>
+            <!-- end row-->
+
+        </div> <!-- container-fluid -->
+    </div>
+    <script>
+        const miBoton = document.getElementById("miBoton");
+
+        miBoton.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevenir la redirección predeterminada del enlace
+
+            Swal.fire({
+                title: '¿Deseas eliminar la reservación?',
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: '¡Sí, eliminar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = miBoton.getAttribute('href'); // Redireccionar si se confirma
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

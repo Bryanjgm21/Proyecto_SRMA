@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewData["Title"] = "Vacaciones";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<html>
+<body>
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+            </div>
+            <div class="row">
+                <div class="col-xl-10">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="card-title">Vacaciones</h4>
+                            <div class="table-responsive">
+                                <table class="table table-centered table-striped table-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                            <th>Cedula</th>
+                                            <th>Vacaciones restantes</th>
+                                            <th>Ausencias justificadas</th>
+                                            <th>Ausencias injustificadas</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="table-user">
+                                                <img src="~/Theme/assets/images/users/avatar-4.jpg" alt="table-user" class="mr-2 avatar-xs rounded-circle">
+                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">Raúl</a>
+                                            </td>
+                                            <td>
+                                                Jimenez
+                                            </td>
+                                            <td>
+                                                65235145
+                                            </td>
+                                            <td>
+                                                6
+                                            </td>
+                                            <td>
+                                                2
+                                            </td>
+                                            <td>
+                                                0
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("VacationAdd","Employee")" class="btn btn-outline-success"> Solicitar </a>
+                                                    <a href="@Url.Action("VacationRefund","Employee")" class="btn btn-outline-secondary"> Devolver </a>
+                                                    <a href="@Url.Action("Absence","Employee")" class="btn btn-outline-danger "> Ausencia </a>
+
+
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="table-user">
+                                                <img src="~/Theme/assets/images/users/avatar-3.jpg" alt="table-user" class="mr-2 avatar-xs rounded-circle">
+                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">Miriam</a>
+                                            </td>
+                                            <td>
+                                                Elizondo
+                                            </td>
+                                            <td>
+                                                5213654
+                                            </td>
+                                            <td>
+                                                4
+                                            </td>
+                                            <td>
+                                                2
+                                            </td>
+                                            <td>
+                                                1
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("VacationAdd","Employee")" class="btn btn-outline-success"> Solicitar </a>
+                                                    <a href="@Url.Action("VacationRefund","Employee")" class="btn btn-outline-secondary"> Devolver </a>
+                                                    <a href="@Url.Action("Absence","Employee")" class="btn btn-outline-danger "> Ausencia </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-user">
+                                                <img src="~/Theme/assets/images/users/avatar-8.jpg" alt="table-user" class="mr-2 avatar-xs rounded-circle">
+                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">Alexa</a>
+                                            </td>
+                                            <td>
+                                                Toruño
+                                            </td>
+                                            <td>
+                                                40251361
+                                            </td>
+                                            <td>
+                                                8
+                                            </td>
+                                            <td>
+                                                1
+                                            </td>
+                                            <td>
+                                                3
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("VacationAdd","Employee")" class="btn btn-outline-success"> Solicitar </a>
+                                                    <a href="@Url.Action("VacationRefund","Employee")" class="btn btn-outline-secondary"> Devolver </a>
+                                                    <a href="@Url.Action("Absence","Employee")" class="btn btn-outline-danger "> Ausencia </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-user">
+                                                <img src="~/Theme/assets/images/users/avatar-1.jpg" alt="table-user" class="mr-2 avatar-xs rounded-circle">
+                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">Sebastian</a>
+                                            </td>
+                                            <td>
+                                                Perez
+                                            </td>
+                                            <td>
+                                                4251563
+                                            </td>
+                                            <td>
+                                                1
+                                            </td>
+                                            <td>
+                                                3
+                                            </td>
+                                            <td>
+                                                2
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("VacationAdd","Employee")" class="btn btn-outline-success"> Solicitar </a>
+                                                    <a href="@Url.Action("VacationRefund","Employee")" class="btn btn-outline-secondary"> Devolver </a>
+                                                    <a href="@Url.Action("Absence","Employee")" class="btn btn-outline-danger "> Ausencia </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+            </div>
+            <!-- end row-->
+
+        </div> <!-- container-fluid -->
+    </div>
+    </div>
+</body>
+</html>

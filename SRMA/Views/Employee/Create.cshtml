@@ -1,0 +1,114 @@
+﻿@model SRMA.Entities.UserEntity
+
+@{
+    ViewData["Title"] = "Registrar Empleado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var elemento = document.getElementById("page-topbar");
+        if (elemento) {
+            elemento.style.display = "none";
+        }
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        var elementos = document.querySelectorAll(".vertical-menu");
+        elementos.forEach(function (elemento) {
+            elemento.style.display = "none";
+        });
+    });
+</script>
+
+<html>
+<body>
+
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex align-items-center min-vh-100">
+                        <div class="w-100 d-block bg-white shadow-lg rounded my-5">
+                            <div class="row">
+                                <div class="col-lg-5 d-none d-lg-block bg-register rounded-left"></div>
+                                <div class="col-lg-7">
+                                    <div class="p-5">
+                                        <div class="text-center mb-5">
+                                            <a href="index.html" class="text-dark font-size-22 font-family-secondary">
+                                                <i class="mdi mdi-album"></i> <b>SRMA</b>
+                                            </a>
+                                        </div>
+                                        <h1 class="h5 mb-1">Agrega la información del empleado</h1>
+
+                                        @using (Html.BeginForm("RegisterEmployee", "Usuario", FormMethod.Post, new { @class = "user" }))
+                                        {
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <label>Nombre</label>
+                                                    @Html.TextBoxFor(m => m.userName, new {@class="form-control form-control-user", @placeholder="Nombre",@type="text"})
+
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label>Apellido</label>
+                                                    @Html.TextBoxFor(m => m.lastName, new {@class="form-control form-control-user", @placeholder="Apellido",@type="text"})
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Cedula</label>
+                                                @Html.TextBoxFor(m => m.Id, new {@class="form-control form-control-user", @placeholder="Cedula",@type="text"})
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <label>Telefono</label>
+                                                    @Html.TextBoxFor(m => m.cellphone, new {@class="form-control form-control-user", @placeholder="Telefono",@type="tel"})
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Correo electronico</label>
+                                                @Html.TextBoxFor(m => m.email, new {@class="form-control form-control-user", @placeholder="Correo electronico",@type="email"})
+                                            </div>
+
+
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="submit" class="btn btn-success btn-block waves-effect waves-light" value="Registrar" />
+                                                <a href="@Url.Action("Index", "Employee")" class="btn btn-secondary btn-block waves-effect waves-light">Volver a la página principal</a>
+                                            </div>
+                                        }
+                                        <!-- end row -->
+                                    </div> <!-- end .padding-5 -->
+                                </div> <!-- end col -->
+                            </div> <!-- end row -->
+                        </div> <!-- end .w-100 -->
+                    </div> <!-- end .d-flex -->
+                </div> <!-- end col-->
+            </div> <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+    @* <script>
+    const miBoton = document.getElementById("miBoton");
+
+    miBoton.addEventListener("click", (event) => {
+    event.preventDefault(); // Prevenir la redirección predeterminada del enlace
+
+    Swal.fire({
+    title: '¿Deseas registrar tu cuenta?',
+    icon: 'question',
+    showCancelButton: true,
+    cancelButtonText: 'Cancelar',
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: '¡Sí, registrar!'
+    }).then((result) => {
+    if (result.isConfirmed) {
+    window.location.href = miBoton.getAttribute('href'); // Redireccionar si se confirma
+    }
+    });
+    });
+    </script>*@
+</body>
+</html>

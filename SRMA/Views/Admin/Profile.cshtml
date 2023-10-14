@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewData["Title"] = "Perfil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<body>
+
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex align-items-center min-vh-100">
+                        <div class="w-100 d-block bg-white shadow-lg rounded my-5">
+                            <div class="row">
+                                <div class="col-lg-5 d-none d-lg-block bg-register rounded-left"></div>
+                                <div class="col-lg-7">
+                                    <div class="p-5">
+                                        <div class="text-center mb-5">
+                                            <a href="index.html" class="text-dark font-size-22 font-family-secondary">
+                                                <i class="mdi mdi-album"></i> <b>SRMA</b>
+                                            </a>
+                                        </div>
+                                        <h1 class="h5 mb-1">Cambiar los datos de tu cuenta</h1>
+                                        <p class="text-muted mb-4">Una vez hayas terminado, utiliza la opción de "Guardar cambios" o tambien puedes eliminar tu cuenta "</p>
+                                        <form class="user">
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Bryan">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Gonzalez">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="number" class="form-control form-control-user" id="exampleInputNumber" placeholder="45365126">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="bg@gmail.com">
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="*********">
+                                                </div>
+                                            </div>
+                                            <a href="@Url.Action("Profile","Usuario")" id="miBoton" class="btn btn-success btn-block waves-effect waves-light"> Guardar cambios </a>
+                                            <a href="@Url.Action("Index","Usuario")" id="miBoton2" class="btn btn-danger btn-block waves-effect waves-light"> Eliminar cuenta </a>
+
+                                        </form>
+                                        <!-- end row -->
+                                    </div> <!-- end .padding-5 -->
+                                </div> <!-- end col -->
+                            </div> <!-- end row -->
+                        </div> <!-- end .w-100 -->
+                    </div> <!-- end .d-flex -->
+                </div> <!-- end col-->
+            </div> <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+    <script>
+        const miBoton = document.getElementById("miBoton");
+
+        miBoton.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevenir la redirección predeterminada del enlace
+
+            Swal.fire({
+                title: '¿Deseas guardar los cambios?',
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Sí, guardar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = miBoton.getAttribute('href'); // Redireccionar si se confirma
+                }
+            });
+        });
+    </script>
+    <script>
+        const miBoton2 = document.getElementById("miBoton2");
+
+        miBoton2.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevenir la redirección predeterminada del enlace
+
+            Swal.fire({
+                title: '¿Deseas eliminar la cuenta?',
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: '¡Sí, eliminar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = miBoton2.getAttribute('href'); // Redireccionar si se confirma
+                }
+            });
+        });
+    </script>
+</body>
+</html>
