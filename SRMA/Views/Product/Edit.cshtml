@@ -1,0 +1,105 @@
+﻿@model SRMA.Entities.ProductEntity
+
+@{
+    ViewData["Title"] = "Editar Producto";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<html>
+<body>
+
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex align-items-center min-vh-100">
+                        <div class="w-100 d-block bg-white shadow-lg rounded my-5">
+                            <div class="row">
+                                <div class="col-lg-5 d-none d-lg-block bg-register rounded-left"></div>
+                                <div class="col-lg-7">
+                                    <div class="p-5">
+                                        <div class="text-center mb-5">
+                                            <a href="index.html" class="text-dark font-size-22 font-family-secondary">
+                                                <i class="mdi mdi-album"></i> <b>SRMA</b>
+                                            </a>
+                                        </div>
+                                        <h1 class="h5 mb-1">Editar Producto</h1>
+                                        <p class="text-muted mb-4">Realiza los cambios necesarios y pulsa "Guardar cambios".</p>
+                                        @using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { @class = "user" }))
+                                        {
+                                            @Html.HiddenFor(m => m.IdProduct)
+
+                                            <div class="form-group">
+                                                <label>Nombre del Producto</label>
+                                                @Html.TextBoxFor(m => m.productName, new { @class = "form-control form-control-user", @placeholder = "Nombre del Producto", @type = "text" })
+                                                <span asp-validation-for="productName" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Stock</label>
+                                                @Html.TextBoxFor(m => m.stock, new { @class = "form-control form-control-user", @placeholder = "Cantidad", @type = "number" })
+                                                <span asp-validation-for="stock" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Detalles</label>
+                                                @Html.TextBoxFor(m => m.details, new { @class = "form-control form-control-user", @placeholder = "Detalles", @type = "text" })
+                                                <span asp-validation-for="details" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Estado del Producto</label>
+                                                @Html.DropDownListFor(m => m.productStatus, new SelectList(
+                                                new List<SelectListItem>
+                                                {
+                                                new SelectListItem { Text = "Agotado", Value = "Agotado" },
+                                                new SelectListItem { Text = "Existente", Value = "Existente" }
+                                                }, "Value", "Text"), new { @class = "form-control form-control-user" })
+                                                </div>
+
+                                            <div class="form-group">
+                                                <label>Precio</label>
+                                                @Html.TextBoxFor(m => m.price, new { @class = "form-control form-control-user", @placeholder = "Precio", @type = "number" })
+                                                <span asp-validation-for="price" class="text-danger"></span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Proveedor</label>
+                                                @Html.DropDownListFor(m => m.IdSupplier, ViewBag.listSuppliers as List<SelectListItem>, new { @class = "form-control" })
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <a href="@Url.Action("Index", "Product")" class="btn btn-secondary btn-block waves-effect waves-light">Volver a la lista de productos</a>
+                                                </div>
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <input type="submit" id="guardarCambiosButton" class="btn btn-success btn-block waves-effect waves-light" value="Guardar cambios" />
+                                                </div>
+                                            </div>
+                                        }
+                                        <!-- end row -->
+                                    </div> <!-- end .padding-5 -->
+                                </div> <!-- end col -->
+                            </div> <!-- end row -->
+                        </div> <!-- end .w-100 -->
+                    </div> <!-- end .d-flex -->
+                </div> <!-- end col-->
+            </div> <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <script>
+        // Agrega el código JavaScript en una función que se ejecutará cuando se haga clic en el botón "Guardar Cambios"
+        document.addEventListener("DOMContentLoaded", function () {
+            var guardarCambiosButton = document.getElementById('guardarCambiosButton');
+            guardarCambiosButton.addEventListener('click', function () {
+                // Código de validación y lógica de edición del producto aquí
+
+                // Muestra el SweetAlert después de editar el producto correctamente
+                Swal.fire('¡Éxito!', 'El producto se editó correctamente.', 'success',);
+            });
+        });
+    </script>
+
+</body>
+</html>

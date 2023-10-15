@@ -1,0 +1,155 @@
+﻿@model IEnumerable<SRMA.Entities.ProductEntity>
+
+@{
+    ViewData["Title"] = "Inventario";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<html>
+<body>
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+            </div>
+            <div class="row">
+                <div class="col-xl-10">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="card-title">Inventario</h4>
+                            <div>
+                                <a href="@Url.Action("Create", "Product")" class="btn btn-success btn-block waves-effect waves-light"> Agregar producto </a>
+
+                            </div>
+                            <div>
+                                 
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-centered table-striped table-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo</th>
+                                            <th>Nombre</th>
+                                            <th>Cantidad</th>
+                                            <th>Descripción</th>
+                                            <th>Estado</th>
+                                            <th>Precio</th>
+                                            <th>Proveedor</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td class="table-user">@item.IdProduct</td>
+                                                <td>@item.productName</td>
+                                                <td>@item.stock</td>
+                                                <td>@item.details</td>
+                                                <td>@item.productStatus</td>
+                                                <td>@item.price</td>
+                                                <td>@item.IdSupplier</td>
+                                                <td>
+                                                    <div>
+                                                        <a href="@Url.Action("Edit", "Product", new { IdProduct = item.IdProduct })" class="btn btn-outline-secondary">Editar</a>
+                                                        <button class="btn btn-danger delete-product" data-product-id="@item.IdProduct">Eliminar</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        }
+
+
+
+                                        <p>
+                                            Generar Reporte:
+                                            <button href="@Url.Action("Index","Inventory")" id="miBotonPDF" class="btn btn-warning">PDF</button>
+                                            <button href="@Url.Action("Index","Inventory")" id="miBotonEx" class="btn btn-warning">Excel</button>
+                                        </p>
+                                    </tbody>
+                                </table>
+                                <div>
+                                    <a href="" class="btn btn-info btn-block waves-effect waves-light"> Cargar más productos </a>
+                                </div>
+                            </div>
+
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+            </div>
+            <!-- end row-->
+
+        </div> <!-- container-fluid -->
+    </div>
+    <div class="modal" id="confirmationModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas eliminar este producto?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var productIdToDelete;
+
+            $(".delete-product").click(function () {
+                productIdToDelete = $(this).data("product-id");
+
+                // Utiliza SweetAlert para mostrar el pop-up de confirmación
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "Esta acción no se puede deshacer",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Realizar una solicitud POST para eliminar el producto
+                        $.ajax({
+                            url: "@Url.Action("Delete", "Product")",
+                            method: "POST",
+                            data: { IdProduct: productIdToDelete },
+                            success: function (result) {
+                                // Manejar la respuesta del servidor
+                                if (result.success) {
+                                    Swal.fire('Error', 'No se pudo eliminar el producto', 'error');
+                                } else {
+                                    Swal.fire('Éxito', 'El producto se ha eliminado', 'success').then(function () {
+                                        window.location.href = "@Url.Action("Index")";
+                                    });
+                                }
+                            },
+                            error: function () {
+                                Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
