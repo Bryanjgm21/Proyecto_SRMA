@@ -27,7 +27,7 @@
 </head>
 
 <body>
-
+    @RenderSection("scripts", required: false)
     <!-- Begin page -->
     <div id="layout-wrapper">
         @RenderBody()
@@ -143,11 +143,12 @@
                     <div class="dropdown d-inline-block ml-2">
                         <button type="button" class="btn header-item waves-effect waves-light" id="page-header-user-dropdown"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="d-none d-sm-inline-block ml-1">BryanAdmin</span>
+                            <i class="mdi mdi-account waves-effect waves-light" style="color: white; font-size: 175%;"></i>
                             <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
                         </button>
+                        @*HACER UNA VISTA PARA EDITAR O ELIMINAR LA CUENTA DE ADMIN*@
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="@Url.Action("Profile","Admin")">
+                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="@Url.Action("Profile","User")">
                                 <span>Perfil</span>
                                 <span>
                                     <span class="badge badge-pill badge-warning">1</span>

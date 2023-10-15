@@ -115,5 +115,23 @@ namespace SRMA.Models
                 }
             }
         }
+
+
+        public List<ProductEntity> GetUrgentProducts()
+        {
+            using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
+            {
+                var data = connection.Query<ProductEntity>("GetUrgentProducts",
+                    commandType: CommandType.StoredProcedure).ToList();
+
+                if (data != null && data.Count > 0)
+                {
+                    return data;
+                }
+
+                return new List<ProductEntity>();
+            }
+        }
+
     }
 }

@@ -65,7 +65,7 @@
                                             </div>
 
 
-                                            <input type="submit" class="btn btn-success btn-block waves-effect waves-light" value="Agregar producto" />
+                                            <input type="submit" id="insertarProducto" class="btn btn-success btn-block waves-effect waves-light" value="Agregar producto" />
                                             <div>
                                                  
                                             </div>
@@ -83,6 +83,18 @@
         </div>
         <!-- end container -->
     </div>
+    <script>
+        // Agrega el código JavaScript en una función que se ejecutará cuando se haga clic en el botón "Guardar Cambios"
+        document.addEventListener("DOMContentLoaded", function () {
+            var insertarProducto = document.getElementById('insertarProducto');
+            insertarProducto.addEventListener('click', function () {
+                // Código de validación y lógica de edición del producto aquí
+
+                // Muestra el SweetAlert después de editar el producto correctamente
+                Swal.fire('¡Éxito!', 'El producto se agregó correctamente.', 'success',);
+            });
+        });
+    </script>
     <!-- end page -->
 </body>
 

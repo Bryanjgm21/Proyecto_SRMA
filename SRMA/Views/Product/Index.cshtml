@@ -41,7 +41,7 @@
                                             <th>Codigo</th>
                                             <th>Nombre</th>
                                             <th>Cantidad</th>
-                                            <th>Disponibilidad</th>
+                                            <th>Descripción</th>
                                             <th>Estado</th>
                                             <th>Precio</th>
                                             <th>Proveedor</th>
@@ -117,33 +117,38 @@
 
             $(".delete-product").click(function () {
                 productIdToDelete = $(this).data("product-id");
-                $("#confirmationModal").modal("show");
-            });
 
-            $("#confirmDelete").click(function () {
-                // Realizar una solicitud POST para eliminar el producto
-                $.ajax({
-                    url: "@Url.Action("Delete", "Product")",
-                    method: "POST",
-                    data: { IdProduct: productIdToDelete },
-                    success: function (result) {
-                        // Manejar la respuesta del servidor, por ejemplo, redirigir a la página de éxito
-                        if (result.success) {
-                            window.location.href = "@Url.Action("Index")";
-                        } else {
-                            // Mostrar un mensaje de error o realizar otras acciones necesarias en caso de error
-                            alert("Producto Eliminado.");
-                            window.location.href = "@Url.Action("Index")";
-                        }
-                    },
-                    error: function () {
-                        // Manejar errores de la solicitud AJAX, si los hay
-                        alert("Error en la solicitud.");
+                // Utiliza SweetAlert para mostrar el pop-up de confirmación
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "Esta acción no se puede deshacer",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Realizar una solicitud POST para eliminar el producto
+                        $.ajax({
+                            url: "@Url.Action("Delete", "Product")",
+                            method: "POST",
+                            data: { IdProduct: productIdToDelete },
+                            success: function (result) {
+                                // Manejar la respuesta del servidor
+                                if (result.success) {
+                                    Swal.fire('Error', 'No se pudo eliminar el producto', 'error');
+                                } else {
+                                    Swal.fire('Éxito', 'El producto se ha eliminado', 'success').then(function () {
+                                        window.location.href = "@Url.Action("Index")";
+                                    });
+                                }
+                            },
+                            error: function () {
+                                Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
+                            }
+                        });
                     }
                 });
-
-                // Cerrar el modal de confirmación
-                $("#confirmationModal").modal("hide");
             });
         });
     </script>

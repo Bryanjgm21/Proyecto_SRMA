@@ -40,6 +40,7 @@ namespace SRMA.Controllers
 
             if (resultado != null)
             {
+                System.Threading.Thread.Sleep(3000);
                 return RedirectToAction("Index", "Product");
             }
             else
@@ -70,7 +71,7 @@ namespace SRMA.Controllers
             {
                 // Realiza la actualización del producto en la base de datos a través de _productModel.
                 _productModel.UpdateProduct(model, model.IdProduct);
-
+                System.Threading.Thread.Sleep(3000);
                 return RedirectToAction("Index"); // Redirige a la lista de productos u otra página según tus necesidades.
             }
 

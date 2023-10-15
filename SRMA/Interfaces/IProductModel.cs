@@ -9,5 +9,7 @@ namespace SRMA.Interfaces
         public ProductEntity? InsertProduct(ProductEntity entity);
         public ProductEntity? UpdateProduct(ProductEntity entity, long IdProduct);
         public ProductEntity? DeleteProduct(long IdProduct);
+        public List<ProductEntity> GetUrgentProducts();
+
     }
 }
