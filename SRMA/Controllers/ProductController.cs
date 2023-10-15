@@ -35,6 +35,10 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult InsertProduct(ProductEntity entity)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Create", entity);
+            }
            
             var resultado = _productModel.InsertProduct(entity);
 
@@ -53,6 +57,7 @@ namespace SRMA.Controllers
         [HttpGet]
         public IActionResult Edit(long IdProduct)
         {
+            
             // Aquí deberías obtener el producto que deseas editar utilizando _productModel.
             var product = _productModel.GetProductById(IdProduct);
 

@@ -32,31 +32,37 @@
                                             <div class="form-group">
                                                 <label>Nombre del Producto</label>
                                                 @Html.TextBoxFor(m => m.productName, new { @class = "form-control form-control-user", @placeholder = "Nombre del Producto", @type = "text" })
+                                                <span asp-validation-for="productName" class="text-danger"></span>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Stock</label>
                                                 @Html.TextBoxFor(m => m.stock, new { @class = "form-control form-control-user", @placeholder = "Cantidad", @type = "number" })
+                                                <span asp-validation-for="stock" class="text-danger"></span>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Detalles</label>
                                                 @Html.TextBoxFor(m => m.details, new { @class = "form-control form-control-user", @placeholder = "Detalles", @type = "text" })
+                                                <span asp-validation-for="details" class="text-danger"></span>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Estado del Producto</label>
                                                 @Html.TextBoxFor(m => m.productStatus, new { @class = "form-control form-control-user", @placeholder = "Estado del Producto", @type = "text" })
+                                                <span asp-validation-for="productStatus" class="text-danger"></span>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Precio</label>
                                                 @Html.TextBoxFor(m => m.price, new { @class = "form-control form-control-user", @placeholder = "Precio", @type = "number" })
+                                                <span asp-validation-for="price" class="text-danger"></span>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>ID del Proveedor</label>
                                                 @Html.TextBoxFor(m => m.IdSupplier, new { @class = "form-control form-control-user", @placeholder = "ID del Proveedor", @type = "number" })
+                                                <span asp-validation-for="IdSupplier" class="text-danger"></span>
                                             </div>
 
                                             <div class="form-group row">
