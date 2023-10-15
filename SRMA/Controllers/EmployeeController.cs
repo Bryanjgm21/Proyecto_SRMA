@@ -8,12 +8,19 @@ namespace SRMA.Controllers
     public class EmployeeController : Controller
     {
         private readonly IUserModel _userModel;
+        private readonly IEmployeeModel _employeeModel;
 
 
         public EmployeeController(IUserModel userModel)
         {
             _userModel = userModel;
         }
+
+        public EmployeeController(IEmployeeModel employeeModel)
+        {
+            _employeeModel = employeeModel;
+        }
+
         //List of Users by Rol
 
         [HttpGet]
@@ -99,6 +106,24 @@ namespace SRMA.Controllers
                 return RedirectToAction("LogIn", "Login");
             }
         }
+
+        // Add employee information
+        [HttpPost]
+        public IActionResult AddEmplInfo(EmployeeEntity employee, UserEntity user)
+        {
+           
+            var resultado = _employeeModel.AddEmplInfo(employee, user);
+
+            if (resultado != null)
+            {
+                return RedirectToAction("Index", "Employee");
+            }
+            else
+            {
+                return RedirectToAction("Create", "Employee");
+            }
+        }
+
 
 
         [HttpGet]

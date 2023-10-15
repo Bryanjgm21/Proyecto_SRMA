@@ -1,0 +1,55 @@
+﻿@model SRMA.Entities.EmployeeEntity
+
+
+
+@{
+    ViewData["Title"] = "AddEmplInfo";
+}
+
+<h1>AddEmplInfo</h1>
+
+<h4>EmployeeEntity</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddEmplInfo">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdEmpl" class="control-label"></label>
+                <input asp-for="IdEmpl" class="form-control" />
+                <span asp-validation-for="IdEmpl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="salary" class="control-label"></label>
+                <input asp-for="salary" class="form-control" />
+                <span asp-validation-for="salary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="workHours" class="control-label"></label>
+                <input asp-for="workHours" class="form-control" />
+                <span asp-validation-for="workHours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="jobTitle" class="control-label"></label>
+                <input asp-for="jobTitle" class="form-control" />
+                <span asp-validation-for="jobTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="absences" class="control-label"></label>
+                <input asp-for="absences" class="form-control" />
+                <span asp-validation-for="absences" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
