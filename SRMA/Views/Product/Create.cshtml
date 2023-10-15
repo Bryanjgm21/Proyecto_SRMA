@@ -24,6 +24,9 @@
                                             </a>
                                         </div>
                                         <h1 class="h5 mb-1">Agregar producto</h1>
+                                        <div>
+                                             
+                                        </div>
                                         @using (Html.BeginForm("InsertProduct", "Product", FormMethod.Post, new { @class = "user" }))
                                         {
                                             <div class="form-group row">
@@ -33,7 +36,7 @@
 
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Stock</label>
+                                                    <label>Cantidad</label>
                                                     @Html.TextBoxFor(m => m.stock, new {@class="form-control form-control-user", @placeholder="Cantidad",@type="number"})
                                                 </div>
                                             </div>
