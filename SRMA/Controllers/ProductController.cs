@@ -41,7 +41,7 @@ namespace SRMA.Controllers
         public async Task<FileResult> ExportProductsToExcel()
         { 
             var data =  _productModel.ListProducts();
-            var fileName = $"Productos.xlsx";
+            var fileName = $"InformeInvProductos_{DateTime.Now.ToString("yyyy/MM/dd")}.xlsx";
             return GenerateExcelProducts(fileName, data);
 
         }
