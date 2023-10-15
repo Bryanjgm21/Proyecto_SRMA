@@ -36,8 +36,8 @@ namespace SRMA.Controllers
             return View();
         }
 
+        // 
         [HttpGet]
-
         public async Task<FileResult> ExportProductsToExcel()
         { 
             var data =  _productModel.ListProducts();
