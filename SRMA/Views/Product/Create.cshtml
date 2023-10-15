@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SRMA.Entities.ProductEntity
+
+@{
     ViewData["Title"] = "Agregar Producto";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
@@ -22,37 +24,51 @@
                                             </a>
                                         </div>
                                         <h1 class="h5 mb-1">Agregar producto</h1>
-                                        <form class="user">
+                                        @using (Html.BeginForm("InsertProduct", "Product", FormMethod.Post, new { @class = "user" }))
+                                        {
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="text" class="form-control form-control-user" id="examplePID" placeholder="Codigo" readonly>
+                                                    <label>Nombre del Producto</label>
+                                                    @Html.TextBoxFor(m => m.productName, new {@class="form-control form-control-user", @placeholder="Nombre",@type="text"})
+
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control form-control-user" id="examplePName" placeholder="Nombre">
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <input type="number" class="form-control form-control-user" id="examplePQuantity" placeholder="Cantidad">
+                                                    <label>Stock</label>
+                                                    @Html.TextBoxFor(m => m.stock, new {@class="form-control form-control-user", @placeholder="Cantidad",@type="number"})
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label>Disponibilidad:</label>
-                                                <select class="form-control form-control-user" id="exampleArequestType" placeholder="Disponibilidad">
-                                                    <option value="Sí">Sí</option>
-                                                    <option value="No">No</option>
-                                                </select>
+                                                <label>Detalles</label>
+                                                @Html.TextBoxFor(m => m.details, new {@class="form-control form-control-user", @placeholder="Detalles",@type="text"})
+
                                             </div>
-                                            <div class="form-group">
-                                                <label>Estado:</label>
-                                                <select class="form-control form-control-user" id="exampleArequestType" placeholder="Estado">
-                                                    <option value="Disponible">Disponible</option>
-                                                    <option value="Solicitar">Solicitar</option>
-                                                    <option value="Agotado">Agotado</option>
-                                                </select>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <label>Estado del Producto</label>
+                                                    @Html.TextBoxFor(m => m.productStatus, new {@class="form-control form-control-user", @placeholder="Estado",@type="text"})
+
+                                                </div>
                                             </div>
 
-                                            <a href="@Url.Action("Index","Product")" id="miBoton" class="btn btn-success btn-block waves-effect waves-light"> Agregar producto </a>
+                                            <div class="form-group row">
+                                            <div class="form-group">
+                                                    <label>Precio</label>
+                                                @Html.TextBoxFor(m => m.price, new {@class="form-control form-control-user", @placeholder="Precio",@type="number"})
+                                            </div>
+                                                <div class="form-group">
+                                                    <label>ID del proveedor</label>
+                                                    @Html.TextBoxFor(m => m.IdSupplier, new {@class="form-control form-control-user", @placeholder="ID proveedor",@type="number"})
+                                                </div>
+                                            </div>
+
+
+                                            <input type="submit" class="btn btn-success btn-block waves-effect waves-light" value="Agregar producto" />
+                                            <div>
+                                                 
+                                            </div>
                                             <a href="@Url.Action("Index","Product")" class="btn btn-info btn-block waves-effect waves-light"> Volver </a>
-                                        </form>
+                                        }
+
                                         <!-- end row -->
                                     </div> <!-- end .padding-5 -->
                                 </div> <!-- end col -->
@@ -65,27 +81,6 @@
         <!-- end container -->
     </div>
     <!-- end page -->
-    <script>
-        const miBoton = document.getElementById("miBoton");
-
-        miBoton.addEventListener("click", (event) => {
-            event.preventDefault(); // Prevenir la redirección predeterminada del enlace
-
-            Swal.fire({
-                title: '¿Deseas agregar el producto?',
-                icon: 'question',
-                showCancelButton: true,
-                cancelButtonText: 'Cancelar',
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '¡Sí, agregar!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = miBoton.getAttribute('href'); // Redireccionar si se confirma
-                }
-            });
-        });
-    </script>
 </body>
 
 
