@@ -66,8 +66,8 @@
 
                                         <p>
                                             Generar Reporte:
-                                            <button href="@Url.Action("Index","Inventory")" id="miBotonPDF" class="btn btn-warning">PDF</button>
-                                            <button href="@Url.Action("Index","Inventory")" id="miBotonEx" class="btn btn-warning">Excel</button>
+                                            <a href="@Url.Action("ExportProductsToExcel","Product")" id="miBotonEx" class="btn btn-warning"> Excel </a>
+                                         @*   <button href="@Url.Action("Index","Inventory")" id="miBotonEx" class="btn btn-warning">Excel</button>*@
                                         </p>
                                     </tbody>
                                 </table>

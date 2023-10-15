@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MySql.Data.MySqlClient;
@@ -124,5 +125,59 @@ namespace SRMA.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+
+        // 
+        [HttpGet]
+        public async Task<FileResult> ExportProductsToExcel()
+        {
+            var data = _productModel.ListProducts();
+            var fileName = $"InformeInvProductos_{DateTime.Now.ToString("yyyy/MM/dd")}.xlsx";
+            return GenerateExcelProducts(fileName, data);
+
+        }
+
+        private FileResult GenerateExcelProducts(string fileName, IEnumerable<ProductEntity> products)
+        {
+
+            DataTable dataTable = new DataTable("Products");
+            dataTable.Columns.AddRange(new DataColumn[]
+            {
+                new DataColumn("IdProduct"),
+                new DataColumn("productName"),
+                new DataColumn("stock"),
+                new DataColumn("details"),
+                new DataColumn("productStatus"),
+                new DataColumn("price")
+
+
+            });
+            foreach (var data in products)
+            {
+                dataTable.Rows.Add(data.IdProduct,
+                                    data.productName,
+                                    data.stock,
+                                    data.details,
+                                    data.productStatus,
+                                    data.price);
+
+            }
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dataTable);
+
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(),
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            fileName);
+
+                }
+            }
+
+
+        }
     }
+
 }
