@@ -102,25 +102,5 @@ namespace SRMA.Controllers
             }
         }
        
-
-        // Register user with rol of employee
-        [HttpPost]
-        public IActionResult RegisterEmployee(UserEntity entity)
-        {
-            entity.IdRol = 2;
-            entity.statusU = true;
-            entity.passwordU = "password1";
-
-            var resultado = _userModel.RegisterUser(entity);
-
-            if (resultado != null)
-            {
-                return RedirectToAction("Index", "Employee");
-            }
-            else
-            {
-                return RedirectToAction("Create", "Employee");
-            }
-        }
     }
 }
