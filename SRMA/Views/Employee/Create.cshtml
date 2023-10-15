@@ -39,6 +39,27 @@
                                             </a>
                                         </div>
                                         <h1 class="h5 mb-1">Agrega la información del empleado</h1>
+@*
+                                        <form asp-action="RegisterEmployee">
+
+                                            Nombre: <input asp-for = "userName" />
+                                            <span asp-validation-for="userName"/>
+
+                                            Apellido: <input asp-for="lastName" />
+                                            <span asp-validation-for="lastName" />
+
+                                            Cedula:  <input asp-for="Id" />
+                                            <span asp-validation-for="Id" />
+
+                                            Telefono:  <input asp-for="cellphone" />
+                                            <span asp-validation-for="cellphone" />
+
+                                            Correo electronico:  <input asp-for="email" />
+                                            <span asp-validation-for="email" />
+
+                                            <input type="submit" value="Guardar"/>
+
+                                        </form>*@
 
                                         @using (Html.BeginForm("RegisterEmployee", "Employee", FormMethod.Post, new { @class = "user" }))
                                         {
@@ -46,29 +67,32 @@
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <label>Nombre</label>
                                                     @Html.TextBoxFor(m => m.userName, new {@class="form-control form-control-user", @placeholder="Nombre",@type="text"})
+                                                    <span asp-validation-for= "userName" class="text-danger"> </span>
 
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Apellido</label>
                                                     @Html.TextBoxFor(m => m.lastName, new {@class="form-control form-control-user", @placeholder="Apellido",@type="text"})
+                                                    <span asp-validation-for="lastName" class="text-danger"> </span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Cedula</label>
                                                 @Html.TextBoxFor(m => m.Id, new {@class="form-control form-control-user", @placeholder="Cedula",@type="text"})
-
+                                                <span asp-validation-for="Id" class="text-danger"> </span>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <label>Telefono</label>
                                                     @Html.TextBoxFor(m => m.cellphone, new {@class="form-control form-control-user", @placeholder="Telefono",@type="tel"})
-
+                                                    <span asp-validation-for="cellphone" class="text-danger"> </span>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Correo electronico</label>
                                                 @Html.TextBoxFor(m => m.email, new {@class="form-control form-control-user", @placeholder="Correo electronico",@type="email"})
+                                                <span asp-validation-for="email" class="text-danger"> </span>
                                             </div>
 
 

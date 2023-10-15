@@ -51,6 +51,11 @@ namespace SRMA.Controllers
             entity.statusU = true;
             entity.passwordU = "password1";
 
+            if (!ModelState.IsValid)
+            {
+                return View("Create",entity);
+            }
+
             var resultado = _userModel.RegisterUser(entity);
 
             if (resultado != null)
@@ -61,12 +66,17 @@ namespace SRMA.Controllers
             {
                 return RedirectToAction("Create", "Employee");
             }
+
         }
+
 
         [HttpPost]
         public IActionResult Edit(UserEntity entity)
         {
-           
+            if (!ModelState.IsValid)
+            {
+                return View("EmployeeInfo", entity);
+            }
 
             var resultado = _userModel.UpdateUser(entity, entity.IdUser);
 
