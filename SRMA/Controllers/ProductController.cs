@@ -48,6 +48,10 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult InsertProduct(ProductEntity entity)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("Create", entity);
+            }
 
             var resultado = _productModel.InsertProduct(entity);
 
