@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IUserModel, UserModel>();
 builder.Services.AddSingleton<IProductModel, ProductModel>();
+builder.Services.AddSingleton<ISupplierModel, SupplierModel>();
 builder.Services.AddSession();
 
 var app = builder.Build();

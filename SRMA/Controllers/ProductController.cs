@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MySql.Data.MySqlClient;
 using SRMA.Entities;    
 using SRMA.Interfaces;
@@ -11,10 +12,12 @@ namespace SRMA.Controllers
     public class ProductController : Controller
     {
         private readonly IProductModel _productModel;
+        private readonly ISupplierModel _supplierModel;
 
-        public ProductController(IProductModel productModel)
+        public ProductController(IProductModel productModel, ISupplierModel supplierModel)
         {
             _productModel = productModel;
+            _supplierModel = supplierModel;
         }
 
         // Consult all products to show the data
@@ -28,6 +31,16 @@ namespace SRMA.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            var suppliers = _supplierModel.ListSuppliers();
+
+            var listSuppliers = new List<SelectListItem>();
+
+            foreach (var item in suppliers)
+            {
+                listSuppliers.Add(new SelectListItem {Text=item.supplierName, Value = item.IdSupplier.ToString() });
+            }
+            ViewBag.listSuppliers = listSuppliers;
+
             return View();
         }
 
@@ -35,7 +48,7 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult InsertProduct(ProductEntity entity)
         {
-           
+
             var resultado = _productModel.InsertProduct(entity);
 
             if (resultado != null)
@@ -53,13 +66,24 @@ namespace SRMA.Controllers
         [HttpGet]
         public IActionResult Edit(long IdProduct)
         {
+
             // Aquí deberías obtener el producto que deseas editar utilizando _productModel.
             var product = _productModel.GetProductById(IdProduct);
+
+            var suppliers = _supplierModel.ListSuppliers();
+
+            var listSuppliers = new List<SelectListItem>();
 
             if (product == null)
             {
                 return NotFound(); // Producto no encontrado
             }
+            
+            foreach (var item in suppliers)
+            {
+                listSuppliers.Add(new SelectListItem { Text = item.supplierName, Value = item.IdSupplier.ToString() });
+            }
+            ViewBag.listSuppliers = listSuppliers;
 
             return View(product);
         }

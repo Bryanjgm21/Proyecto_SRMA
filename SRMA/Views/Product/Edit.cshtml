@@ -46,8 +46,13 @@
 
                                             <div class="form-group">
                                                 <label>Estado del Producto</label>
-                                                @Html.TextBoxFor(m => m.productStatus, new { @class = "form-control form-control-user", @placeholder = "Estado del Producto", @type = "text" })
-                                            </div>
+                                                @Html.DropDownListFor(m => m.productStatus, new SelectList(
+                                                new List<SelectListItem>
+                                                {
+                                                new SelectListItem { Text = "Agotado", Value = "Agotado" },
+                                                new SelectListItem { Text = "Existente", Value = "Existente" }
+                                                }, "Value", "Text"), new { @class = "form-control form-control-user" })
+                                                </div>
 
                                             <div class="form-group">
                                                 <label>Precio</label>
@@ -55,8 +60,8 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label>ID del Proveedor</label>
-                                                @Html.TextBoxFor(m => m.IdSupplier, new { @class = "form-control form-control-user", @placeholder = "ID del Proveedor", @type = "number" })
+                                                <label>Proveedor</label>
+                                                @Html.DropDownListFor(m => m.IdSupplier, ViewBag.listSuppliers as List<SelectListItem>, new { @class = "form-control" })
                                             </div>
 
                                             <div class="form-group row">
