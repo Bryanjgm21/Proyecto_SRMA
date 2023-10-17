@@ -109,7 +109,7 @@ namespace SRMA.Models
             {
 
                 connection.Execute("DeleteAcc",
-                       new { IdUser = q },
+                       new { UIdUser = q },
                        commandType: System.Data.CommandType.StoredProcedure);
 
                 return null;

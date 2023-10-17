@@ -40,7 +40,7 @@ namespace SRMA.Models
                 parameters.Add("pIdProduct", IdProduct, DbType.Int32, ParameterDirection.Input);
 
                 var data = connection.Query<ProductEntity>("GetProductById", parameters,
-                    commandType: CommandType.StoredProcedure).FirstOrDefault(); // Cambiar "NombreDelProcedimientoAlmacenado" por el nombre correcto.
+                    commandType: CommandType.StoredProcedure).FirstOrDefault(); 
 
                 return data ?? new ProductEntity(); // Devuelve el producto encontrado o una instancia vacía si no se encuentra.
             }
