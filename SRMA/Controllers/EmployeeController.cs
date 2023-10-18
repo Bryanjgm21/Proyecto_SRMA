@@ -106,7 +106,7 @@ namespace SRMA.Controllers
             }
             else
             {
-                return RedirectToAction("LogIn", "Login");
+                return RedirectToAction("Index", "Employee");
             }
         }
 

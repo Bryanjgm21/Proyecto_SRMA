@@ -49,7 +49,14 @@ namespace SRMA.Controllers
 
             long UserId = (long)IdUser;
 
+            if (!ModelState.IsValid)
+            {
+                System.Threading.Thread.Sleep(1500);
+                return View("Profile", entity);
+            }
+
             var resultado = _userModel.UpdateUser(entity, UserId);
+            System.Threading.Thread.Sleep(2000);
 
 
             if (resultado != null)

@@ -33,37 +33,41 @@
 
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <label>Nombre</label>
-                                                    @Html.TextBoxFor(m => m.userName, new {@class="form-control form-control-user", @placeholder="Nombre",@type="text"})
-
+                                                    @Html.TextBoxFor(m => m.userName, new {@class="form-control form-control-user", @placeholder="Nombre",@type="text", @id="userName"})
+                                                    <span asp-validation-for="userName" class="text-danger"> </span>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Apellido</label>
-                                                    @Html.TextBoxFor(m => m.lastName, new {@class="form-control form-control-user", @placeholder="Apellido",@type="text"})
+                                                    @Html.TextBoxFor(m => m.lastName, new {@class="form-control form-control-user", @placeholder="Apellido",@type="text", @id="lastName"})
+                                                    <span asp-validation-for="lastName" class="text-danger"> </span>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Correo electronico</label>
-                                                    @Html.TextBoxFor(m => m.email, new {@class="form-control form-control-user", @placeholder="Correo electronico",@type="email"})
+                                                    @Html.TextBoxFor(m => m.email, new {@class="form-control form-control-user", @placeholder="Correo electronico",@type="email", @id="email"})
+                                                    <span asp-validation-for="email" class="text-danger"> </span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <label>Telefono</label>
-                                                    @Html.TextBoxFor(m => m.cellphone, new {@class="form-control form-control-user", @placeholder="Telefono",@type="tel"})
+                                                    @Html.TextBoxFor(m => m.cellphone, new {@class="form-control form-control-user", @placeholder="Telefono",@type="tel", @id="cellphone"})
+                                                    <span asp-validation-for="cellphone" class="text-danger"> </span>
 
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Contraseña</label>
-                                                @Html.TextBoxFor(m => m.passwordU, new {@class="form-control form-control-user", @placeholder="Contraseña",@type="text"})
+                                                @Html.TextBoxFor(m => m.passwordU, new {@class="form-control form-control-user", @placeholder="Contraseña",@type="password", @id="passwordU"})
+                                                <span asp-validation-for="passwordU" class="text-danger"> </span>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <a href="@Url.Action("Index", "User")" class="btn btn-secondary btn-block waves-effect waves-light">Volver a la página principal</a>
                                                 </div>
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="submit" class="btn btn-success btn-block waves-effect waves-light" value="Guardar cambios" />
+                                                    <input type="submit" id="guardarCambiosButton" class="btn btn-success btn-block waves-effect waves-light" value="Guardar cambios" />
 
                                                 </div>
                                             </div>
@@ -95,7 +99,52 @@
         <!-- end container -->
     </div>
     <!-- end page -->
-    
+
+    <script>
+        function validateForm() {
+            
+            if (document.getElementById("userName").value === "" ||
+                document.getElementById("lastName").value === "" ||
+                document.getElementById("email").value === "") {
+                
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Por favor, completa todos los campos requeridos.',
+                    showConfirmButton: false
+                });
+                return false; 
+            }
+
+            
+
+            return true; 
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var guardarCambiosButton = document.getElementById('guardarCambiosButton');
+            guardarCambiosButton.addEventListener('click', function () {
+                if (validateForm()) {
+                    
+                    Swal.fire('¡Éxito!', 'Se guardaron los cambios correctamente.', 'success');
+                }
+            });
+        });
+    </script>
+
+
+    @*<script>
+        // Agrega el código JavaScript en una función que se ejecutará cuando se haga clic en el botón "Guardar Cambios"
+        document.addEventListener("DOMContentLoaded", function () {
+            var guardarCambiosButton = document.getElementById('guardarCambiosButton');
+            guardarCambiosButton.addEventListener('click', function () {
+                // Código de validación y lógica de edición del producto aquí
+
+                // Muestra el SweetAlert después de editar el producto correctamente
+                Swal.fire('¡Éxito!', 'Se guardaron los cambios correctamente.', 'success',);
+            });
+        });
+    </script>*@
 </body>
 </html>
 @*<script>

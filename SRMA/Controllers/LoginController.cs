@@ -84,6 +84,7 @@ namespace SRMA.Controllers
 
             if (resultado != null)
             {
+                System.Threading.Thread.Sleep(2000);
                 return RedirectToAction("LogIn", "Login");
             }
             else

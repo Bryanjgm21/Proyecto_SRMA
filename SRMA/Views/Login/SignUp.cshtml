@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
-<script>
+@*<script>
     document.addEventListener("DOMContentLoaded", function () {
         var elemento = document.getElementById("page-topbar");
         if (elemento) {
@@ -18,7 +18,7 @@
             elemento.style.display = "none";
         });
     });
-</script>
+</script>*@
 
 <html>
 <body>
@@ -72,7 +72,7 @@
                                                 </div>
                                             </div>
 
-                                            <input type="submit" class="btn btn-success btn-block waves-effect waves-light" value="Registrar" />
+                                            <input type="submit" id="guardarRegistro" class="btn btn-success btn-block waves-effect waves-light" value="Registrar" />
 
                                             <div class="row mt-4">
                                                 <div class="col-12 text-center">
@@ -91,6 +91,22 @@
         </div>
         <!-- end container -->
     </div>
+
+
+
+    <script>
+        // Agrega el código JavaScript en una función que se ejecutará cuando se haga clic en el botón "Guardar Cambios"
+        document.addEventListener("DOMContentLoaded", function () {
+            var guardarRegistro = document.getElementById('guardarRegistro');
+            guardarRegistro.addEventListener('click', function () {
+                // Código de validación y lógica de edición del producto aquí
+
+                // Muestra el SweetAlert después de editar el producto correctamente
+                Swal.fire('¡Éxito!', 'Registro Exitoso.', 'success',);
+            });
+        });
+    </script>
+
     <!-- end page -->
     @* <script>
     const miBoton = document.getElementById("miBoton");
