@@ -35,7 +35,7 @@
             <div class="navbar-header">
                 <!-- LOGO -->
                 <div class="navbar-brand-box d-flex align-items-left">
-                    <a href="@Url.Action("AdminReservation","Reservation")" class="logo">
+                    <a href="@Url.Action("AdminDashboard","Admin")" class="logo">
                         <i class="mdi mdi-album"></i>
                         <span>
                             SRMA - Admin
@@ -47,9 +47,9 @@
                     </button>
                 </div>
 
-                <a href="/Home/Admin" class="logo">
+                <a href="@Url.Action("AdminDashboard","Admin")" class="logo">
                     <span>
-                        <img href="@Url.Action("AdminReservation","Reservation")" src="~/Theme/assets/images/users/Logoma2.png"
+                        <img href="@Url.Action("AdminDashboard","Admin")" src="~/Theme/assets/images/users/Logoma2.png"
                              class="mr-8 rounded-circle avatar-xl align-items-center">
                     </span>
                 </a>
@@ -148,7 +148,7 @@
                         </button>
                         @*HACER UNA VISTA PARA EDITAR O ELIMINAR LA CUENTA DE ADMIN*@
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="@Url.Action("Profile","User")">
+                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="@Url.Action("Profile","Admin")">
                                 <span>Perfil</span>
                                 <span>
                                     <span class="badge badge-pill badge-warning">1</span>
@@ -216,7 +216,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="text-sm-right d-none d-sm-block">
-                        Diseñado y desarrolaldo por SRMA.
+                        Diseñado y desarrollado por SRMA.
                     </div>
                 </div>
             </div>
