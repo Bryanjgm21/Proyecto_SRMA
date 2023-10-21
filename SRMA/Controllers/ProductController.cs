@@ -51,6 +51,16 @@ namespace SRMA.Controllers
         {
             if (!ModelState.IsValid)
             {
+                var suppliers = _supplierModel.ListSuppliers();
+                var listSuppliers = new List<SelectListItem>();
+
+                foreach (var item in suppliers)
+                {
+                    listSuppliers.Add(new SelectListItem { Text = item.supplierName, Value = item.IdSupplier.ToString() });
+                }
+
+                ViewBag.listSuppliers = listSuppliers;
+
                 return View("Create", entity);
             }
 
@@ -96,6 +106,17 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult Edit(ProductEntity model)
         {
+            var suppliers = _supplierModel.ListSuppliers();
+            var listSuppliers = new List<SelectListItem>();
+
+            foreach (var item in suppliers)
+            {
+                listSuppliers.Add(new SelectListItem { Text = item.supplierName, Value = item.IdSupplier.ToString() });
+            }
+
+            ViewBag.listSuppliers = listSuppliers;
+
+
             if (ModelState.IsValid)
             {
                 // Realiza la actualización del producto en la base de datos a través de _productModel.

@@ -1,5 +1,4 @@
 ﻿@model SRMA.Entities.ProductEntity
-@using SRMA.Entities;
 @{
     ViewData["Title"] = "Agregar Producto";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -67,6 +66,8 @@
                                                 <div class="form-group">
                                                     <label>Proveedor</label>
                                                     @Html.DropDownListFor(m => m.IdSupplier, ViewBag.listSuppliers as List<SelectListItem>, new { @class = "form-control" })
+                                                    <span asp-validation-for="IdSupplier" class="text-danger"></span>
+
                                                 </div>
                                             </div>
 
