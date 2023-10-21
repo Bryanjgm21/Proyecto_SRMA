@@ -21,7 +21,6 @@ namespace SRMA.Entities
         [Required(ErrorMessage = "El campo Precio es obligatorio.")]
         public int price { get; set; }
 
-        [Required(ErrorMessage = "El campo ID del proveedor es obligatorio.")]
         public long IdSupplier { get; set; }
 
     }

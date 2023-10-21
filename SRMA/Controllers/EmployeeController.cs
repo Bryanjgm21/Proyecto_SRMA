@@ -60,6 +60,7 @@ namespace SRMA.Controllers
 
             if (resultado != null)
             {
+                System.Threading.Thread.Sleep(3000);
                 return RedirectToAction("Index", "Employee");
             }
             else
@@ -83,6 +84,7 @@ namespace SRMA.Controllers
 
             if (resultado != null)
             {
+                System.Threading.Thread.Sleep(3000);
                 return RedirectToAction("Index", "Employee");
             }
             else
@@ -93,20 +95,20 @@ namespace SRMA.Controllers
 
 
         [HttpPost]
-        public IActionResult DeleteAcc(int IdUser)
+        public IActionResult DeleteAcc(long IdUser)
         {
            
-            long UserId = (long)IdUser;
+            
+            var result = _userModel.DeleteAcc(IdUser);
 
-            var result = _userModel.DeleteAcc(UserId);
-
-            if (result != null)
+            if (result == null)
             {
+                System.Threading.Thread.Sleep(3000);
                 return RedirectToAction("Index", "Employee");
             }
             else
             {
-                return RedirectToAction("LogIn", "Login");
+                return RedirectToAction("EmployeeInfo", "Employee");
             }
         }
 
