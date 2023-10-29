@@ -80,6 +80,8 @@
 
                                         </div>
                                         <div class="form-group">
+                                          @*  <button class="btn btn-danger delete-product" data-product-id="IdUser">Eliminar</button>*@
+
                                             @using (Html.BeginForm("DeleteAcc", "User", FormMethod.Post))
                                             {
                                                 <input type="submit" class="btn btn-danger btn-block waves-effect waves-light" value="Eliminar cuenta" />
@@ -131,7 +133,49 @@
         });
     });
 </script>
+@*
+<script>
+    $(document).ready(function () {
+        var productIdToDelete;
 
+        $(".delete-product").click(function () {
+            productIdToDelete = $(this).data("product-id");
+
+            // Utiliza SweetAlert para mostrar el pop-up de confirmación
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción no se puede deshacer",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Realizar una solicitud POST para eliminar el producto
+                    $.ajax({
+                        url: "@Url.Action("DeleteAcc", "User")",
+                        method: "POST",
+                        data: { IdProduct: productIdToDelete },
+                        success: function (result) {
+                            // Manejar la respuesta del servidor
+                            if (result.success) {
+                                Swal.fire('Error', 'No se pudo eliminar el perfil', 'error');
+                            } else {
+                                Swal.fire('Éxito', 'El perfil se ha eliminado', 'success').then(function () {
+                                    window.location.href = "@Url.Action("Index")";
+                                });
+                            }
+                        },
+                        error: function () {
+                            Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+*@
 
 
 
