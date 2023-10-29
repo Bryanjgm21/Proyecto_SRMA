@@ -35,7 +35,7 @@
             <div class="navbar-header">
                 <!-- LOGO -->
                 <div class="navbar-brand-box d-flex align-items-left">
-                    <a href="@Url.Action("AdminReservation","Reservation")" class="logo">
+                    <a href="@Url.Action("AdminDashboard","Admin")" class="logo">
                         <i class="mdi mdi-album"></i>
                         <span>
                             SRMA - Admin
@@ -47,9 +47,9 @@
                     </button>
                 </div>
 
-                <a href="/Home/Admin" class="logo">
+                <a href="@Url.Action("AdminDashboard","Admin")" class="logo">
                     <span>
-                        <img href="@Url.Action("AdminReservation","Reservation")" src="~/Theme/assets/images/users/Logoma2.png"
+                        <img href="@Url.Action("AdminDashboard","Admin")" src="~/Theme/assets/images/users/Logoma2.png"
                              class="mr-8 rounded-circle avatar-xl align-items-center">
                     </span>
                 </a>
@@ -91,7 +91,7 @@
                                         <h6 class="m-0"> Notificaciones </h6>
                                     </div>
                                     <div class="col-auto">
-                                        <a href="#!" class="small">Ver todo</a>
+                                        <a href="#!" class="small"></a>
                                     </div>
                                 </div>
                             </div>
@@ -101,10 +101,9 @@
                                         <img src="~/Theme/assets/images/media/sm-1.jpg"
                                              class="mr-3 rounded-circle avatar-xs" alt="user-pic">
                                         <div class="media-body">
-                                            <h6 class="mt-0 mb-1">Productos por agotarse:</h6>
-                                            <p class="font-size-12 mb-1">Cebolla</p>
-                                            <p class="font-size-12 mb-1">Lechuga</p>
-                                            <p class="font-size-12 mb-1">Jamón</p>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#urgentProductsModal">
+                                                Mostrar Productos Urgentes
+                                            </button>
                                             <p class="font-size-12 mb-0 text-muted"><i class="mdi mdi-clock-outline"></i> Ahora </p>
                                         </div>
                                     </div>
@@ -148,7 +147,7 @@
                         </button>
                         @*HACER UNA VISTA PARA EDITAR O ELIMINAR LA CUENTA DE ADMIN*@
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="@Url.Action("Profile","User")">
+                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="@Url.Action("Profile","Admin")">
                                 <span>Perfil</span>
                                 <span>
                                     <span class="badge badge-pill badge-warning">1</span>
@@ -216,7 +215,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="text-sm-right d-none d-sm-block">
-                        Diseñado y desarrolaldo por SRMA.
+                        Diseñado y desarrollado por SRMA.
                     </div>
                 </div>
             </div>

@@ -1485,13 +1485,17 @@ div.dt-button-info h2 {
 }
 
 .bg-register {
-  background: url("../images/bg-register.jpg");
-  background-position: center;
-  background-size: cover;
+    background: url("../images/bg-register.jpg"); 
+    background-position: center;
+    background-size: cover;
 }
 
-/* 20. Pricing */
-.card-pricing {
+
+
+}
+
+    /* 20. Pricing */
+    .card-pricing {
   position: relative;
   border-radius: 10px;
 }

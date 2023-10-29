@@ -53,7 +53,7 @@ namespace SRMA.Controllers
 
                 if (result.IdRol == 1)
                 {
-                    return RedirectToAction("AdminDashboard", "Admin");
+                    return RedirectToAction("AdminDashboard", "Admin", new { cameFromLogin = true });
                 }
 
                 return RedirectToAction("Index", "User");

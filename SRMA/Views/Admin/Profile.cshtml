@@ -1,7 +1,7 @@
-﻿
+﻿@model SRMA.Entities.UserEntity
 @{
     ViewData["Title"] = "Perfil";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <html>
@@ -23,31 +23,52 @@
                                             </a>
                                         </div>
                                         <h1 class="h5 mb-1">Cambiar los datos de tu cuenta</h1>
-                                        <p class="text-muted mb-4">Una vez hayas terminado, utiliza la opción de "Guardar cambios" o tambien puedes eliminar tu cuenta "</p>
-                                        <form class="user">
+                                        <p class="text-muted mb-4">Una vez hayas terminado, utiliza la opción de "Guardar cambios"</p>
+                                        @using (Html.BeginForm("UpdateUser", "User", FormMethod.Post, new { @class = "user" }))
+                                        {
                                             <div class="form-group row">
+
+                                                @Html.HiddenFor(m => m.IdUser)
+
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Bryan">
+                                                    <label>Nombre</label>
+                                                    @Html.TextBoxFor(m => m.userName, new {@class="form-control form-control-user", @placeholder="Nombre",@type="text"})
+
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Gonzalez">
+                                                    <label>Apellido</label>
+                                                    @Html.TextBoxFor(m => m.lastName, new {@class="form-control form-control-user", @placeholder="Apellido",@type="text"})
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="number" class="form-control form-control-user" id="exampleInputNumber" placeholder="45365126">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="bg@gmail.com">
+
+                                                <div class="form-group">
+                                                    <label>Correo electronico</label>
+                                                    @Html.TextBoxFor(m => m.email, new {@class="form-control form-control-user", @placeholder="Correo electronico",@type="email"})
+                                                </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="*********">
+                                                    <label>Telefono</label>
+                                                    @Html.TextBoxFor(m => m.cellphone, new {@class="form-control form-control-user", @placeholder="Telefono",@type="tel"})
+
                                                 </div>
                                             </div>
-                                            <a href="@Url.Action("Profile","Usuario")" id="miBoton" class="btn btn-success btn-block waves-effect waves-light"> Guardar cambios </a>
-                                            <a href="@Url.Action("Index","Usuario")" id="miBoton2" class="btn btn-danger btn-block waves-effect waves-light"> Eliminar cuenta </a>
 
-                                        </form>
+                                            <div class="form-group">
+                                                <label>Contraseña</label>
+                                                @Html.TextBoxFor(m => m.passwordU, new {@class="form-control form-control-user", @placeholder="Contraseña",@type="password"})
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <a href="@Url.Action("AdminDashboard", "Admin")" class="btn btn-secondary btn-block waves-effect waves-light">Volver</a>
+                                                </div>
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <input type="submit" class="btn btn-success btn-block waves-effect waves-light" value="Guardar cambios" />
+
+                                                </div>
+                                            </div>
+                                        }
+                                      
+
                                         <!-- end row -->
                                     </div> <!-- end .padding-5 -->
                                 </div> <!-- end col -->
@@ -60,47 +81,6 @@
         <!-- end container -->
     </div>
     <!-- end page -->
-    <script>
-        const miBoton = document.getElementById("miBoton");
 
-        miBoton.addEventListener("click", (event) => {
-            event.preventDefault(); // Prevenir la redirección predeterminada del enlace
-
-            Swal.fire({
-                title: '¿Deseas guardar los cambios?',
-                icon: 'question',
-                showCancelButton: true,
-                cancelButtonText: 'Cancelar',
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '¡Sí, guardar!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = miBoton.getAttribute('href'); // Redireccionar si se confirma
-                }
-            });
-        });
-    </script>
-    <script>
-        const miBoton2 = document.getElementById("miBoton2");
-
-        miBoton2.addEventListener("click", (event) => {
-            event.preventDefault(); // Prevenir la redirección predeterminada del enlace
-
-            Swal.fire({
-                title: '¿Deseas eliminar la cuenta?',
-                icon: 'question',
-                showCancelButton: true,
-                cancelButtonText: 'Cancelar',
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: '¡Sí, eliminar!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = miBoton2.getAttribute('href'); // Redireccionar si se confirma
-                }
-            });
-        });
-    </script>
 </body>
 </html>

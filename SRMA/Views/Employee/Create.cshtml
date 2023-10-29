@@ -2,23 +2,8 @@
 
 @{
     ViewData["Title"] = "Registrar Empleado";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var elemento = document.getElementById("page-topbar");
-        if (elemento) {
-            elemento.style.display = "none";
-        }
-    });
-    document.addEventListener("DOMContentLoaded", function () {
-        var elementos = document.querySelectorAll(".vertical-menu");
-        elementos.forEach(function (elemento) {
-            elemento.style.display = "none";
-        });
-    });
-</script>
 
 <html>
 <body>
