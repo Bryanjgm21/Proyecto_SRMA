@@ -3,6 +3,7 @@ using SRMA.Models;
 using System.Diagnostics;
 using SRMA.Entities;
 using SRMA.Interfaces;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace SRMA.Controllers
 {
@@ -77,19 +78,34 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult SignUp(UserEntity entity)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("SignUp", entity);
+            }
+
             entity.IdRol = 3;
             entity.statusU = true;
 
-            var resultado = _userModel.RegisterUser(entity);
-
-            if (resultado != null)
+            if (entity.passwordU == entity.confirmPassword)
             {
-                return RedirectToAction("LogIn", "Login");
+                var resultado = _userModel.RegisterUser(entity);
+
+                if (resultado != null)
+                {
+                    System.Threading.Thread.Sleep(2000);
+                    return RedirectToAction("LogIn", "Login");
+                }
+                else
+                {
+                    return RedirectToAction("SignUp", "Login");
+                }
             }
             else
             {
-                return RedirectToAction("SignUp", "Login");
+                ModelState.AddModelError("ConfirmPassword", "La contraseña y la confirmación de contraseña no coinciden.");
+                return View(entity);
             }
+           
         }
 
         // Open RecoverPassword View
