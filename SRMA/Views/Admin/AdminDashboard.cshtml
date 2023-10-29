@@ -491,7 +491,10 @@
                         }
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <a href="@Url.Action("Index","Product")" class="btn btn-info btn-block waves-effect waves-light">
+                            Revisar productos
+                        </a>
+                        <button type="button" class="btn btn-secondary mx-auto d-block" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -500,9 +503,18 @@
 
     <script>
         $(document).ready(function () {
-            // Activa el modal al cargar la página
-            $('#urgentProductsModal').modal('show');
+            var urlParams = new URLSearchParams(window.location.search);
+            var cameFromLogin = urlParams.get('cameFromLogin');
+
+            if (cameFromLogin) {
+                // Muestra el modal
+                $('#urgentProductsModal').modal('show');
+            }
         });
     </script>
+
+
+
+
 </body>
 </html>
