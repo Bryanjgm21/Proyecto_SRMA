@@ -4,15 +4,20 @@ using SRMA.Entities;
 using MySql.Data.MySqlClient;
 using System.Data;
 using MimeKit;
+using DocumentFormat.OpenXml.InkML;
 
 namespace SRMA.Models
 {
     public class UserModel : IUserModel
     {
         private readonly IConfiguration _configuration;
-        public UserModel(IConfiguration configuration)
+        private readonly IUtilities _utilities;
+        private string _connection;
+        public UserModel(IConfiguration configuration, IUtilities utilities)
         {
             _configuration = configuration;
+            _utilities = utilities;
+            _connection = _configuration.GetConnectionString("defaultconnection");
         }
         // LogIn Method
         public UserEntity LogIn(UserEntity entity)
@@ -141,6 +146,68 @@ namespace SRMA.Models
             }
         }
 
+        
+
+        // List of users by role
+
+        public List<UserEntity> ListUsers(byte q)
+        {
+            using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
+            {
+                var userList = connection.Query<UserEntity>("GetUsers",
+                    new { pIdRol = q }, 
+                    commandType: CommandType.StoredProcedure).ToList();
+
+                if (userList != null && userList.Count > 0)
+                {
+                    return userList;
+                }
+
+                return new List<UserEntity>();
+            }
+        }
+        //*******************************
+
+        public int RecoverAccount(UserEntity entity)
+        {
+            using ( var connection = new MySqlConnection(_connection))
+            {
+                var data = connection.Query<UserEntity>("RecoverAccount",
+                        new { entity.email },
+                        commandType: CommandType.StoredProcedure).FirstOrDefault();
+
+                if (data != null)
+                {
+                    string tempPassword = _utilities.GenerarCodigo();
+                    string content = _utilities.ArmarHTML(data, tempPassword);
+
+                    connection.Execute("UpdateTempKey",
+                        new { data.IdUser, tempPassword },
+                        commandType: CommandType.StoredProcedure);
+
+                    _utilities.EnviarCorreo(data.email, "Restaurar Contraseña", content);
+                    return 1;
+                }
+                else
+                    return 0;
+            }
+        }
+
+        public int ChangeAccPassword(UserEntity entity)
+        {
+            using (var connection = new MySqlConnection(_connection))
+            {
+                entity.IdUser = long.Parse(_utilities.Decrypt(entity.IdUserEncrypt));
+
+                var data = connection.Execute("ChangeAccPassword",
+                    new { entity.IdUser, entity.tempPassword, entity.passwordU },
+                    commandType: CommandType.StoredProcedure);
+
+                return 1;
+            }
+        }
+
+
         // Validates if the email exist in the db
         public UserEntity? email_Verification(UserEntity entity)
         {
@@ -164,27 +231,6 @@ namespace SRMA.Models
                     commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
             }
         }
-
-        // List of users by role
-
-        public List<UserEntity> ListUsers(byte q)
-        {
-            using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
-            {
-                var userList = connection.Query<UserEntity>("GetUsers",
-                    new { pIdRol = q }, 
-                    commandType: CommandType.StoredProcedure).ToList();
-
-                if (userList != null && userList.Count > 0)
-                {
-                    return userList;
-                }
-
-                return new List<UserEntity>();
-            }
-        }
-
-
 
         // Mail body
         public void Email(string mail)

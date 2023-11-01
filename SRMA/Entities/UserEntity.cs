@@ -30,6 +30,10 @@ namespace SRMA.Entities
         public int ptoDays { get; set; }
         public bool statusU { get; set; }
         public byte IdRol { get; set; }
+        public string tempPassword { get; set; } = string.Empty;
+
+        public string IdUserEncrypt { get; set; } = string.Empty;
+        
 
     }
 }

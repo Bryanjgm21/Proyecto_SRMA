@@ -100,6 +100,42 @@ namespace SRMA.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult RecoverPassword(UserEntity entity)
+        {
+            var resp = _userModel.RecoverAccount(entity);
+
+            if (resp == 1)
+                return RedirectToAction("LogIn", "Login");
+            else
+            {
+                ViewBag.MensajePantalla = "No se pudo validar su cuenta";
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassword(string q)
+        {
+            UserEntity entity = new UserEntity();
+            entity.IdUserEncrypt = q;
+            return View(entity);
+        }
+
+        [HttpPost]
+        public IActionResult ChangePassword(UserEntity entity)
+        {
+            var resp = _userModel.ChangeAccPassword(entity);
+
+            if (resp == 1)
+                return RedirectToAction("LogIn", "Login");
+            else
+            {
+                ViewBag.MensajePantalla = "No se pudo actualizar su contraseña";
+                return View();
+            }
+        }
+
         //Action that sends the email
         [HttpPost]
         public IActionResult email_Recovery(UserEntity entity)

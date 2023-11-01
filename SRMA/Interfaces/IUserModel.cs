@@ -20,7 +20,11 @@ namespace SRMA.Interfaces
         // Password Recovery via Email
         public UserEntity? email_Verification(UserEntity entity);
         public void Email(string mail);
-        
+
+        public int RecoverAccount(UserEntity entity);
+        public int ChangeAccPassword(UserEntity entity);
+
+
 
     }
 }
