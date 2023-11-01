@@ -11,7 +11,7 @@ namespace SRMA.Interfaces
         // CRUD User
         public UserEntity? ConsultAcc(long q);
         public UserEntity? UpdateUser(UserEntity entity, long q);
-        public UserEntity? DeleteAcc(long q);
+        public UserEntity? DeleteAcc(long IdUser);
         public List<UserEntity> ListUsers(byte q);
 
         // Fidelity Program SignUp

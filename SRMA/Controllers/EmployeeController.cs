@@ -101,14 +101,13 @@ namespace SRMA.Controllers
             
             var result = _userModel.DeleteAcc(IdUser);
 
-            if (result == null)
+            if (result != null)
             {
-                System.Threading.Thread.Sleep(3000);
-                return RedirectToAction("Index", "Employee");
+                return RedirectToAction("Index", new { IdUser = result.IdUser });
             }
             else
             {
-                return RedirectToAction("EmployeeInfo", "Employee");
+                return RedirectToAction("Index");
             }
         }
 

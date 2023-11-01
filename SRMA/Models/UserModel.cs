@@ -102,19 +102,27 @@ namespace SRMA.Models
         }
 
         // Deletes User by id
-        public UserEntity? DeleteAcc(long q)
+        public UserEntity? DeleteAcc(long IdUser)
 
         {
             using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
             {
+                var parameters = new { UIdUser = IdUser };
 
-                connection.Execute("DeleteAcc",
-                       new { UIdUser = q },
-                       commandType: System.Data.CommandType.StoredProcedure);
+                // Ejecuta el procedimiento almacenado o consulta SQL para eliminar el producto
+                var result = connection.Execute("DeleteAcc", parameters, commandType: CommandType.StoredProcedure);
 
-                return null;
+                if (result > 0)
+                {
+                    // La eliminación fue exitosa, puedes devolver una respuesta, por ejemplo, un mensaje de éxito.
+                    return new UserEntity { IdUser = IdUser };
+                }
+                else
+                {
+                    // En caso de que no se haya eliminado ningún producto (por ejemplo, si el IdProduct no existe), puedes devolver nulo o algún otro valor para indicar que la operación no fue exitosa.
+                    return null;
+                }
             }
-
         }
 
         // Method to Register a user in the loyalty program, first consult the user id then registers the user in the loyalty program
