@@ -5,77 +5,76 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<html>
-<body>
 
-    <div>
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="d-flex align-items-center min-vh-100">
                         <div class="w-100 d-block bg-white shadow-lg rounded my-5">
-                            <div class="row">
-                                <div class="col-lg-5 d-none d-lg-block bg-register rounded-left"></div>
-                                <div class="col-lg-7">
-                                    <div class="p-5">
-                                        <div class="text-center mb-5">
-                                            <a href="index.html" class="text-dark font-size-22 font-family-secondary">
-                                                <i class="mdi mdi-album"></i> <b>SRMA</b>
-                                            </a>
+                                <div class="row">
+                                    <!-- Columna izquierda para la imagen -->
+                                    <div class="col-lg-5 d-none d-lg-block rounded-left">
+                                        <img src="/Theme/assets/images/Employees.jpg" style="max-width:115%; height:100%" class="img-fluid">
+                                    </div>
+                                    <!-- Columna derecha para el contenido -->
+                                    <div class="col-lg-7">
+                                        <div class="p-5">
+                                            <div class="text-center mb-5">
+                                                <a href="index.html" class="text-dark font-size-22 font-family-secondary">
+                                                    <i class="mdi mdi-album"></i> <b>SRMA</b>
+                                                </a>
+                                            </div>
+                                            <h1 class="h5 mb-1">Agrega la información del empleado</h1>
+
+                                            @using (Html.BeginForm("RegisterEmployee", "Employee", FormMethod.Post, new { @class = "user" }))
+                                            {
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <label>Nombre</label>
+                                                        @Html.TextBoxFor(m => m.userName, new { @class = "form-control form-control-user", @placeholder = "Nombre", @type = "text" })
+                                                        <span asp-validation-for="userName" class="text-danger"> </span>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>Apellido</label>
+                                                        @Html.TextBoxFor(m => m.lastName, new { @class = "form-control form-control-user", @placeholder = "Apellido", @type = "text" })
+                                                        <span asp-validation-for="lastName" class="text-danger"> </span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Cedula</label>
+                                                    @Html.TextBoxFor(m => m.Id, new { @class = "form-control form-control-user", @placeholder = "Cedula", @type = "text" })
+                                                    <span asp-validation-for="Id" class="text-danger"> </span>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <label>Telefono</label>
+                                                        @Html.TextBoxFor(m => m.cellphone, new { @class = "form-control form-control-user", @placeholder = "Telefono", @type = "tel" })
+                                                        <span asp-validation-for="cellphone" class="text-danger"> </span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Correo electrónico</label>
+                                                    @Html.TextBoxFor(m => m.email, new { @class = "form-control form-control-user", @placeholder = "Correo electrónico", @type = "text" })
+                                                    <span asp-validation-for="email" class="text-danger"> </span>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input type="submit" id="addEmpl" class="btn btn-success btn-block waves-effect waves-light" value="Registrar" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <a href="@Url.Action("Index", "Employee")" class="btn btn-secondary btn-block waves-effect waves-light">Volver a la página principal</a>
+                                                </div>
+                                            }
                                         </div>
-                                        <h1 class="h5 mb-1">Agrega la información del empleado</h1>
-
-                                        @using (Html.BeginForm("RegisterEmployee", "Employee", FormMethod.Post, new { @class = "user" }))
-                                        {
-                                            <div class="form-group row">
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <label>Nombre</label>
-                                                    @Html.TextBoxFor(m => m.userName, new {@class="form-control form-control-user", @placeholder="Nombre",@type="text"})
-                                                    <span asp-validation-for= "userName" class="text-danger"> </span>
-
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>Apellido</label>
-                                                    @Html.TextBoxFor(m => m.lastName, new {@class="form-control form-control-user", @placeholder="Apellido",@type="text"})
-                                                    <span asp-validation-for="lastName" class="text-danger"> </span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Cedula</label>
-                                                @Html.TextBoxFor(m => m.Id, new {@class="form-control form-control-user", @placeholder="Cedula",@type="text"})
-                                                <span asp-validation-for="Id" class="text-danger"> </span>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <label>Telefono</label>
-                                                    @Html.TextBoxFor(m => m.cellphone, new {@class="form-control form-control-user", @placeholder="Telefono",@type="tel"})
-                                                    <span asp-validation-for="cellphone" class="text-danger"> </span>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Correo electronico</label>
-                                                @Html.TextBoxFor(m => m.email, new {@class="form-control form-control-user", @placeholder="Correo electronico",@type="text"})
-                                                <span asp-validation-for="email" class="text-danger"> </span>
-                                            </div>
-
-
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="submit" id="addEmpl" class="btn btn-success btn-block waves-effect waves-light" value="Registrar" />
-                                                <a href="@Url.Action("Index", "Employee")" class="btn btn-secondary btn-block waves-effect waves-light">Volver a la página principal</a>
-                                            </div>
-                                        }
-                                        <!-- end row -->
-                                    </div> <!-- end .padding-5 -->
-                                </div> <!-- end col -->
-                            </div> <!-- end row -->
-                        </div> <!-- end .w-100 -->
+                                    </div>
+                                </div>
+                            </div>
                     </div> <!-- end .d-flex -->
                 </div> <!-- end col-->
             </div> <!-- end row -->
         </div>
         <!-- end container -->
-    </div>
     <script>
         // Agrega el código JavaScript en una función que se ejecutará cuando se haga clic en el botón "Guardar Cambios"
         document.addEventListener("DOMContentLoaded", function () {
@@ -88,5 +87,3 @@
             });
         });
     </script>
-</body>
-</html>

@@ -56,19 +56,7 @@
         return isObject(obj) && obj.nodeType > 0;
     }
 
-    function getWavesElements(nodes) {
-        var stringRepr = toString.call(nodes);
 
-        if (stringRepr === '[object String]') {
-            return $$(nodes);
-        } else if (isObject(nodes) && /^\[object (Array|HTMLCollection|NodeList|Object)\]$/.test(stringRepr) && nodes.hasOwnProperty('length')) {
-            return nodes;
-        } else if (isDOMNode(nodes)) {
-            return [nodes];
-        }
-
-        return [];
-    }
 
     function offset(elem) {
         var docElem, win,
