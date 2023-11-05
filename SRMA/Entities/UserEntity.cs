@@ -33,5 +33,10 @@ namespace SRMA.Entities
         public bool statusU { get; set; }
         public byte IdRol { get; set; }
 
+        public string tempPassword { get; set; } = string.Empty;
+        public bool tempKey { get; set; }
+
+        public string IdUserEncrypt { get; set; } = string.Empty;
+
     }
 }
