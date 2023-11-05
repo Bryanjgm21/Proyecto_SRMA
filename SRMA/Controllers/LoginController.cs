@@ -60,6 +60,8 @@ namespace SRMA.Controllers
 
 
             }
+          
+
             else
             {
                 ViewBag.MsjPantalla = "Correo o contraseña incorrectos.";
@@ -113,6 +115,47 @@ namespace SRMA.Controllers
         public IActionResult RecoverPassword()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult RecoverPassword(UserEntity entity)
+        {
+            var resp = _userModel.RecoverAccount(entity);
+
+            if (resp == 1)
+            {
+                TempData["ContrasenaRecuperada"] = "Email de recuperación enviado exitosamente";
+                return RedirectToAction("RecoverPassword", "Login");
+            }
+                
+            else
+            {
+                TempData["ErrorCorreo"] = "No tienes una cuenta, por favor registrate.";
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassword(string q)
+        {
+            UserEntity entity = new UserEntity();
+            entity.IdUserEncrypt = q;
+            return View(entity);
+        }
+
+        [HttpPost]
+        public IActionResult ChangePassword(UserEntity entity)
+        {
+            var resp = _userModel.ChangeAccPassword(entity);
+
+            if (resp == 1)
+
+                return RedirectToAction("LogIn", "Login");
+            else
+            {
+                ViewBag.MensajePantalla = "No se pudo actualizar su contraseña";
+                return View();
+            }
         }
 
         //Action that sends the email
