@@ -28,8 +28,6 @@ namespace SRMA.Entities
         [Required(ErrorMessage = "El campo Teléfono es obligatorio.")]
         [RegularExpression(@"\d{8}", ErrorMessage = "El Teléfono debe tener 8 dígitos y solo ser números")]
         public string cellphone { get; set; } = string.Empty;
-        public DateTime startDate { get; set; }
-        public int ptoDays { get; set; }
         public bool statusU { get; set; }
         public byte IdRol { get; set; }
 
