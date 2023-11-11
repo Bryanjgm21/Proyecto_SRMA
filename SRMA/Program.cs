@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IUserModel, UserModel>();
 builder.Services.AddSingleton<IProductModel, ProductModel>();
 builder.Services.AddSingleton<ISupplierModel, SupplierModel>();
+builder.Services.AddSingleton<IReservationModel, ReservationModel>();
 builder.Services.AddSingleton<IUtilities, Utilities>();
 builder.Services.AddSession();
 
