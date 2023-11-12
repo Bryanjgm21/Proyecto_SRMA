@@ -40,20 +40,20 @@ namespace SRMA.Models
         }
 
         // Method to Register a user in the loyalty program, first consult the user id then registers the user in the loyalty program
-        public int InsertReservationByClient(ReservationEntity entity)
+        public int InsertReservationByClient(ReservationEntity entity, long q)
 
         {
             using (var connection = new MySqlConnection(_connection))
             {
                 var user = connection.Query<UserEntity>("ConsultAcc",
-                     new { IdUser = entity.IdUser },
+                     new { IdUser = q },
                      commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
 
                 if (user != null)
                 {
 
                     connection.Execute("InsertReservation",
-                       new { entity.quantity, entity.details, entity.observations, entity.dateReservation, entity.IdUser, },
+                       new { entity.quantity, entity.details, entity.observations, dateR = entity.dateReservation.Date, timeR = entity.dateReservation.TimeOfDay, q},
                        commandType: System.Data.CommandType.StoredProcedure); ;
 
                     return 1;

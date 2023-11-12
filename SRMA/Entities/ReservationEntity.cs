@@ -1,9 +1,15 @@
-﻿namespace SRMA.Entities
+﻿using DocumentFormat.OpenXml.Office.CoverPageProps;
+
+namespace SRMA.Entities
 {
+
     public class ReservationEntity
     {
+       
         // Main atributes
         public long IdReservation { get; set; }
+        public DateOnly dateR { get; set; }
+        public TimeOnly timeR{ get; set; }
         public DateTime dateReservation { get; set; }
 
         public int quantity { get; set; }

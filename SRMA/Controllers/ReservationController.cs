@@ -34,7 +34,11 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult NewReservation(ReservationEntity entity)
         {
-            var resp = _reservationModel.InsertReservationByClient(entity);
+
+            var IdUser = HttpContext.Session.GetInt32("IdSession");
+            long UserId = (long)IdUser;
+
+            var resp = _reservationModel.InsertReservationByClient(entity,UserId);
 
             if (resp == 1)
                 return RedirectToAction("Index", "Reservation");
