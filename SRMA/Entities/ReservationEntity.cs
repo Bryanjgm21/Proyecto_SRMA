@@ -24,6 +24,8 @@ namespace SRMA.Entities
         // FK Table Users
         public int IdUser { get; set; }
         public string email { get; set; } = string.Empty;
+        public string userName { get; set; } = string.Empty;
+        public string lastName { get; set; } = string.Empty;
 
 
     }

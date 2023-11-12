@@ -2,6 +2,7 @@
 using NuGet.Protocol;
 using SRMA.Entities;
 using SRMA.Interfaces;
+using SRMA.Models;
 
 namespace SRMA.Controllers
 {
@@ -76,15 +77,47 @@ namespace SRMA.Controllers
         }
 
         [HttpGet]
-        public IActionResult AdminEdit()
+        public IActionResult AdminEdit(long q)
         {
-            return View();
+            var result = _reservationModel.GetReservationsById(q);
+
+            if (result != null)
+            {
+                return View(result);
+            }
+            return NotFound();
         }
+
+        public IActionResult EditReser(ReservationEntity entity)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("AdminEdit", entity);
+            }
+
+            var resultado = _reservationModel.UpdateReservation(entity, entity.IdReservation);
+
+
+            if (resultado != null)
+            {
+                System.Threading.Thread.Sleep(3000);
+                return RedirectToAction("AdminReservation", "Reservation");
+            }
+            else
+            {
+                return RedirectToAction("AdminEdit", "Reservation");
+            }
+        }
+
 
         [HttpGet]
         public IActionResult AdminReservation()
         {
-            return View();
+            var reservations = _reservationModel.ListReservations();
+            return View(reservations);
+            
         }
+
+
     }
 }

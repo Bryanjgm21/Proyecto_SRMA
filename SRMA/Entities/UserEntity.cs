@@ -8,8 +8,9 @@ namespace SRMA.Entities
         public long IdUser { get; set; }
 
         [Required(ErrorMessage = "El campo Correo Electrónico es obligatorio.")]
-        [EmailAddress(ErrorMessage = "El Correo Electrónico no es válido.")]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Correo inválido")]
         public string email { get; set; } = string.Empty;
+
         [RegularExpression("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$", ErrorMessage = "La contraseña debe tener minimo 8 caracteres")]
         public string passwordU { get; set; } = string.Empty;
         [RegularExpression("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$", ErrorMessage = "La contraseña debe tener mayúscula, minúscula, un número y un caracter especial")]

@@ -63,5 +63,72 @@ namespace SRMA.Models
             }
         }
 
+        public List<ReservationEntity> ListReservations()
+        {
+            using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
+            {
+                var reservationsList = connection.Query<ReservationEntity>("GetAllReservations",
+                    commandType: CommandType.StoredProcedure).ToList();
+
+                if (reservationsList != null && reservationsList.Count > 0)
+                {
+                    return reservationsList;
+                }
+
+                return new List<ReservationEntity>();
+            }
+        }
+
+        public ReservationEntity? GetReservationsById(long q)
+
+        {
+            using (var connection = new MySqlConnection(_connection))
+            {
+                var data = connection.Query<ReservationEntity>("GetReservationById",
+                     new { pIdReservation = q },
+                     commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
+
+                if (data != null)
+                {
+
+                    var reservationViewModel = new ReservationEntity
+                    {
+                        IdUser = data.IdUser,
+                        userName = data.userName,
+                        lastName = data.lastName,
+                        IdReservation = data.IdReservation,
+                        details = data.details,
+                        observations = data.observations,
+                        quantity = data.quantity,
+                        dateReservation = data.dateReservation,
+                    };
+
+                    return reservationViewModel;
+                }
+
+                return null;
+            }
+        }
+             public ReservationEntity? UpdateReservation(ReservationEntity entity, long q)
+        {
+            if (entity != null)
+            {
+                using (var connection = new MySqlConnection(_connection))
+                {
+                    var result = connection.Execute("UpdateReservation",
+                       new { pIdReservation = q, entity.quantity, entity.details, entity.observations, entity.dateReservation,entity.IdUser},
+                       commandType: CommandType.StoredProcedure);
+
+                    return entity;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+
     }
 }

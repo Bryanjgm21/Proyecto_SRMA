@@ -4,7 +4,10 @@ namespace SRMA.Interfaces
 {
     public interface IReservationModel
     {
-        List<ReservationEntity> GetReservationsByUser(long q);
+        public List<ReservationEntity> GetReservationsByUser(long q);
         public int InsertReservationByClient(ReservationEntity entity, long q);
+        public List<ReservationEntity> ListReservations();
+        public ReservationEntity? GetReservationsById(long q);
+        public ReservationEntity? UpdateReservation(ReservationEntity entity, long q);
     }
 }
