@@ -41,7 +41,7 @@ namespace SRMA.Controllers
             var resp = _reservationModel.InsertReservationByClient(entity,UserId);
 
             if (resp == 1)
-                return RedirectToAction("Index", "Reservation");
+                return RedirectToAction("ViewReservations", "Reservation");
             else
             {
                 ViewBag.MensajePantalla = "No se pudo registrar su cuenta";

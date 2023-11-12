@@ -53,8 +53,8 @@ namespace SRMA.Models
                 {
 
                     connection.Execute("InsertReservation",
-                       new { entity.quantity, entity.details, entity.observations, dateR = entity.dateReservation.Date, timeR = entity.dateReservation.TimeOfDay, q},
-                       commandType: System.Data.CommandType.StoredProcedure); ;
+                       new { entity.quantity, entity.details, entity.observations, dateR = entity.dateReservation.Date, timeR = entity.dateReservation.TimeOfDay, IdUser = q},
+                       commandType: System.Data.CommandType.StoredProcedure);
 
                     return 1;
                 }

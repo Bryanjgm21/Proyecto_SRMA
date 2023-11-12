@@ -5,6 +5,7 @@ namespace SRMA.Entities
 
     public class ReservationEntity
     {
+
        
         // Main atributes
         public long IdReservation { get; set; }
