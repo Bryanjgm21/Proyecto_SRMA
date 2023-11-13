@@ -1,0 +1,111 @@
+﻿@model SRMA.Entities.ReservationEntity
+@{
+    ViewData["Title"] = "NewReservation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>NewReservation</h1>
+<html>
+<body>
+
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex align-items-center min-vh-100">
+                        <div class="w-100 d-block bg-white shadow-lg rounded my-5">
+                            <div class="row">
+                                <!-- Columna izquierda para la imagen -->
+                                <div class="col-lg-5 d-none d-lg-block rounded-left">
+                                    <img src="/Theme/assets/images/Update.jpg" style="max-width:100%; height:100%" class="img-fluid">
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="p-5">
+                                        <div class="text-center mb-5">
+                                            <a href="index.html" class="text-dark font-size-22 font-family-secondary">
+                                                <i class="mdi mdi-album"></i> <b>SRMA</b>
+                                            </a>
+                                        </div>
+                                        <h1 class="h5 mb-1">Cambiar los datos de tu cuenta</h1>
+                                        <p class="text-muted mb-4">Una vez hayas terminado, utiliza la opción de "Guardar cambios"</p>
+                                        @using (Html.BeginForm("NewReservation", "Reservation", FormMethod.Post, new { @class = "user" }))
+                                        {
+                                            <div class="form-group row">
+
+                                               @* <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <label>Fecha y Hora</label>
+                                                    @Html.TextBoxFor(m => m.dateReservation, new {@class="form-control form-control-user", @placeholder="Fecha y hora de reserva",@type="datetime-local"})
+                                                </div>*@
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <label>Fecha y Hora</label>
+                                                    @Html.TextBoxFor(m => m.dateReservation, new { @class = "form-control form-control-user", @placeholder = "Fecha y hora de reserva", @type = "datetime-local", @id = "dateReservation" })
+                                                </div>
+                                               @* <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <label>Nombre</label>
+                                                    @Html.TextBoxFor(m => m.dateReservation, new {@class="form-control form-control-user", @placeholder="Fecha de reserva",@type="time"})
+                                                </div>*@
+
+                                                <div class="col-sm-6">
+                                                    <label>Cantidad de personas</label>
+                                                    @Html.TextBoxFor(m => m.quantity, new {@class="form-control form-control-user", @placeholder="Cantidad de personas",@type="number"})
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Observaciones</label>
+                                                    @Html.TextBoxFor(m => m.observations, new {@class="form-control form-control-user", @placeholder="Observaciones",@type="text"})
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <a href="@Url.Action("ViewReservations", "Reservation")" class="btn btn-secondary btn-block waves-effect waves-light">Volver a la página principal</a>
+                                                    </div>
+                                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                                        <input type="submit" id="guardarCambiosButton" class="btn btn-success btn-block waves-effect waves-light" value="Guardar cambios" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        <!-- end row -->
+                                    </div> <!-- end .padding-5 -->
+                                </div> <!-- end col -->
+                            </div> <!-- end row -->
+                        </div> <!-- end .w-100 -->
+                    </div> <!-- end .d-flex -->
+                </div> <!-- end col-->
+            </div> <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+
+</body>
+</html>
+
+<script>
+    var dateReservationInput = document.getElementById('dateReservation');
+
+    dateReservationInput.min = new Date().toISOString().slice(0, 16);
+
+    var maxDate = new Date();
+    maxDate.setDate(maxDate.getDate() + 22);
+    dateReservationInput.max = maxDate.toISOString().slice(0, 16);
+
+    dateReservationInput.addEventListener('change', function () {
+        var selectedDateTime = new Date(dateReservationInput.value);
+        var startTime = new Date(selectedDateTime);
+        startTime.setHours(7, 30, 0, 0);
+        var endTime = new Date(selectedDateTime);
+        endTime.setHours(19, 30, 0, 0);
+
+        if (selectedDateTime < startTime || selectedDateTime > endTime) {
+            // Utilizar SweetAlert para mostrar un mensaje estilizado
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor, selecciona una hora entre las 7:30 y las 19:30.'
+            });
+            // Puedes reiniciar el valor del campo o tomar otra acción según tus necesidades
+            // dateReservationInput.value = '';
+        }
+    });
+</script>
