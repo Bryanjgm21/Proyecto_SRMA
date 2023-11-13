@@ -82,6 +82,7 @@ namespace SRMA.Controllers
         {
             if (!ModelState.IsValid)
             {
+                // Si el modelo no es válido, simplemente regresa a la vista sin intentar registrar el usuario.
                 return View("SignUp", entity);
             }
 
@@ -94,21 +95,33 @@ namespace SRMA.Controllers
 
                 if (resultado != null)
                 {
-                    System.Threading.Thread.Sleep(2000);
-                    return RedirectToAction("LogIn", "Login");
+                    // Almacenar el mensaje de éxito en ViewBag
+                    ViewBag.MensajeExito = "Registro exitoso.";
+
+                    // Agregar un indicador de éxito al modelo para que lo pueda comprobar la vista
+                    ModelState.AddModelError("RegistroExitoso", "Registro exitoso");
+
+                    // Devolver la vista sin redirección
+                    return View("SignUp", entity);
                 }
                 else
                 {
-                    return RedirectToAction("SignUp", "Login");
+                    // Manejar error al registrar el usuario
+                    ViewBag.MensajeError = "Error al registrar el usuario.";
                 }
             }
             else
             {
+                // Manejar error de contraseña no coincidente
                 ModelState.AddModelError("ConfirmPassword", "La contraseña y la confirmación de contraseña no coinciden.");
-                return View(entity);
             }
-           
+
+            // Devolver la vista con el modelo y mensajes
+            return View(entity);
         }
+
+
+
 
         // Open RecoverPassword View
         [HttpGet]
