@@ -32,9 +32,13 @@
                                         {
                                             <div class="form-group row">
 
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                               @* <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <label>Fecha y Hora</label>
                                                     @Html.TextBoxFor(m => m.dateReservation, new {@class="form-control form-control-user", @placeholder="Fecha y hora de reserva",@type="datetime-local"})
+                                                </div>*@
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <label>Fecha y Hora</label>
+                                                    @Html.TextBoxFor(m => m.dateReservation, new { @class = "form-control form-control-user", @placeholder = "Fecha y hora de reserva", @type = "datetime-local", @id = "dateReservation" })
                                                 </div>
                                                @* <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <label>Nombre</label>
@@ -76,3 +80,32 @@
 
 </body>
 </html>
+
+<script>
+    var dateReservationInput = document.getElementById('dateReservation');
+
+    dateReservationInput.min = new Date().toISOString().slice(0, 16);
+
+    var maxDate = new Date();
+    maxDate.setDate(maxDate.getDate() + 22);
+    dateReservationInput.max = maxDate.toISOString().slice(0, 16);
+
+    dateReservationInput.addEventListener('change', function () {
+        var selectedDateTime = new Date(dateReservationInput.value);
+        var startTime = new Date(selectedDateTime);
+        startTime.setHours(7, 30, 0, 0);
+        var endTime = new Date(selectedDateTime);
+        endTime.setHours(19, 30, 0, 0);
+
+        if (selectedDateTime < startTime || selectedDateTime > endTime) {
+            // Utilizar SweetAlert para mostrar un mensaje estilizado
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor, selecciona una hora entre las 7:30 y las 19:30.'
+            });
+            // Puedes reiniciar el valor del campo o tomar otra acción según tus necesidades
+            // dateReservationInput.value = '';
+        }
+    });
+</script>
