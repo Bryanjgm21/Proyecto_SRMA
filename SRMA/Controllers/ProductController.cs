@@ -51,6 +51,10 @@ namespace SRMA.Controllers
         {
             if (!ModelState.IsValid)
             {
+                var suppliers = _supplierModel.ListSuppliers();
+                var listSuppliers = suppliers.Select(item => new SelectListItem { Text = item.supplierName, Value = item.IdSupplier.ToString() }).ToList();
+                ViewBag.listSuppliers = listSuppliers;
+
                 return View("Create", entity);
             }
 
@@ -58,7 +62,7 @@ namespace SRMA.Controllers
 
             if (resultado != null)
             {
-                System.Threading.Thread.Sleep(3000);
+                System.Threading.Thread.Sleep(5000);
                 return RedirectToAction("Index", "Product");
             }
             else
@@ -100,11 +104,15 @@ namespace SRMA.Controllers
             {
                 // Realiza la actualización del producto en la base de datos a través de _productModel.
                 _productModel.UpdateProduct(model, model.IdProduct);
-                System.Threading.Thread.Sleep(3000);
+                System.Threading.Thread.Sleep(5000);
                 return RedirectToAction("Index"); // Redirige a la lista de productos u otra página según tus necesidades.
             }
 
             // Si el modelo no es válido, vuelve a mostrar la vista de edición con errores.
+            var suppliers = _supplierModel.ListSuppliers();
+            var listSuppliers = suppliers.Select(item => new SelectListItem { Text = item.supplierName, Value = item.IdSupplier.ToString() }).ToList();
+            ViewBag.listSuppliers = listSuppliers;
+
             return View(model);
         }
 

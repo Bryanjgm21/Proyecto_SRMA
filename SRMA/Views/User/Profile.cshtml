@@ -44,16 +44,18 @@
                                                     @Html.TextBoxFor(m => m.lastName, new {@class="form-control form-control-user", @placeholder="Apellido",@type="text"})
                                                     <span asp-validation-for="lastName" class="text-danger"> </span>
                                                 </div>
-
+                                                <div>
+                                                     
+                                                </div>
                                                 <div class="form-group">
-                                                    <label>Correo electronico</label>
+                                                    <label>Correo electrónico</label>
                                                     @Html.TextBoxFor(m => m.email, new {@class="form-control form-control-user", @placeholder="Correo electronico",@type="text"})
                                                     <span asp-validation-for="email" class="text-danger"> </span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <label>Telefono</label>
+                                                    <label>Teléfono</label>
                                                     @Html.TextBoxFor(m => m.cellphone, new {@class="form-control form-control-user", @placeholder="Telefono",@type="tel"})
                                                     <span asp-validation-for="cellphone" class="text-danger"> </span>
 
@@ -68,7 +70,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <a href="@Url.Action("Index", "User")" class="btn btn-secondary btn-block waves-effect waves-light">Volver a la página principal</a>
+                                                    <a href="@Url.Action("Index", "User")" class="btn btn-secondary btn-block waves-effect waves-light">Volver</a>
                                                 </div>
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <input type="submit" id="guardarCambiosButton"  class="btn btn-success btn-block waves-effect waves-light" value="Guardar cambios" />
@@ -77,16 +79,16 @@
                                             </div>
                                         }
                                         <div class="form-group">
-                                            @using (Html.BeginForm("RegisterProgram", "User", FormMethod.Post))
+                                            @using (Html.BeginForm("RegisterProgram", "User", FormMethod.Post, new { id = "registerProgramForm" }))
                                             {
-                                                <input type="submit" class="btn btn-primary btn-block waves-effect waves-light" value="Programa de lealtead" />
+                                                <input type="submit" class="btn btn-info btn-block waves-effect waves-light" value="Registrar Programa de lealtad" />
                                             }
 
                                         </div>
                                         <div class="form-group">
                                           @*  <button class="btn btn-danger delete-product" data-product-id="IdUser">Eliminar</button>*@
 
-                                            @using (Html.BeginForm("DeleteAcc", "User", FormMethod.Post))
+                                            @using (Html.BeginForm("DeleteAcc", "User", FormMethod.Post, new { id = "deleteAccountForm" }))
                                             {
                                                 <input type="submit" class="btn btn-danger btn-block waves-effect waves-light" value="Eliminar cuenta" />
                                             }
@@ -137,50 +139,60 @@
         });
     });
 </script>
-@*
+
 <script>
-    $(document).ready(function () {
-        var productIdToDelete;
+    document.addEventListener("DOMContentLoaded", function () {
+        // Captura el evento de envío del formulario
+        document.getElementById('deleteAccountForm').addEventListener('submit', function (event) {
+            // Previene la acción predeterminada (enviar el formulario)
+            event.preventDefault();
 
-        $(".delete-product").click(function () {
-            productIdToDelete = $(this).data("product-id");
-
-            // Utiliza SweetAlert para mostrar el pop-up de confirmación
+            // Muestra un pop-up de confirmación
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "Esta acción no se puede deshacer",
+                text: 'Esta acción eliminará tu cuenta permanentemente.',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
+                cancelButtonText: 'Volver',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar cuenta'
             }).then((result) => {
+                // Si el usuario confirma, envía el formulario
                 if (result.isConfirmed) {
-                    // Realizar una solicitud POST para eliminar el producto
-                    $.ajax({
-                        url: "@Url.Action("DeleteAcc", "User")",
-                        method: "POST",
-                        data: { IdProduct: productIdToDelete },
-                        success: function (result) {
-                            // Manejar la respuesta del servidor
-                            if (result.success) {
-                                Swal.fire('Error', 'No se pudo eliminar el perfil', 'error');
-                            } else {
-                                Swal.fire('Éxito', 'El perfil se ha eliminado', 'success').then(function () {
-                                    window.location.href = "@Url.Action("Index")";
-                                });
-                            }
-                        },
-                        error: function () {
-                            Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
-                        }
-                    });
+                    document.getElementById('deleteAccountForm').submit();
                 }
             });
         });
     });
 </script>
-*@
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Captura el evento de envío del formulario
+        document.getElementById('registerProgramForm').addEventListener('submit', function (event) {
+            // Previene la acción predeterminada (enviar el formulario)
+            event.preventDefault();
 
+            // Muestra un pop-up de confirmación
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: 'Esta acción registrará tu cuenta al programa de lealtad.',
+                icon: 'question',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, registrar'
+            }).then((result) => {
+                // Si el usuario confirma, envía el formulario
+                if (result.isConfirmed) {
+                    document.getElementById('registerProgramForm').submit();
 
-
+                    // Muestra un pop-up de éxito después de enviar el formulario
+                    Swal.fire('¡Éxito!', 'Tu cuenta se registró correctamente.', 'success');
+                }
+            });
+        });
+    });
+</script>

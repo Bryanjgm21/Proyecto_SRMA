@@ -27,7 +27,7 @@
                                         </div>
                                         <h1 class="h5 mb-1">Cambiar los datos de tu cuenta</h1>
                                         <p class="text-muted mb-4">Una vez hayas terminado, utiliza la opción de "Guardar cambios"</p>
-                                        @using (Html.BeginForm("UpdateUser", "User", FormMethod.Post, new { @class = "user" }))
+                                        @using (Html.BeginForm("UpdateUser", "Admin", FormMethod.Post, new { @class = "user" }))
                                         {
                                             <div class="form-group row">
 
@@ -36,36 +36,39 @@
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <label>Nombre</label>
                                                     @Html.TextBoxFor(m => m.userName, new {@class="form-control form-control-user", @placeholder="Nombre",@type="text"})
-
+                                                    <span asp-validation-for="userName" class="text-danger"> </span>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Apellido</label>
                                                     @Html.TextBoxFor(m => m.lastName, new {@class="form-control form-control-user", @placeholder="Apellido",@type="text"})
+                                                    <span asp-validation-for="lastName" class="text-danger"> </span>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Correo electronico</label>
                                                     @Html.TextBoxFor(m => m.email, new {@class="form-control form-control-user", @placeholder="Correo electronico",@type="email"})
+                                                    <span asp-validation-for="email" class="text-danger"> </span>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <label>Telefono</label>
                                                     @Html.TextBoxFor(m => m.cellphone, new {@class="form-control form-control-user", @placeholder="Telefono",@type="tel"})
-
+                                                    <span asp-validation-for="cellphone" class="text-danger"> </span>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Contraseña</label>
                                                 @Html.TextBoxFor(m => m.passwordU, new {@class="form-control form-control-user", @placeholder="Contraseña",@type="password"})
+                                                <span asp-validation-for="passwordU" class="text-danger"> </span>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <a href="@Url.Action("AdminDashboard", "Admin")" class="btn btn-secondary btn-block waves-effect waves-light">Volver</a>
                                                 </div>
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="submit" class="btn btn-success btn-block waves-effect waves-light" value="Guardar cambios" />
+                                                    <input type="submit" id="guardarCambiosButton" class="btn btn-success btn-block waves-effect waves-light" value="Guardar cambios" />
 
                                                 </div>
                                             </div>
@@ -87,3 +90,31 @@
 
 </body>
 </html>
+<script>
+    function validateForm() {
+
+        if (document.getElementById("userName").value === "" ||
+            document.getElementById("lastName").value === "" ||
+            document.getElementById("email").value === "") {
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Por favor, completa todos los campos requeridos.',
+                showConfirmButton: false
+            });
+            return false;
+        }
+        return true;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var guardarCambiosButton = document.getElementById('guardarCambiosButton');
+        guardarCambiosButton.addEventListener('click', function () {
+            if (validateForm()) {
+
+                Swal.fire('¡Éxito!', 'Se guardaron los cambios correctamente.', 'success');
+            }
+        });
+    });
+</script>

@@ -23,7 +23,7 @@ namespace SRMA.Interfaces
 
         public int RecoverAccount(UserEntity entity);
         public int ChangeAccPassword(UserEntity entity);
-
+        public UserEntity? verifUser(UserEntity entity);
 
     }
 }

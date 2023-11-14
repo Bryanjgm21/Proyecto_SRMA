@@ -80,11 +80,11 @@ namespace SRMA.Controllers
 
             if (result != null)
             {
-                return RedirectToAction("Index", "User");
+                return RedirectToAction("LogIn", "Login");
             }
             else
             {
-                return RedirectToAction("LogIn", "Login");
+                return RedirectToAction("Index", "User");
             }
         }
 
@@ -100,7 +100,7 @@ namespace SRMA.Controllers
 
             if (result != null)
             {
-                return RedirectToAction("Index", "User");
+                return RedirectToAction("Profile", "User");
             }
             else
             {
