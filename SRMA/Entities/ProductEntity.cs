@@ -23,5 +23,8 @@ namespace SRMA.Entities
 
         public long IdSupplier { get; set; }
 
+        public string supplierName { get; set; } = string.Empty;
+
+
     }
 }

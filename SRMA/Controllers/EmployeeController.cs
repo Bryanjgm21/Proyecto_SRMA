@@ -53,22 +53,40 @@ namespace SRMA.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View("Create",entity);
+                // Si el modelo no es válido, simplemente regresa a la vista sin intentar registrar el usuario.
+                return View("Create", entity);
+            }
+
+            var ver = _userModel.verifUser(entity);
+            if (ver != null)
+            {
+                ViewBag.ErrorMessage = "El empleado ya existe";
+                return View("Create", entity);
             }
 
             var resultado = _userModel.RegisterUser(entity);
 
             if (resultado != null)
             {
-                System.Threading.Thread.Sleep(3000);
-                return RedirectToAction("Index", "Employee");
+                // Almacenar el mensaje de éxito en ViewBag
+                ViewBag.MensajeExito = "Registro exitoso.";
+
+                // Agregar un indicador de éxito al modelo para que lo pueda comprobar la vista
+                ModelState.AddModelError("RegistroExitoso", "Registro exitoso");
+
+                // Devolver la vista sin redirección
+                return View("Create", entity);
             }
             else
             {
-                return RedirectToAction("Create", "Employee");
+                // Manejar error al registrar el usuario
+                ViewBag.MensajeError = "Error al registrar el usuario.";
             }
 
+            // Devolver la vista con el modelo y mensajes
+            return View("Create", entity);
         }
+
 
 
         [HttpPost]
@@ -76,22 +94,33 @@ namespace SRMA.Controllers
         {
             if (!ModelState.IsValid)
             {
+                // Si el modelo no es válido, simplemente regresa a la vista sin intentar actualizar el usuario.
                 return View("EmployeeInfo", entity);
             }
 
             var resultado = _userModel.UpdateUser(entity, entity.IdUser);
 
-
             if (resultado != null)
             {
-                System.Threading.Thread.Sleep(3000);
-                return RedirectToAction("Index", "Employee");
+                // Almacenar el mensaje de éxito en ViewBag
+                ViewBag.MensajeExito = "Actualizacion exitosa.";
+
+                // Agregar un indicador de éxito al modelo para que lo pueda comprobar la vista
+                ModelState.AddModelError("RegistroExitoso", "Actualizacion exitosa");
+
+                // Devolver la vista sin redirección
+                return View("EmployeeInfo", entity);
             }
             else
             {
-                return RedirectToAction("EmployeeInfo", "Employee");
+                // Manejar error al actualizar el usuario
+                ViewBag.MensajeError = "Error al actualizar el usuario.";
             }
+
+            // Devolver la vista con el modelo y mensajes
+            return View("EmployeeInfo", entity);
         }
+
 
 
         [HttpPost]

@@ -270,6 +270,16 @@ namespace SRMA.Models
 
         }
 
+        public UserEntity? verifUser(UserEntity entity)
+        {
+
+            using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
+            {
+                return connection.Query<UserEntity>("verUser",
+                    new { pEmail = entity.email, pidRol = entity.IdRol },
+                    commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
 
     }
 }

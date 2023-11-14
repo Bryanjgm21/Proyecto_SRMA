@@ -5,7 +5,9 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-
+@{
+    var registroExitoso = ViewData.ModelState["RegistroExitoso"]?.Errors.Any() ?? false;
+}
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -24,7 +26,21 @@
                                                     <i class="mdi mdi-album"></i> <b>SRMA</b>
                                                 </a>
                                             </div>
+                                @if (ViewBag.ErrorMessage != null)
+                                {
+                                    <script>
+                                        Swal.fire({
+                                            title: 'Error',
+                                            text: '@ViewBag.ErrorMessage',
+                                            icon: 'error',
+                                            confirmButtonText: 'Aceptar'
+                                        });
+                                    </script>
+                                }
                                             <h1 class="h5 mb-1">Agrega la información del empleado</h1>
+                                            <div>
+                                                 
+                                            </div>
 
                                             @using (Html.BeginForm("RegisterEmployee", "Employee", FormMethod.Post, new { @class = "user" }))
                                             {
@@ -40,31 +56,34 @@
                                                         <span asp-validation-for="lastName" class="text-danger"> </span>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>Cedula</label>
+                                                <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <label>Cédula</label>
                                                     @Html.TextBoxFor(m => m.Id, new { @class = "form-control form-control-user", @placeholder = "Cedula", @type = "text" })
                                                     <span asp-validation-for="Id" class="text-danger"> </span>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                                        <label>Telefono</label>
+                                                
+                                                <div class="col-sm-6">
+                                                        <label>Teléfono</label>
                                                         @Html.TextBoxFor(m => m.cellphone, new { @class = "form-control form-control-user", @placeholder = "Telefono", @type = "tel" })
                                                         <span asp-validation-for="cellphone" class="text-danger"> </span>
                                                     </div>
-                                                </div>
-
+                                                    </div>
                                                 <div class="form-group">
                                                     <label>Correo electrónico</label>
                                                     @Html.TextBoxFor(m => m.email, new { @class = "form-control form-control-user", @placeholder = "Correo electrónico", @type = "text" })
                                                     <span asp-validation-for="email" class="text-danger"> </span>
                                                 </div>
 
-                                                <div class="form-group">
-                                                    <input type="submit" id="addEmpl" class="btn btn-success btn-block waves-effect waves-light" value="Registrar" />
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <a href="@Url.Action("Index", "Employee")" class="btn btn-secondary btn-block waves-effect waves-light">Volver</a>
+                                                        </div>
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="submit" id="guardarRegistro" class="btn btn-success btn-block waves-effect waves-light" value="Registrar" />
+
                                                 </div>
-                                                <div class="form-group">
-                                                    <a href="@Url.Action("Index", "Employee")" class="btn btn-secondary btn-block waves-effect waves-light">Volver a la página principal</a>
-                                                </div>
+                                            </div>
                                             }
                                         </div>
                                     </div>
@@ -75,15 +94,28 @@
             </div> <!-- end row -->
         </div>
         <!-- end container -->
-    <script>
-        // Agrega el código JavaScript en una función que se ejecutará cuando se haga clic en el botón "Guardar Cambios"
-        document.addEventListener("DOMContentLoaded", function () {
-            var insertarProducto = document.getElementById('addEmpl');
-            insertarProducto.addEventListener('click', function () {
-                // Código de validación y lógica de edición del producto aquí
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var mensajeExito = '@(registroExitoso ? "Registro exitoso." : "")';
 
-                // Muestra el SweetAlert después de editar el producto correctamente
-                Swal.fire('¡Éxito!', 'El empleado se agregó correctamente.', 'success',);
+        if (mensajeExito) {
+            // Muestra el SweetAlert después de registrar el usuario correctamente
+            Swal.fire({
+                title: '¡Éxito!',
+                text: mensajeExito,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                // Redirige a la página correspondiente al hacer clic en "OK"
+                if (result.isConfirmed) {
+                    // Verifica si la URL contiene "Employee" para redirigir a "Index" de Employee
+                    if (window.location.href.includes("Employee")) {
+                        window.location.href = '@Url.Action("Index", "Employee")';
+                    } else {
+                        window.location.href = '@Url.Action("Index", "Employee")';
+                    }
+                }
             });
-        });
-    </script>
+        }
+    });
+</script>

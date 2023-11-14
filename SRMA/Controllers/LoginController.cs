@@ -89,6 +89,13 @@ namespace SRMA.Controllers
             entity.IdRol = 3;
             entity.statusU = true;
 
+            var ver = _userModel.verifUser(entity);
+            if (ver != null)
+            {
+                ViewBag.ErrorMessage = "El correo ya esta en uso.";
+                return View("SignUp", entity);
+            }
+
             if (entity.passwordU == entity.confirmPassword)
             {
                 var resultado = _userModel.RegisterUser(entity);
