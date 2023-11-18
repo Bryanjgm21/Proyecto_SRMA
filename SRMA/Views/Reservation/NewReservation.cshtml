@@ -26,8 +26,10 @@
                                                 <i class="mdi mdi-album"></i> <b>SRMA</b>
                                             </a>
                                         </div>
-                                        <h1 class="h5 mb-1">Cambiar los datos de tu cuenta</h1>
+                                        <h1 class="h5 mb-1">Crea una nueva reservación</h1>
                                         <p class="text-muted mb-4">Una vez hayas terminado, utiliza la opción de "Guardar cambios"</p>
+                                        <p class="text-muted mb-4">¡Recuerda que nuestro horario es de 7:30am a 7:30 pm!"</p>
+
                                         @using (Html.BeginForm("NewReservation", "Reservation", FormMethod.Post, new { @class = "user" }))
                                         {
                                             <div class="form-group row">
@@ -48,11 +50,13 @@
                                                 <div class="col-sm-6">
                                                     <label>Cantidad de personas</label>
                                                     @Html.TextBoxFor(m => m.quantity, new {@class="form-control form-control-user", @placeholder="Cantidad de personas",@type="number"})
+                                                    <span asp-validation-for="quantity" class="text-danger"> </span>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Observaciones</label>
                                                     @Html.TextBoxFor(m => m.observations, new {@class="form-control form-control-user", @placeholder="Observaciones",@type="text"})
+                                                    <span asp-validation-for="observations" class="text-danger"> </span>
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-sm-6 mb-3 mb-sm-0">
