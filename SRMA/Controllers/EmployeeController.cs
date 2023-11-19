@@ -60,7 +60,14 @@ namespace SRMA.Controllers
             var ver = _userModel.verifUser(entity);
             if (ver != null)
             {
-                ViewBag.ErrorMessage = "El empleado ya existe";
+                ViewBag.ErrorMessage = "El correo del empleado ya existe";
+                return View("Create", entity);
+            }
+
+            var ced = _userModel.verCed(entity);
+            if (ced != null)
+            {
+                ViewBag.ErrorMessage = "La cedula del empleado ya existe";
                 return View("Create", entity);
             }
 
@@ -98,6 +105,20 @@ namespace SRMA.Controllers
                 return View("EmployeeInfo", entity);
             }
 
+            var ver = _userModel.verifUser(entity);
+            if (ver != null)
+            {
+                ViewBag.ErrorMessage = "El correo del empleado ya existe";
+                return View("Create", entity);
+            }
+
+            var ced = _userModel.verCed(entity);
+            if (ced != null)
+            {
+                ViewBag.ErrorMessage = "La cedula del empleado ya existe";
+                return View("Create", entity);
+            }
+
             var resultado = _userModel.UpdateUser(entity, entity.IdUser);
 
             if (resultado != null)
@@ -120,7 +141,6 @@ namespace SRMA.Controllers
             // Devolver la vista con el modelo y mensajes
             return View("EmployeeInfo", entity);
         }
-
 
 
         [HttpPost]

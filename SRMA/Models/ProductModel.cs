@@ -115,7 +115,25 @@ namespace SRMA.Models
                 }
             }
         }
+        public ProductEntity? ActivProduct(long IdProduct)
+        {
+            using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
+            {
+                var parameters = new { pIdProduct = IdProduct };
+                var result = connection.Execute("ActiveProduct", parameters, commandType: CommandType.StoredProcedure);
 
+                if (result > 0)
+                {
+                    // La eliminación fue exitosa, puedes devolver una respuesta, por ejemplo, un mensaje de éxito.
+                    return new ProductEntity { IdProduct = IdProduct };
+                }
+                else
+                {
+                    // En caso de que no se haya eliminado ningún producto (por ejemplo, si el IdProduct no existe), puedes devolver nulo o algún otro valor para indicar que la operación no fue exitosa.
+                    return null;
+                }
+            }
+        }
 
         public List<ProductEntity> GetUrgentProducts()
         {
