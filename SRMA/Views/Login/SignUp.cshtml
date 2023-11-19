@@ -31,8 +31,8 @@
                         <div class="w-100 d-block bg-white shadow-lg rounded my-5">
                             <div class="row">
                                 <!-- Columna izquierda para la imagen -->
-                                <div class="col-lg-5 d-none d-lg-block rounded-left">
-                                    <img src="/Theme/assets/images/Register.jpg" style="max-width:100%; height:100%" class="img-fluid">
+                                <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center rounded-center">
+                                    <i class="fas fa-user-plus" style="font-size: 300px;margin-left: 85px;"></i>
                                 </div>
                                 <div class="col-lg-7">
                                     <div class="p-5">
@@ -96,6 +96,10 @@
                                                     <span asp-validation-for="confirmPassword" class="text-danger"> </span>
                                                 </div>
                                                 <div id="message" class="text-danger"></div>
+                                            </div>
+
+                                            <div>
+                                                 
                                             </div>
 
                                             <input type="submit" id="guardarRegistro" class="btn btn-success btn-block waves-effect waves-light" value="Registrar" />

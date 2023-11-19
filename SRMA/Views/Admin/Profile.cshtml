@@ -4,6 +4,9 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-e3n5b2ORb8H6t5xq7QFn6SA5Qk6dZGP4MOie49g4lZP8l67cZv57RCS6KtjVdLQd" crossorigin="anonymous">
+
+
 <html>
 <body>
 
@@ -15,9 +18,10 @@
                         <div class="w-100 d-block bg-white shadow-lg rounded my-5">
                             <div class="row">
                                 <!-- Columna izquierda para la imagen -->
-                                <div class="col-lg-5 d-none d-lg-block rounded-left">
-                                    <img src="/Theme/assets/images/Update.jpg" style="max-width:100%; height:100%" class="img-fluid">
+                                <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center rounded-center">
+                                    <i class="fas fa-user" style="font-size: 350px;margin-left: 85px;"></i>
                                 </div>
+
                                 <div class="col-lg-7">
                                     <div class="p-5">
                                         <div class="text-center mb-5">
@@ -43,25 +47,30 @@
                                                     @Html.TextBoxFor(m => m.lastName, new {@class="form-control form-control-user", @placeholder="Apellido",@type="text"})
                                                     <span asp-validation-for="lastName" class="text-danger"> </span>
                                                 </div>
+                                            </div>
 
                                                 <div class="form-group">
                                                     <label>Correo electronico</label>
                                                     @Html.TextBoxFor(m => m.email, new {@class="form-control form-control-user", @placeholder="Correo electronico",@type="email"})
                                                     <span asp-validation-for="email" class="text-danger"> </span>
                                                 </div>
-                                            </div>
+
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <label>Telefono</label>
                                                     @Html.TextBoxFor(m => m.cellphone, new {@class="form-control form-control-user", @placeholder="Telefono",@type="tel"})
                                                     <span asp-validation-for="cellphone" class="text-danger"> </span>
                                                 </div>
+                                                <div class="col-sm-6">
+                                                    <label>Contraseña</label>
+                                                    @Html.TextBoxFor(m => m.passwordU, new {@class="form-control form-control-user", @placeholder="Contraseña",@type="password"})
+                                                    <span asp-validation-for="passwordU" class="text-danger"> </span>
+                                                </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label>Contraseña</label>
-                                                @Html.TextBoxFor(m => m.passwordU, new {@class="form-control form-control-user", @placeholder="Contraseña",@type="password"})
-                                                <span asp-validation-for="passwordU" class="text-danger"> </span>
+                                            
+                                            <div>
+                                                 
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">

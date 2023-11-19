@@ -16,8 +16,8 @@
                         <div class="w-100 d-block bg-white shadow-lg rounded my-5">
                             <div class="row">
                                 <!-- Columna izquierda para la imagen -->
-                                <div class="col-lg-5 d-none d-lg-block rounded-left">
-                                    <img src="/Theme/assets/images/Products2.jpg" style="max-width:100%; height:100%" class="img-fluid">
+                                <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center rounded-center">
+                                    <i class="fas fa-box-open" style="font-size: 300px; margin-left: 75px;"></i>
                                 </div>
                                 <div class="col-lg-7">
                                     <div class="p-5">
@@ -32,16 +32,18 @@
                                         {
                                             @Html.HiddenFor(m => m.IdProduct)
 
-                                            <div class="form-group">
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <label>Nombre del Producto</label>
                                                 @Html.TextBoxFor(m => m.productName, new { @class = "form-control form-control-user", @placeholder = "Nombre del Producto", @type = "text" })
                                                 <span asp-validation-for="productName" class="text-danger"></span>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label>Stock</label>
+                                            <div class="col-sm-6">
+                                                <label>Cantidad</label>
                                                 @Html.TextBoxFor(m => m.stock, new { @class = "form-control form-control-user", @placeholder = "Cantidad", @type = "number" })
                                                 <span asp-validation-for="stock" class="text-danger"></span>
+                                            </div>
                                             </div>
 
                                             <div class="form-group">
@@ -50,7 +52,8 @@
                                                 <span asp-validation-for="details" class="text-danger"></span>
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <label>Estado del Producto</label>
                                                 @Html.DropDownListFor(m => m.productStatus, new SelectList(
                                                 new List<SelectListItem>
@@ -60,15 +63,20 @@
                                                 }, "Value", "Text"), new { @class = "form-control form-control-user" })
                                                 </div>
 
-                                            <div class="form-group">
+                                            <div class="col-sm-6">
                                                 <label>Precio</label>
                                                 @Html.TextBoxFor(m => m.price, new { @class = "form-control form-control-user", @placeholder = "Precio", @type = "number" })
                                                 <span asp-validation-for="price" class="text-danger"></span>
+                                            </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Proveedor</label>
                                                 @Html.DropDownListFor(m => m.IdSupplier, ViewBag.listSuppliers as List<SelectListItem>, new { @class = "form-control" })
+                                            </div>
+
+                                            <div>
+                                                 
                                             </div>
 
                                             <div class="form-group row">
