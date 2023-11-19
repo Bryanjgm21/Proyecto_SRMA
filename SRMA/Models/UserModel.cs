@@ -281,5 +281,16 @@ namespace SRMA.Models
             }
         }
 
+        public UserEntity? verCed(UserEntity entity)
+        {
+
+            using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
+            {
+                return connection.Query<UserEntity>("verCed",
+                    new { pId = entity.Id },
+                    commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
+            }
+        }
+
     }
 }

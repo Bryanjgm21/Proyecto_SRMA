@@ -24,6 +24,7 @@ namespace SRMA.Entities
         public int price { get; set; }
 
         public long IdSupplier { get; set; }
+        public bool productCond { get; set; }
 
         public string supplierName { get; set; } = string.Empty;
 

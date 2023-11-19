@@ -54,6 +54,13 @@ namespace SRMA.Controllers
                 Thread.Sleep(1500);
                 return View("Profile", entity);
             }
+            var ver = _userModel.verifUser(entity);
+            if (ver != null)
+            {
+                ViewBag.ErrorMessage = "El correo ya esta en uso.";
+                return View("SignUp", entity);
+            }
+
 
             var resultado = _userModel.UpdateUser(entity, UserId);
             Thread.Sleep(2000);

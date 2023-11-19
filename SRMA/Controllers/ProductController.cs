@@ -134,6 +134,23 @@ namespace SRMA.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult ActivProd(long IdProduct)
+        {
+            // Llama a la función DeleteProduct en el modelo de productos para eliminar el producto
+            var deletedProduct = _productModel.ActivProduct(IdProduct);
+
+            if (deletedProduct != null)
+            {
+                // Si el producto se eliminó correctamente, puedes redirigir a una página de éxito o realizar otras acciones necesarias.
+                return RedirectToAction("Index", new { IdProduct = deletedProduct.IdProduct });
+            }
+            else
+            {
+                // Si la eliminación no fue exitosa (por ejemplo, el producto no existe), puedes redirigir a una página de error o realizar otras acciones necesarias.
+                return RedirectToAction("Index");
+            }
+        }
 
         // 
         [HttpGet]
