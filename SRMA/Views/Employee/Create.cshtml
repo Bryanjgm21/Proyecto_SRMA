@@ -15,8 +15,8 @@
                         <div class="w-100 d-block bg-white shadow-lg rounded my-5">
                                 <div class="row">
                                     <!-- Columna izquierda para la imagen -->
-                                    <div class="col-lg-5 d-none d-lg-block rounded-left">
-                                        <img src="/Theme/assets/images/Employees.jpg" style="max-width:115%; height:100%" class="img-fluid">
+                                    <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center rounded-center">
+                                        <i class="fas fa-user-tie" style="font-size: 300px; margin-left: 50px;"></i>
                                     </div>
                                     <!-- Columna derecha para el contenido -->
                                     <div class="col-lg-7">
@@ -73,6 +73,9 @@
                                                     <label>Correo electrónico</label>
                                                     @Html.TextBoxFor(m => m.email, new { @class = "form-control form-control-user", @placeholder = "Correo electrónico", @type = "text" })
                                                     <span asp-validation-for="email" class="text-danger"> </span>
+                                                </div>
+                                                <div>
+                                         
                                                 </div>
 
                                             <div class="form-group row">

@@ -15,9 +15,10 @@
                         <div class="w-100 d-block bg-white shadow-lg rounded my-5">
                             <div class="row">
                                 <!-- Columna izquierda para la imagen -->
-                                <div class="col-lg-5 d-none d-lg-block rounded-left">
-                                    <img src="/Theme/assets/images/Employees.jpg" style="max-width:115%; height:100%" class="img-fluid">
+                                <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center rounded-center">
+                                    <i class="fas fa-user-tie" style="font-size: 300px; margin-left: 50px;"></i>
                                 </div>
+
                                 <div class="col-lg-7">
                                     <div class="p-5">
                                         <div class="text-center mb-5">
@@ -30,10 +31,8 @@
                                         @using (Html.BeginForm("Edit", "Employee", FormMethod.Post, new { @class = "user" }))
                                         {
                                             <div class="form-group row">
-
-                                                @Html.HiddenFor(m => m.IdUser)
-
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
+                                                @Html.HiddenFor(m => m.IdUser)
                                                     <label>Nombre</label>
                                                     @Html.TextBoxFor(m => m.userName, new {@class="form-control form-control-user", @placeholder="Nombre",@type="text"})
                                                     <span asp-validation-for="userName" class="text-danger"> </span>
@@ -43,29 +42,30 @@
                                                     @Html.TextBoxFor(m => m.lastName, new {@class="form-control form-control-user", @placeholder="Apellido",@type="text"})
                                                     <span asp-validation-for="lastName" class="text-danger"> </span>
                                                 </div>
-
-                                                <div class="form-group">
-                                                    <label>Correo electronico</label>
-                                                    @Html.TextBoxFor(m => m.email, new {@class="form-control form-control-user", @placeholder="Correo electronico",@type="email"})
-                                                    <span asp-validation-for="email" class="text-danger"> </span>
-
                                                 </div>
-                                            </div>
+
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <label>Telefono</label>
+                                                    <label>Cédula</label>
+                                                    @Html.TextBoxFor(m => m.Id, new {@class="form-control form-control-user", @placeholder="Cedula", @type="int"})
+                                                    <span asp-validation-for="Id" class="text-danger"> </span>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label>Teléfono</label>
                                                     @Html.TextBoxFor(m => m.cellphone, new {@class="form-control form-control-user", @placeholder="Telefono",@type="tel"})
                                                     <span asp-validation-for="cellphone" class="text-danger"> </span>
                                                 </div>
-                                            <div class="form-group row">
-                                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                                        <label>Cedula</label>
-                                                        @Html.TextBoxFor(m => m.Id, new {@class="form-control form-control-user", @placeholder="Cedula", @type="int"})
-                                                     <span asp-validation-for="Id" class="text-danger"> </span>
-                                                    </div>
-                                                    
                                             </div>
-                                           </div>
+                                            <div class="form-group">
+                                                    <label>Correo electrónico</label>
+                                                    @Html.TextBoxFor(m => m.email, new {@class="form-control form-control-user", @placeholder="Correo electronico",@type="email"})
+                                                    <span asp-validation-for="email" class="text-danger"> </span>
+                                            </div>
+
+                                            <div>
+                                                 
+                                            </div>
+                                           
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <a href="@Url.Action("Index", "Employee")" class="btn btn-secondary btn-block waves-effect waves-light">Volver</a>

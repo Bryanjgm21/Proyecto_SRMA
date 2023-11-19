@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>NewReservation</h1>
 <html>
 <body>
 
@@ -16,9 +15,10 @@
                         <div class="w-100 d-block bg-white shadow-lg rounded my-5">
                             <div class="row">
                                 <!-- Columna izquierda para la imagen -->
-                                <div class="col-lg-5 d-none d-lg-block rounded-left">
-                                    <img src="/Theme/assets/images/Update.jpg" style="max-width:100%; height:100%" class="img-fluid">
+                                <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center rounded-center">
+                                    <i class="fas fa-receipt" style="font-size: 300px; margin-left: 50px;"></i>
                                 </div>
+
                                 <div class="col-lg-7">
                                     <div class="p-5">
                                         <div class="text-center mb-5">
@@ -28,7 +28,7 @@
                                         </div>
                                         <h1 class="h5 mb-1">Crea una nueva reservación</h1>
                                         <p class="text-muted mb-4">Una vez hayas terminado, utiliza la opción de "Guardar cambios"</p>
-                                        <p class="text-muted mb-4">¡Recuerda que nuestro horario es de 7:30am a 7:30 pm!"</p>
+                                        <p class="text-muted mb-4">¡Recuerda que nuestro horario es de 7:30am a 7:30 pm!</p>
 
                                         @using (Html.BeginForm("NewReservation", "Reservation", FormMethod.Post, new { @class = "user" }))
                                         {
@@ -41,6 +41,7 @@
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <label>Fecha y Hora</label>
                                                     @Html.TextBoxFor(m => m.dateReservation, new { @class = "form-control form-control-user", @placeholder = "Fecha y hora de reserva", @type = "datetime-local", @id = "dateReservation" })
+                                                    <span asp-validation-for="dateReservation" class="text-danger"></span>
                                                 </div>
                                                @* <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <label>Nombre</label>
@@ -52,11 +53,15 @@
                                                     @Html.TextBoxFor(m => m.quantity, new {@class="form-control form-control-user", @placeholder="Cantidad de personas",@type="number"})
                                                     <span asp-validation-for="quantity" class="text-danger"> </span>
                                                 </div>
+                                            </div>
 
                                                 <div class="form-group">
                                                     <label>Observaciones</label>
                                                     @Html.TextBoxFor(m => m.observations, new {@class="form-control form-control-user", @placeholder="Observaciones",@type="text"})
                                                     <span asp-validation-for="observations" class="text-danger"> </span>
+                                                </div>
+                                                <div>
+                                                     
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -67,7 +72,6 @@
 
                                                     </div>
                                                 </div>
-                                            </div>
                                         }
                                         <!-- end row -->
                                     </div> <!-- end .padding-5 -->

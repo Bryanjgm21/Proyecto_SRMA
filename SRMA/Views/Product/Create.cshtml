@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-e3n5b2ORb8H6t5xq7QFn6SA5Qk6dZGP4MOie49g4lZP8l67cZv57RCS6KtjVdLQd" crossorigin="anonymous">
+
 
 <body>
 
@@ -16,9 +18,10 @@
                         <div class="w-100 d-block bg-white shadow-lg rounded my-5">
                             <div class="row">
                                 <!-- Columna izquierda para la imagen -->
-                                <div class="col-lg-5 d-none d-lg-block rounded-left">
-                                    <img src="/Theme/assets/images/Products.jpg" style="max-width:110%; height:100%" class="img-fluid">
+                                <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center rounded-center">
+                                    <i class="fas fa-box-open" style="font-size: 300px; margin-left: 75px;"></i>
                                 </div>
+
                                 <div class="col-lg-7">
                                     <div class="p-5">
                                         <div class="text-center mb-5">
@@ -59,26 +62,28 @@
                                                 new SelectListItem { Text = "Existente", Value = "Existente" }
                                                 }, "Value", "Text"), new { @class = "form-control form-control-user" })
                                                 </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                            <div class="form-group">
+                                                <div class="col-sm-6">
                                                     <label>Precio</label>
-                                                @Html.TextBoxFor(m => m.price, new {@class="form-control form-control-user", @placeholder="Precio",@type="number"})
+                                                    @Html.TextBoxFor(m => m.price, new {@class="form-control form-control-user", @placeholder="Precio",@type="number"})
                                                     <span asp-validation-for="price" class="text-danger"></span>
+                                                </div>
                                             </div>
                                                 <div class="form-group">
                                                     <label>Proveedor</label>
                                                     @Html.DropDownListFor(m => m.IdSupplier, ViewBag.listSuppliers as List<SelectListItem>, new { @class = "form-control" })
                                                 </div>
-                                            </div>
+                                                <div>
+                                                     
+                                                </div>
 
-
-                                            <input type="submit" id="insertarProducto" class="btn btn-success btn-block waves-effect waves-light" value="Agregar producto" />
-                                            <div>
-                                                 
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <a href="@Url.Action("Index","Product")" class="btn btn-secondary btn-block waves-effect waves-light"> Volver </a>
+                                                </div>
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="submit" id="insertarProducto" class="btn btn-success btn-block waves-effect waves-light" value="Agregar producto" />
+                                                </div>
                                             </div>
-                                            <a href="@Url.Action("Index","Product")" class="btn btn-info btn-block waves-effect waves-light"> Volver </a>
                                         }
 
                                         <!-- end row -->
