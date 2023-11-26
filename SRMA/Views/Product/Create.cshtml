@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-e3n5b2ORb8H6t5xq7QFn6SA5Qk6dZGP4MOie49g4lZP8l67cZv57RCS6KtjVdLQd" crossorigin="anonymous">
 
 
+
 <body>
 
     <div>
@@ -29,6 +30,7 @@
                                                 <i class="mdi mdi-album"></i> <b>SRMA</b>
                                             </a>
                                         </div>
+                                        
                                         <h1 class="h5 mb-1">Agregar producto</h1>
                                         <div>
                                              
@@ -97,18 +99,42 @@
         </div>
         <!-- end container -->
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
-        // Agrega el código JavaScript en una función que se ejecutará cuando se haga clic en el botón "Guardar Cambios"
         document.addEventListener("DOMContentLoaded", function () {
-            var insertarProducto = document.getElementById('insertarProducto');
-            insertarProducto.addEventListener('click', function () {
-                // Código de validación y lógica de edición del producto aquí
+            var mensajeExito = '@(TempData["RegistroExitoso"] as string)';
+            var mensajeError = '@(TempData["MensajeError"] as string)';
 
-                // Muestra el SweetAlert después de editar el producto correctamente
-                Swal.fire('¡Éxito!', 'El producto se agregó correctamente.', 'success',);
-            });
+            if (mensajeExito) {
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: mensajeExito,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '@Url.Action("Index", "Product")';
+                    }
+                });
+
+                // Clear TempData after displaying the success message
+                TempData["RegistroExitoso"] = null;
+            }
+
+            if (mensajeError) {
+                Swal.fire({
+                    title: 'Error',
+                    text: mensajeError,
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+
+                // Clear TempData after displaying the error message
+                TempData["MensajeError"] = null;
+            }
         });
     </script>
+
     <!-- end page -->
 </body>
 
