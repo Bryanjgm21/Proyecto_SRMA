@@ -35,35 +35,32 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult NewReservation(ReservationEntity entity)
         {
-
             var IdUser = HttpContext.Session.GetInt32("IdSession");
             long UserId = (long)IdUser;
 
+
             if (!ModelState.IsValid)
             {
-                // Si el modelo no es válido, simplemente regresa a la vista sin intentar registrar el usuario.
+                ViewBag.MsjError = "La fecha y hora de reservación son obligatorias.";
+
                 return View("NewReservation", entity);
             }
 
-            var resp = _reservationModel.InsertReservationByClient(entity,UserId);
+            var resp = _reservationModel.InsertReservationByClient(entity, UserId);
 
             if (resp == 1)
             {
-                ViewBag.MensajeExito = "Registro exitoso.";
-
-                // Agregar un indicador de éxito al modelo para que lo pueda comprobar la vista
-                ModelState.AddModelError("RegistroExitoso", "Registro exitoso");
-
-                return View("NewReservation", entity);
+                TempData["RegistroExitoso"] = "La reservacion se agrego correctamente.";
+                return RedirectToAction("NewReservation");
             }
-
             else
             {
-                ViewBag.MensajePantalla = "No se pudo registrar su cuenta";
-                return View();
-            }
 
+                TempData["MensajeError"] = "Error al agregar la reservacion. Por favor, inténtelo de nuevo.";
+            }
+            return RedirectToAction("NewReservation");
         }
+
 
         [HttpGet]
         public IActionResult Index()

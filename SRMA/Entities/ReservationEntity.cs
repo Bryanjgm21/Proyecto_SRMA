@@ -12,11 +12,12 @@ namespace SRMA.Entities
         public long IdReservation { get; set; }
         public DateOnly dateR { get; set; }
         public TimeOnly timeR{ get; set; }
+
         public DateTime dateReservation { get; set; }
         [Required(ErrorMessage = "El campo cantidad es obligatorio.")]
         [RegularExpression(@"^[1-9]\d{0,1}$", ErrorMessage = "Debe solo ser solo números")]
         [Range(1, 15, ErrorMessage = "El valor debe estar entre 1 y 15.")]
-        public int quantity { get; set; }
+        public int? quantity { get; set; }
 
         public bool statusReser { get; set; }
 

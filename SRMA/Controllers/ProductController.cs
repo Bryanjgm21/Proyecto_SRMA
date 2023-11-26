@@ -7,6 +7,7 @@ using SRMA.Entities;
 using SRMA.Interfaces;
 using SRMA.Models;
 using System.Data;
+using System.Diagnostics;
 
 namespace SRMA.Controllers
 {
@@ -33,13 +34,7 @@ namespace SRMA.Controllers
         public IActionResult Create()
         {
             var suppliers = _supplierModel.ListSuppliers();
-
-            var listSuppliers = new List<SelectListItem>();
-
-            foreach (var item in suppliers)
-            {
-                listSuppliers.Add(new SelectListItem {Text=item.supplierName, Value = item.IdSupplier.ToString() });
-            }
+            var listSuppliers = suppliers.Select(item => new SelectListItem { Text = item.supplierName, Value = item.IdSupplier.ToString() }).ToList();
             ViewBag.listSuppliers = listSuppliers;
 
             return View();
@@ -62,14 +57,17 @@ namespace SRMA.Controllers
 
             if (resultado != null)
             {
-                System.Threading.Thread.Sleep(5000);
-                return RedirectToAction("Index", "Product");
+                TempData["RegistroExitoso"] = "El producto se agrego correctamente.";
+                return RedirectToAction("Create");
             }
             else
             {
-                return RedirectToAction("Create", "Product");
+                TempData["MensajeError"] = "Error al agregar el producto. Por favor, inténtelo de nuevo.";
             }
+
+            return RedirectToAction("Create");
         }
+
 
         // Consult the product by their id to update the data
         [HttpGet]

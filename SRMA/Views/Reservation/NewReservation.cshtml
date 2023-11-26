@@ -41,7 +41,12 @@
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <label>Fecha y Hora</label>
                                                     @Html.TextBoxFor(m => m.dateReservation, new { @class = "form-control form-control-user", @placeholder = "Fecha y hora de reserva", @type = "datetime-local", @id = "dateReservation" })
-                                                    <span asp-validation-for="dateReservation" class="text-danger"></span>
+                                                    @if (ViewBag.MsjError != null)
+                                                    {
+                                                        <div style="color:#dc3545">
+                                                            @ViewBag.MsjError
+                                                        </div>
+                                                    }
                                                 </div>
                                                @* <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <label>Nombre</label>
@@ -50,7 +55,7 @@
 
                                                 <div class="col-sm-6">
                                                     <label>Cantidad de personas</label>
-                                                    @Html.TextBoxFor(m => m.quantity, new {@class="form-control form-control-user", @placeholder="Cantidad de personas",@type="number"})
+                                                    @Html.TextBoxFor(m => m.quantity, new {@class="form-control form-control-user", @placeholder="Cantidad de personas",@type="text"})
                                                     <span asp-validation-for="quantity" class="text-danger"> </span>
                                                 </div>
                                             </div>
@@ -65,7 +70,7 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                                        <a href="@Url.Action("ViewReservations", "Reservation")" class="btn btn-secondary btn-block waves-effect waves-light">Volver a la página principal</a>
+                                                        <a href="@Url.Action("ViewReservations", "Reservation")" class="btn btn-secondary btn-block waves-effect waves-light">Volver</a>
                                                     </div>
                                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                                         <input type="submit" id="guardarCambiosButton" class="btn btn-success btn-block waves-effect waves-light" value="Guardar cambios" />
@@ -114,6 +119,42 @@
             });
             // Puedes reiniciar el valor del campo o tomar otra acción según tus necesidades
             // dateReservationInput.value = '';
+        }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var mensajeExito = '@(TempData["RegistroExitoso"] as string)';
+        var mensajeError = '@(TempData["MensajeError"] as string)';
+
+        if (mensajeExito) {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: mensajeExito,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("ViewReservations", "Reservation")';
+                }
+            });
+
+            // Clear TempData after displaying the success message
+            TempData["RegistroExitoso"] = null;
+        }
+
+        if (mensajeError) {
+            Swal.fire({
+                title: 'Error',
+                text: mensajeError,
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+
+            // Clear TempData after displaying the error message
+            TempData["MensajeError"] = null;
         }
     });
 </script>

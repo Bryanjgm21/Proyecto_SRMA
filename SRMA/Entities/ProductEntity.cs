@@ -11,7 +11,7 @@ namespace SRMA.Entities
 
         [Required(ErrorMessage = "El campo Cantidad es obligatorio.")]
         [RegularExpression(@"^[1-9]\d{0,2}$", ErrorMessage = "Debe solo ser solo números")]
-        public int stock { get; set; }
+        public int? stock { get; set; }
 
         [Required(ErrorMessage = "El campo Detalles es obligatorio.")]
         public string details { get; set; } = string.Empty;
@@ -21,7 +21,7 @@ namespace SRMA.Entities
 
         [Required(ErrorMessage = "El campo Precio es obligatorio.")]
         [RegularExpression(@"^[1-9]\d{0,15}$", ErrorMessage = "Debe solo ser solo números")]
-        public int price { get; set; }
+        public int? price { get; set; }
 
         public long IdSupplier { get; set; }
         public bool productCond { get; set; }
