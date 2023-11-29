@@ -96,6 +96,13 @@ namespace SRMA.Controllers
                 return View("SignUp", entity);
             }
 
+            var ced = _userModel.verCed(entity);
+            if (ced != null)
+            {
+                ViewBag.ErrorMessage = "La cedula ya esta agregada";
+                return View("SignUp", entity);
+            }
+
             if (entity.passwordU == entity.confirmPassword)
             {
                 var resultado = _userModel.RegisterUser(entity);

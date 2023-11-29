@@ -59,9 +59,15 @@ namespace SRMA.Controllers
             if (ver != null)
             {
                 ViewBag.ErrorMessage = "El correo ya esta en uso.";
-                return View("SignUp", entity);
+                return View("Profile", entity);
             }
 
+            var ced = _userModel.verCed(entity);
+            if (ced != null)
+            {
+                ViewBag.ErrorMessage = "La cedula ya esta agregada";
+                return View("Profile", entity);
+            }
 
             var resultado = _userModel.UpdateUser(entity, UserId);
             Thread.Sleep(2000);
