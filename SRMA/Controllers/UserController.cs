@@ -54,6 +54,7 @@ namespace SRMA.Controllers
                 Thread.Sleep(1500);
                 return View("Profile", entity);
             }
+
             var ver = _userModel.verifUser(entity);
             if (ver != null)
             {

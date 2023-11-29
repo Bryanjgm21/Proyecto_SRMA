@@ -276,7 +276,7 @@ namespace SRMA.Models
             using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
             {
                 return connection.Query<UserEntity>("verUser",
-                    new { pEmail = entity.email, pidRol = entity.IdRol },
+                    new { pEmail = entity.email},
                     commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
             }
         }

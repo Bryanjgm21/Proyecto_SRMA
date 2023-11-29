@@ -12,11 +12,11 @@ namespace SRMA.Entities
         public string email { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El campo es obligatorio.")]
-        [RegularExpression("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$", ErrorMessage = "La contraseña debe tener minimo 8 caracteres")]
-        public string passwordU { get; set; } = string.Empty;
-        [RegularExpression("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$", ErrorMessage = "La contraseña debe tener mayúscula, minúscula, un número y un caracter especial")]
-        [Required(ErrorMessage = "El campo es obligatorio.")]
-        public string confirmPassword { get; set; } = string.Empty;
+        [RegularExpression("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*()_+{}|':;<>,.?~\\-]).{8,}$", ErrorMessage = "La contraseña debe tener minimo 8 caracteres")]
+        public string? passwordU { get; set; } = string.Empty;
+        [RegularExpression("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*()_+{}|':;<>,.?~\\-]).{8,}$", ErrorMessage = "La contraseña debe tener mayúscula, minúscula, un número y un caracter especial")]
+        
+        public string? confirmPassword { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El campo Nombre es obligatorio.")]
         public string userName { get; set; } = string.Empty;
@@ -31,13 +31,13 @@ namespace SRMA.Entities
         [Required(ErrorMessage = "El campo Teléfono es obligatorio.")]
         [RegularExpression(@"\d{8}", ErrorMessage = "El Teléfono debe tener 8 dígitos y solo ser números")]
         public string cellphone { get; set; } = string.Empty;
-        public bool statusU { get; set; }
-        public byte IdRol { get; set; }
+        public bool? statusU { get; set; }
+        public byte? IdRol { get; set; }
 
-        public string tempPassword { get; set; } = string.Empty;
-        public bool tempKey { get; set; }
+        public string? tempPassword { get; set; } = string.Empty;
+        public bool? tempKey { get; set; }
 
-        public string IdUserEncrypt { get; set; } = string.Empty;
+        public string? IdUserEncrypt { get; set; } = string.Empty;
 
     }
 }

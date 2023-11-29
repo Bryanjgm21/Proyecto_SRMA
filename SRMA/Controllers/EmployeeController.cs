@@ -109,14 +109,14 @@ namespace SRMA.Controllers
             if (ver != null)
             {
                 ViewBag.ErrorMessage = "El correo del empleado ya existe";
-                return View("Create", entity);
+                return View("EmployeeInfo", entity);
             }
 
             var ced = _userModel.verCed(entity);
             if (ced != null)
             {
                 ViewBag.ErrorMessage = "La cedula del empleado ya existe";
-                return View("Create", entity);
+                return View("EmployeeInfo", entity);
             }
 
             var resultado = _userModel.UpdateUser(entity, entity.IdUser);
