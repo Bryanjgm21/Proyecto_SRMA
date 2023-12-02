@@ -488,16 +488,16 @@
                             </ul>
                         }
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer justify-content-center">
                         <div class="form-group row">
-                        <a href="@Url.Action("Index","Product")" class="btn btn-info btn-block waves-effect waves-light">
-                            Revisar productos
-                        </a>
+                            <button type="button" class="btn btn-secondary mx-auto d-block" data-dismiss="modal">Cerrar</button>
                         </div>
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                        <button type="button" class="btn btn-secondary mx-auto d-block" data-dismiss="modal">Cerrar</button>
+                        <div class="form-group row">
+                            <a href="@Url.Action("Index","Product")" class="btn btn-info btn-block waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="Revisar productos">
+                                Revisar
+                            </a>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
@@ -516,6 +516,12 @@
         });
     </script>
 
+    <!-- Inicializa los tooltips -->
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 
 
 

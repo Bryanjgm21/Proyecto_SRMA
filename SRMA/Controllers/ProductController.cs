@@ -53,6 +53,7 @@ namespace SRMA.Controllers
                 return View("Create", entity);
             }
 
+            
             var resultado = _productModel.InsertProduct(entity);
 
             if (resultado != null)
@@ -98,20 +99,28 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult Edit(ProductEntity model)
         {
-            if (ModelState.IsValid)
-            {
-                // Realiza la actualización del producto en la base de datos a través de _productModel.
-                _productModel.UpdateProduct(model, model.IdProduct);
-                System.Threading.Thread.Sleep(5000);
-                return RedirectToAction("Index"); // Redirige a la lista de productos u otra página según tus necesidades.
-            }
-
-            // Si el modelo no es válido, vuelve a mostrar la vista de edición con errores.
             var suppliers = _supplierModel.ListSuppliers();
             var listSuppliers = suppliers.Select(item => new SelectListItem { Text = item.supplierName, Value = item.IdSupplier.ToString() }).ToList();
             ViewBag.listSuppliers = listSuppliers;
 
-            return View(model);
+            if (!ModelState.IsValid)
+            {
+                return View("Edit", model);
+            }
+
+            var resultado = _productModel.UpdateProduct(model, model.IdProduct);
+
+            if (resultado != null)
+            {
+                TempData["RegistroExitoso"] = "El producto se modifico correctamente.";
+                return RedirectToAction("Edit");
+            }
+            else
+            {
+                TempData["MensajeError"] = "Error al modificar el producto. Por favor, inténtelo de nuevo.";
+            }
+
+            return RedirectToAction("Edit", new { id = model.IdProduct });
         }
 
         [HttpPost]

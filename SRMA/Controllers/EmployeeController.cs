@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DocumentFormat.OpenXml.Drawing.Charts;
+using Microsoft.AspNetCore.Mvc;
 using SRMA.Entities;
 using SRMA.Interfaces;
 using static Dapper.SqlMapper;
@@ -49,7 +50,9 @@ namespace SRMA.Controllers
         {
             entity.IdRol = 2;
             entity.statusU = true;
-            entity.passwordU = "password1";
+            entity.passwordU = "Password123.@";
+
+            ModelState.Remove("passwordU");
 
             if (!ModelState.IsValid)
             {
@@ -57,14 +60,14 @@ namespace SRMA.Controllers
                 return View("Create", entity);
             }
 
-            var ver = _userModel.verifUser(entity);
+            var ver = _userModel.verifUser(entity,0);
             if (ver != null)
             {
                 ViewBag.ErrorMessage = "El correo del empleado ya existe";
                 return View("Create", entity);
             }
 
-            var ced = _userModel.verCed(entity);
+            var ced = _userModel.verCed(entity,0);
             if (ced != null)
             {
                 ViewBag.ErrorMessage = "La cedula del empleado ya existe";
@@ -75,23 +78,19 @@ namespace SRMA.Controllers
 
             if (resultado != null)
             {
-                // Almacenar el mensaje de éxito en ViewBag
-                ViewBag.MensajeExito = "Registro exitoso.";
-
-                // Agregar un indicador de éxito al modelo para que lo pueda comprobar la vista
-                ModelState.AddModelError("RegistroExitoso", "Registro exitoso");
+                TempData["RegistroExitoso"] = "Se registro correctamente.";
 
                 // Devolver la vista sin redirección
-                return View("Create", entity);
+                return RedirectToAction("Create");
             }
             else
             {
                 // Manejar error al registrar el usuario
-                ViewBag.MensajeError = "Error al registrar el usuario.";
+                TempData["MensajeError"] = "Error al registrar el usuario.";
             }
 
             // Devolver la vista con el modelo y mensajes
-            return View("Create", entity);
+            return RedirectToAction("Create");
         }
 
 
@@ -99,24 +98,30 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult Edit(UserEntity entity)
         {
+            var IdUser = entity.IdUser;
+
+            entity.passwordU = "Password123.@";
+
+            ModelState.Remove("passwordU");
+
             if (!ModelState.IsValid)
             {
                 // Si el modelo no es válido, simplemente regresa a la vista sin intentar actualizar el usuario.
                 return View("EmployeeInfo", entity);
             }
 
-            var ver = _userModel.verifUser(entity);
+            var ver = _userModel.verifUser(entity, IdUser);
             if (ver != null)
             {
                 ViewBag.ErrorMessage = "El correo del empleado ya existe";
-                return View("Create", entity);
+                return View("EmployeeInfo", entity);
             }
 
-            var ced = _userModel.verCed(entity);
+            var ced = _userModel.verCed(entity, IdUser);
             if (ced != null)
             {
                 ViewBag.ErrorMessage = "La cedula del empleado ya existe";
-                return View("Create", entity);
+                return View("EmployeeInfo", entity);
             }
 
             var resultado = _userModel.UpdateUser(entity, entity.IdUser);

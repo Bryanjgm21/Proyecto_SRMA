@@ -54,25 +54,33 @@ namespace SRMA.Controllers
                 Thread.Sleep(1500);
                 return View("Profile", entity);
             }
-            var ver = _userModel.verifUser(entity);
+
+            var ver = _userModel.verifUser(entity, UserId);
             if (ver != null)
             {
-                ViewBag.ErrorMessage = "El correo ya esta en uso.";
-                return View("SignUp", entity);
+               ViewBag.ErrorMessage = "El correo ya esta en uso.";
+                return View("Profile", entity);
             }
-
+            var ced = _userModel.verCed(entity, UserId);
+            if (ced != null)
+            {
+                ViewBag.ErrorMessage = "La cedula ya esta agregada";
+                return View("Profile", entity);
+            }
 
             var resultado = _userModel.UpdateUser(entity, UserId);
             Thread.Sleep(2000);
 
             if (resultado != null)
             {
-                return RedirectToAction("Index", "User");
+                TempData["RegistroExitoso"] = "El usuario se modifico correctamente.";
+                return RedirectToAction("Profile");
             }
             else
             {
-                return RedirectToAction("Profile", "User");
+                TempData["MensajeError"] = "Error al modificar el usuario. Por favor, inténtelo de nuevo.";
             }
+            return RedirectToAction("Profile");
         }
 
         // Consult the user by their id to delete the user from the table

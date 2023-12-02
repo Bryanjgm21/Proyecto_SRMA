@@ -80,6 +80,7 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult SignUp(UserEntity entity)
         {
+
             if (!ModelState.IsValid)
             {
                 // Si el modelo no es válido, simplemente regresa a la vista sin intentar registrar el usuario.
@@ -89,10 +90,17 @@ namespace SRMA.Controllers
             entity.IdRol = 3;
             entity.statusU = true;
 
-            var ver = _userModel.verifUser(entity);
+            var ver = _userModel.verifUser(entity,0);
             if (ver != null)
             {
                 ViewBag.ErrorMessage = "El correo ya esta en uso.";
+                return View("SignUp", entity);
+            }
+
+            var ced = _userModel.verCed(entity,0);
+            if (ced != null)
+            {
+                ViewBag.ErrorMessage = "La cedula ya esta agregada";
                 return View("SignUp", entity);
             }
 
