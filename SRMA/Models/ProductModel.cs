@@ -10,9 +10,11 @@ namespace SRMA.Models
     public class ProductModel : IProductModel
     {
         private readonly IConfiguration _configuration;
+        private string _connection;
         public ProductModel(IConfiguration configuration)
         {
             _configuration = configuration;
+            _connection = _configuration.GetConnectionString("defaultconnection");
         }
 
         public List<ProductEntity> ListProducts()
@@ -20,7 +22,7 @@ namespace SRMA.Models
             using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
             {
                 var data = connection.Query<ProductEntity>("GetAllProducts",
-                   
+
                     commandType: CommandType.StoredProcedure).ToList();
 
                 if (data != null && data.Count > 0)
@@ -40,7 +42,7 @@ namespace SRMA.Models
                 parameters.Add("pIdProduct", IdProduct, DbType.Int32, ParameterDirection.Input);
 
                 var data = connection.Query<ProductEntity>("GetProductById", parameters,
-                    commandType: CommandType.StoredProcedure).FirstOrDefault(); 
+                    commandType: CommandType.StoredProcedure).FirstOrDefault();
 
                 return data ?? new ProductEntity(); // Devuelve el producto encontrado o una instancia vacía si no se encuentra.
             }
@@ -53,11 +55,11 @@ namespace SRMA.Models
                 using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
                 {
                     connection.Execute("InsertProduct",
-                       new { entity.productName, entity.details, entity.stock, entity.productStatus, entity.price, entity.IdSupplier },
+                       new { entity.productName, entity.details, entity.stock, entity.price, entity.IdSupplier },
                        commandType: System.Data.CommandType.StoredProcedure);
 
                     return entity;
-                    
+
                 }
             }
             else
@@ -78,7 +80,6 @@ namespace SRMA.Models
                         pProductName = entity.productName,
                         pDetails = entity.details,
                         pStock = entity.stock,
-                        pProductStatus = entity.productStatus,
                         pPrice = entity.price,
                         pIdSupplier = entity.IdSupplier
                     };
@@ -133,6 +134,20 @@ namespace SRMA.Models
                     return null;
                 }
             }
+        }
+
+        public int ChangeStatusProduct(ProductEntity entity)
+        {
+
+            using (var connection = new MySqlConnection(_connection))
+            {
+                var data = connection.Execute("ChangeStatusProduct",
+                    new { entity.IdProduct},
+                    commandType: CommandType.StoredProcedure);
+
+                return data;
+            }
+
         }
 
         public List<ProductEntity> GetUrgentProducts()
