@@ -11,10 +11,11 @@ namespace SRMA.Entities
         [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Correo inválido")]
         public string email { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "El campo es obligatorio.")]
-        [RegularExpression("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*()_+{}|':;<>,.?~\\-]).{8,}$", ErrorMessage = "La contraseña debe tener minimo 8 caracteres")]
+        [Required(ErrorMessage = "El campo Contraseña es obligatorio.")]
+        [RegularExpression("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*()_+{}|':;<>,.?~\\-]).{8,}$", ErrorMessage = "La contraseña debe tener minimo 8 caracteres, tener mayúscula, minúscula, un número y un caracter especial.")]
         public string? passwordU { get; set; } = string.Empty;
-        [RegularExpression("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*()_+{}|':;<>,.?~\\-]).{8,}$", ErrorMessage = "La contraseña debe tener mayúscula, minúscula, un número y un caracter especial")]
+
+        [RegularExpression("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*()_+{}|':;<>,.?~\\-]).{8,}$", ErrorMessage = "La contraseña debe tener minimo 8 caracteres, tener mayúscula, minúscula, un número y un caracter especial.")]
         
         public string? confirmPassword { get; set; } = string.Empty;
 

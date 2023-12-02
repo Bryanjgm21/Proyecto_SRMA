@@ -129,32 +129,39 @@
 </body>
 </html>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-    function validateForm() {
-
-        if (document.getElementById("userName").value === "" ||
-            document.getElementById("lastName").value === "" ||
-            document.getElementById("email").value === "") {
-
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Por favor, completa todos los campos requeridos.',
-                showConfirmButton: false
-            });
-            return false;
-        }
-        return true;
-    }
-
     document.addEventListener("DOMContentLoaded", function () {
-        var guardarCambiosButton = document.getElementById('guardarCambiosButton');
-        guardarCambiosButton.addEventListener('click', function () {
-            if (validateForm()) {
+        var mensajeExito = '@(TempData["RegistroExitoso"] as string)';
+        var mensajeError = '@(TempData["MensajeError"] as string)';
 
-                Swal.fire('¡Éxito!', 'Se guardaron los cambios correctamente.', 'success');
-            }
-        });
+        if (mensajeExito) {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: mensajeExito,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("Index", "User")';
+                }
+            });
+
+            // Clear TempData after displaying the success message
+            TempData["RegistroExitoso"] = null;
+        }
+
+        if (mensajeError) {
+            Swal.fire({
+                title: 'Error',
+                text: mensajeError,
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+
+            // Clear TempData after displaying the error message
+            TempData["MensajeError"] = null;
+        }
     });
 </script>
 

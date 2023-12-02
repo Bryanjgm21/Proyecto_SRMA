@@ -8,6 +8,7 @@
 @{
     var registroExitoso = ViewData.ModelState["RegistroExitoso"]?.Errors.Any() ?? false;
 }
+
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -44,6 +45,8 @@
 
                                             @using (Html.BeginForm("RegisterEmployee", "Employee", FormMethod.Post, new { @class = "user" }))
                                             {
+                                                
+                                                
                                                 <div class="form-group row">
                                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                                         <label>Nombre</label>
@@ -97,7 +100,7 @@
             </div> <!-- end row -->
         </div>
         <!-- end container -->
-<script>
+@*<script>
     document.addEventListener("DOMContentLoaded", function () {
         var mensajeExito = '@(registroExitoso ? "Registro exitoso." : "")';
 
@@ -119,6 +122,42 @@
                     }
                 }
             });
+        }
+    });
+</script>*@
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var mensajeExito = '@(TempData["RegistroExitoso"] as string)';
+        var mensajeError = '@(TempData["MensajeError"] as string)';
+
+        if (mensajeExito) {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: mensajeExito,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("Index", "Employee")';
+                }
+            });
+
+            // Clear TempData after displaying the success message
+            TempData["RegistroExitoso"] = null;
+        }
+
+        if (mensajeError) {
+            Swal.fire({
+                title: 'Error',
+                text: mensajeError,
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+
+            // Clear TempData after displaying the error message
+            TempData["MensajeError"] = null;
         }
     });
 </script>

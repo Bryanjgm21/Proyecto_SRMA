@@ -74,12 +74,14 @@ namespace SRMA.Controllers
 
             if (resultado != null)
             {
-                return RedirectToAction("Index", "User");
+                TempData["RegistroExitoso"] = "El usuario se modifico correctamente.";
+                return RedirectToAction("Profile");
             }
             else
             {
-                return RedirectToAction("Profile", "User");
+                TempData["MensajeError"] = "Error al modificar el usuario. Por favor, inténtelo de nuevo.";
             }
+            return RedirectToAction("Profile");
         }
 
         // Consult the user by their id to delete the user from the table

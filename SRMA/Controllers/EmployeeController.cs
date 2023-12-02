@@ -49,7 +49,9 @@ namespace SRMA.Controllers
         {
             entity.IdRol = 2;
             entity.statusU = true;
-            entity.passwordU = "password1";
+            entity.passwordU = "Password123.@";
+
+            ModelState.Remove("passwordU");
 
             if (!ModelState.IsValid)
             {
@@ -75,23 +77,19 @@ namespace SRMA.Controllers
 
             if (resultado != null)
             {
-                // Almacenar el mensaje de éxito en ViewBag
-                ViewBag.MensajeExito = "Registro exitoso.";
-
-                // Agregar un indicador de éxito al modelo para que lo pueda comprobar la vista
-                ModelState.AddModelError("RegistroExitoso", "Registro exitoso");
+                TempData["RegistroExitoso"] = "Se registro correctamente.";
 
                 // Devolver la vista sin redirección
-                return View("Create", entity);
+                return RedirectToAction("Create");
             }
             else
             {
                 // Manejar error al registrar el usuario
-                ViewBag.MensajeError = "Error al registrar el usuario.";
+                TempData["MensajeError"] = "Error al registrar el usuario.";
             }
 
             // Devolver la vista con el modelo y mensajes
-            return View("Create", entity);
+            return RedirectToAction("Create");
         }
 
 
@@ -99,6 +97,10 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult Edit(UserEntity entity)
         {
+            entity.passwordU = "Password123.@";
+
+            ModelState.Remove("passwordU");
+
             if (!ModelState.IsValid)
             {
                 // Si el modelo no es válido, simplemente regresa a la vista sin intentar actualizar el usuario.
