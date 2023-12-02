@@ -17,7 +17,7 @@ namespace SRMA.Entities
         public string details { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "El campo Estado del Producto es obligatorio.")]
-        public string productStatus { get; set; } = string.Empty;
+        public bool productStatus { get; set; } 
 
         [Required(ErrorMessage = "El campo Precio es obligatorio.")]
         [RegularExpression(@"^[1-9]\d{0,15}$", ErrorMessage = "Debe solo ser solo números")]
