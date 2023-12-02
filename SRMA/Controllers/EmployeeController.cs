@@ -57,14 +57,14 @@ namespace SRMA.Controllers
                 return View("Create", entity);
             }
 
-            var ver = _userModel.verifUser(entity);
+            var ver = _userModel.verifUser(entity,0);
             if (ver != null)
             {
                 ViewBag.ErrorMessage = "El correo del empleado ya existe";
                 return View("Create", entity);
             }
 
-            var ced = _userModel.verCed(entity);
+            var ced = _userModel.verCed(entity,0);
             if (ced != null)
             {
                 ViewBag.ErrorMessage = "La cedula del empleado ya existe";
@@ -99,20 +99,24 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult Edit(UserEntity entity)
         {
+            var IdUser = entity.IdUser;
+
+            
+
             if (!ModelState.IsValid)
             {
                 // Si el modelo no es válido, simplemente regresa a la vista sin intentar actualizar el usuario.
                 return View("EmployeeInfo", entity);
             }
 
-            var ver = _userModel.verifUser(entity);
+            var ver = _userModel.verifUser(entity, IdUser);
             if (ver != null)
             {
                 ViewBag.ErrorMessage = "El correo del empleado ya existe";
                 return View("EmployeeInfo", entity);
             }
 
-            var ced = _userModel.verCed(entity);
+            var ced = _userModel.verCed(entity, IdUser);
             if (ced != null)
             {
                 ViewBag.ErrorMessage = "La cedula del empleado ya existe";
