@@ -53,6 +53,7 @@ namespace SRMA.Controllers
                 return View("Create", entity);
             }
 
+            
             var resultado = _productModel.InsertProduct(entity);
 
             if (resultado != null)

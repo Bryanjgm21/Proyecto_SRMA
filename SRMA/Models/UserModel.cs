@@ -75,7 +75,7 @@ namespace SRMA.Models
                         cellphone = data.cellphone,
                         email = data.email,
                         passwordU = data.passwordU,
-
+                        IdProgram = data.IdProgram,
                     };
 
                     return userViewModel;

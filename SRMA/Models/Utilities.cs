@@ -23,7 +23,7 @@ namespace SRMA.Models
             string htmlArchivo = System.IO.File.ReadAllText(rutaArchivo);
             htmlArchivo = htmlArchivo.Replace("@@Nombre", datos.userName);
             htmlArchivo = htmlArchivo.Replace("@@ClaveTemporal", tempPassword);
-            htmlArchivo = htmlArchivo.Replace("@@Link", "https://localhost:7073/Login/ChangePassword?q=" + Encrypt(datos.IdUser.ToString()));
+            htmlArchivo = htmlArchivo.Replace("@@Link", "https://srma20231128184338.azurewebsites.net/Login/ChangePassword?q=" + Encrypt(datos.IdUser.ToString()));
 
             return htmlArchivo;
         }

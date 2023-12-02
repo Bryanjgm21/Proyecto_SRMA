@@ -40,5 +40,9 @@ namespace SRMA.Entities
 
         public string? IdUserEncrypt { get; set; } = string.Empty;
 
+        //FK
+
+        public long? IdProgram { get; set; }
+
     }
 }

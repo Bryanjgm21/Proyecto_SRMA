@@ -96,13 +96,16 @@
                                                 </div>
                                             </div>
                                         }
-                                        <div class="form-group">
-                                            @using (Html.BeginForm("RegisterProgram", "User", FormMethod.Post, new { id = "registerProgramForm" }))
-                                            {
-                                                <input type="submit" class="btn btn-info btn-block waves-effect waves-light" value="Registrar Programa de lealtad" />
-                                            }
-
-                                        </div>
+                                        @if (Model.IdProgram == null)
+                                        {
+                                            <div class="form-group">
+                                                @using (Html.BeginForm("RegisterProgram", "User", FormMethod.Post, new { id = "registerProgramForm" }))
+                                                {
+                                                    <input type="submit" class="btn btn-info btn-block waves-effect waves-light" value="Registrar Programa de lealtad" />
+                                                }
+                                            </div>
+                                        }
+                                        
                                         <div class="form-group">
                                           @*  <button class="btn btn-danger delete-product" data-product-id="IdUser">Eliminar</button>*@
 
@@ -126,9 +129,6 @@
     </div>
     <!-- end page -->
     
-</body>
-</html>
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {

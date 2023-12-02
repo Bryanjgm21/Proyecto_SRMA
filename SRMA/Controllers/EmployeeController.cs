@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DocumentFormat.OpenXml.Drawing.Charts;
+using Microsoft.AspNetCore.Mvc;
 using SRMA.Entities;
 using SRMA.Interfaces;
 using static Dapper.SqlMapper;
@@ -97,6 +98,8 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult Edit(UserEntity entity)
         {
+            var IdUser = entity.IdUser;
+
             entity.passwordU = "Password123.@";
 
             ModelState.Remove("passwordU");
