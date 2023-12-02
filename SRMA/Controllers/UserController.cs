@@ -55,14 +55,13 @@ namespace SRMA.Controllers
                 return View("Profile", entity);
             }
 
-            var ver = _userModel.verifUser(entity);
+            var ver = _userModel.verifUser(entity, UserId);
             if (ver != null)
             {
-                ViewBag.ErrorMessage = "El correo ya esta en uso.";
+               ViewBag.ErrorMessage = "El correo ya esta en uso.";
                 return View("Profile", entity);
             }
-
-            var ced = _userModel.verCed(entity);
+            var ced = _userModel.verCed(entity, UserId);
             if (ced != null)
             {
                 ViewBag.ErrorMessage = "La cedula ya esta agregada";

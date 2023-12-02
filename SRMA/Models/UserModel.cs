@@ -270,24 +270,24 @@ namespace SRMA.Models
 
         }
 
-        public UserEntity? verifUser(UserEntity entity)
+        public UserEntity? verifUser(UserEntity entity, long q)
         {
 
             using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
             {
-                return connection.Query<UserEntity>("verUser",
-                    new { pEmail = entity.email},
+                return connection.Query<UserEntity>("verificarCorreo",
+                    new { pEmail = entity.email, pId=q},
                     commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
             }
         }
 
-        public UserEntity? verCed(UserEntity entity)
+        public UserEntity? verCed(UserEntity entity, long q)
         {
 
             using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
             {
-                return connection.Query<UserEntity>("verCed",
-                    new { pId = entity.Id },
+                return connection.Query<UserEntity>("verId",
+                    new { pId = entity.Id, pIdUser = q },
                     commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
             }
         }
