@@ -53,7 +53,7 @@ namespace SRMA.Models
                 {
 
                     connection.Execute("InsertReservation",
-                       new { entity.quantity, entity.details, entity.observations, dateR = entity.dateReservation.Date, timeR = entity.dateReservation.TimeOfDay, IdUser = q},
+                       new { entity.quantity, entity.observations, dateR = entity.dateReservation.Date, timeR = entity.dateReservation.TimeOfDay, IdUser = q},
                        commandType: System.Data.CommandType.StoredProcedure);
 
                     return 1;
@@ -65,7 +65,7 @@ namespace SRMA.Models
 
         public List<ReservationEntity> ListReservations()
         {
-            using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
+            using (var connection = new MySqlConnection(_connection))
             {
                 var reservationsList = connection.Query<ReservationEntity>("GetAllReservations",
                     commandType: CommandType.StoredProcedure).ToList();
@@ -97,7 +97,6 @@ namespace SRMA.Models
                         userName = data.userName,
                         lastName = data.lastName,
                         IdReservation = data.IdReservation,
-                        details = data.details,
                         observations = data.observations,
                         quantity = data.quantity,
                         dateReservation = data.dateReservation,
@@ -116,7 +115,7 @@ namespace SRMA.Models
                 using (var connection = new MySqlConnection(_connection))
                 {
                     var result = connection.Execute("UpdateReservation",
-                       new { pIdReservation = q, entity.quantity, entity.details, entity.observations, entity.dateReservation,entity.IdUser},
+                       new { pIdReservation = q, entity.quantity, entity.observations, entity.dateReservation,entity.IdUser},
                        commandType: CommandType.StoredProcedure);
 
                     return entity;

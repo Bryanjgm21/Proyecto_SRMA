@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-e3n5b2ORb8H6t5xq7QFn6SA5Qk6dZGP4MOie49g4lZP8l67cZv57RCS6KtjVdLQd" crossorigin="anonymous">
 
 
-
 <body>
 
     <div>
@@ -30,10 +29,8 @@
                                                 <i class="mdi mdi-album"></i> <b>SRMA</b>
                                             </a>
                                         </div>
-                                        
                                         <h1 class="h5 mb-1">Agregar producto</h1>
                                         <div>
-                                             
                                         </div>
                                         @using (Html.BeginForm("InsertProduct", "Product", FormMethod.Post, new { @class = "user" }))
                                         {
@@ -54,36 +51,41 @@
                                                 @Html.TextBoxFor(m => m.details, new {@class="form-control form-control-user", @placeholder="Detalles",@type="text"})
                                                 <span asp-validation-for="details" class="text-danger"></span>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <label>Estado del Producto</label>
-                                                    @Html.DropDownListFor(m => m.productStatus, new SelectList(
-                                                new List<SelectListItem>
-                                                {
-                                                new SelectListItem { Text = "Agotado", Value = "Agotado" },
-                                                new SelectListItem { Text = "Existente", Value = "Existente" }
-                                                }, "Value", "Text"), new { @class = "form-control form-control-user" })
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>Precio</label>
-                                                    @Html.TextBoxFor(m => m.price, new {@class="form-control form-control-user", @placeholder="Precio",@type="number"})
-                                                    <span asp-validation-for="price" class="text-danger"></span>
-                                                </div>
+
+                                            <div class="form-group">
+                                                <label>Precio</label>
+                                                @Html.TextBoxFor(m => m.price, new {@class="form-control form-control-user", @placeholder="Precio",@type="number"})
+                                                <span asp-validation-for="price" class="text-danger"></span>
                                             </div>
-                                                <div class="form-group">
-                                                    <label>Proveedor</label>
-                                                    @Html.DropDownListFor(m => m.IdSupplier, ViewBag.listSuppliers as List<SelectListItem>, new { @class = "form-control" })
-                                                </div>
-                                                <div>
-                                                     
-                                                </div>
+                                            @*<div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label>Estado del Producto</label>
+                                        @Html.DropDownListFor(m => m.productStatus, new SelectList(
+                                        new List<SelectListItem>
+                                        {
+                                        new SelectListItem { Text = "Agotado", Value = "Agotado" },
+                                        new SelectListItem { Text = "Existente", Value = "Existente" }
+                                        }, "Value", "Text"), new { @class = "form-control form-control-user" })
+                                        </div>
+                                        <div class="col-sm-6">
+                                        <label>Precio</label>
+                                        @Html.TextBoxFor(m => m.price, new {@class="form-control form-control-user", @placeholder="Precio",@type="number"})
+                                        <span asp-validation-for="price" class="text-danger"></span>
+                                        </div>
+                                        </div>*@
+                                            <div class="form-group">
+                                                <label>Proveedor</label>
+                                                @Html.DropDownListFor(m => m.IdSupplier, ViewBag.listSuppliers as List<SelectListItem>, new { @class = "form-control" })
+                                            </div>
+                                            <div>
+                                            </div>
 
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                                     <a href="@Url.Action("Index","Product")" class="btn btn-secondary btn-block waves-effect waves-light"> Volver </a>
                                                 </div>
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="submit" id="insertarProducto" class="btn btn-success btn-block waves-effect waves-light" value="Agregar producto" />
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <input type="submit" id="insertarProducto" class="btn btn-success btn-block waves-effect waves-light" value="Agregar producto" />
                                                 </div>
                                             </div>
                                         }
@@ -134,7 +136,6 @@
             }
         });
     </script>
-
     <!-- end page -->
 </body>
 

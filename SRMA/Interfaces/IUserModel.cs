@@ -25,6 +25,5 @@ namespace SRMA.Interfaces
         public int ChangeAccPassword(UserEntity entity);
         public UserEntity? verifUser(UserEntity entity,long q);
         public UserEntity? verCed(UserEntity entity, long q);
-
     }
 }

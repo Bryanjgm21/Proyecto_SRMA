@@ -21,9 +21,9 @@ namespace SRMA.Controllers
         }
 
 
-      
 
-       
+
+
 
         [HttpGet]
         public IActionResult LogIn()
@@ -43,7 +43,7 @@ namespace SRMA.Controllers
         }
 
 
-      
+
 
         [HttpGet]
         public IActionResult Profile()

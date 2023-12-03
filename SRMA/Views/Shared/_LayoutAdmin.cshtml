@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="~/SRMA.styles.css" asp-append-version="true" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="~/Theme/assets/images/favicon.ico">
+    <!-- Plugins css -->
+    <link href="~/Theme/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="~/Theme/plugins/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="~/Theme/plugins/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="~/Theme/plugins/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" />
 
     <!-- App css -->
     <link href="~/Theme/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -18,7 +23,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.all.min.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
@@ -153,7 +158,7 @@
                                     <span class="badge badge-pill badge-warning">1</span>
                                 </span>
                             </a>
-                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="@Url.Action("LogIn","Login")">
+                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="@Url.Action("LogOut","Login")">
                                 <span>Cerrar sesion</span>
                             </a>
                         </div>
@@ -236,6 +241,25 @@
     <script src="~/Theme/assets/js/metismenu.min.js"></script>
     <script src="~/Theme/assets/js/waves.js"></script>
     <script src="~/Theme/assets/js/simplebar.min.js"></script>
+
+   
+    <!-- third party js -->
+    <script src="~/Theme/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Theme/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <script src="~/Theme/plugins/datatables/dataTables.responsive.min.js"></script>
+    <script src="~/Theme/plugins/datatables/responsive.bootstrap4.min.js"></script>
+    <script src="~/Theme/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="~/Theme/plugins/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="~/Theme/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="~/Theme/plugins/datatables/buttons.flash.min.js"></script>
+    <script src="~/Theme/plugins/datatables/buttons.print.min.js"></script>
+    <script src="~/Theme/plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="~/Theme/plugins/datatables/dataTables.select.min.js"></script>
+    <script src="~/Theme/plugins/datatables/pdfmake.min.js"></script>
+    <script src="~/Theme/plugins/datatables/vfs_fonts.js"></script>
+
+    <!-- Datatables init -->
+    <script src="~/Theme/assets/pages/datatables-demo.js"></script>
 
     <!-- Sparkline Js-->
     <script src="~/Theme/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
