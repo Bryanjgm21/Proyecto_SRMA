@@ -30,12 +30,12 @@ namespace SRMA.Controllers
             return View();
         }
 
-        //[HttpGet]
-        //public IActionResult LogOut()
-        //{
-        //    HttpContext.Session.Clear();
-        //    return RedirectToAction("LogIn", "Login");
-        //}
+        [HttpGet]
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("LogIn", "Login");
+        }
 
         /*
           IdRol Setup 
