@@ -33,10 +33,10 @@ namespace SRMA.Controllers
 
 
         [HttpPost]
-        public IActionResult InsertP(long IdUser, int qty)
+        public IActionResult InsertPoints(long IdUser, int qty)
         {
 
-            var result = _fidelityProModel.InsertP(IdUser, qty);
+            var result = _fidelityProModel.InsertPoints(IdUser, qty);
 
             if (result != null)
             {
@@ -52,7 +52,7 @@ namespace SRMA.Controllers
         public IActionResult RedeemP(string code, int qty)
         {
 
-            var result = _fidelityProModel.RedeemP(code, qty);
+            var result = _fidelityProModel.RedeemPoints(code, qty);
 
             if (result != null)
             {
