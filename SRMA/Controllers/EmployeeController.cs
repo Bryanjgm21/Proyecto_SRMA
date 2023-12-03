@@ -190,7 +190,7 @@ namespace SRMA.Controllers
             return RedirectToAction("EmployeeInfo");
         }
 
-        public IActionResult ActInfoEmp(EmployeeInfoEntity entity)
+        public IActionResult UpdateInfoEmp(EmployeeInfoEntity entity)
         {
             var IdUser = entity.IdUser;
 
@@ -199,7 +199,7 @@ namespace SRMA.Controllers
                 return View("ActInfoEmp", entity);
             }
 
-            var resultado = _userEmployeeInfoModel.ActInfoEmp(entity, IdUser);
+            var resultado = _userEmployeeInfoModel.UpdateInfoEmp(entity, IdUser);
             
             if (resultado != null)
             {
