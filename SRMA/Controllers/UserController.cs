@@ -122,6 +122,22 @@ namespace SRMA.Controllers
                 return RedirectToAction("Profile", "User");
             }
         }
-       
+
+        [HttpGet]
+       public IActionResult CodeUser()
+        {
+            var IdUser = HttpContext.Session.GetInt32("IdSession");
+
+            long UserId = (long)IdUser;
+
+            var result = _userModel.ConsultAcc(UserId);
+
+            if (result != null)
+            {
+                return View(result);
+            }
+
+            return NotFound(); 
+        }
     }
 }

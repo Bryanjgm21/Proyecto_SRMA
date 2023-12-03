@@ -40,9 +40,10 @@ namespace SRMA.Entities
 
         public string? IdUserEncrypt { get; set; } = string.Empty;
 
-        //FK
+        //FK FidelityProgram
+         public long? IdProgram { get; set; }
 
-        public long? IdProgram { get; set; }
+
 
     }
 }
