@@ -95,7 +95,10 @@
 
                                                 </div>
                                             </div>
+                                            @Html.HiddenFor(m => m.IdProgram)
+
                                         }
+
                                         @if (Model.IdProgram == null)
                                         {
                                             <div class="form-group">
