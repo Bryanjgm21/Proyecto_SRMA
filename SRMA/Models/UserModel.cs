@@ -143,7 +143,7 @@ namespace SRMA.Models
                 {
 
                     connection.Execute("RegUserProg",
-                       new { IdUser = q },
+                       new { pIdUser = q },
                        commandType: System.Data.CommandType.StoredProcedure); ;
 
                     return user;

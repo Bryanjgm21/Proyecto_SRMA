@@ -15,7 +15,7 @@
                         <div class="row">
                             <!-- Columna izquierda para la imagen -->
                             <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center rounded-center">
-                                <i class="fas fa-user" style="font-size: 350px;margin-left: 85px;"></i>
+                                <img src="~/Theme/assets/images/media/MenuFidelity.png" style="max-width: 160%; height: auto; display: block; margin: auto;  ">
                             </div>
                             <div class="col-lg-7">
                                 <div class="p-5">
@@ -24,50 +24,41 @@
                                             <i class="mdi mdi-album"></i> <b>SRMA</b>
                                         </a>
                                     </div>
-                                    @if (ViewBag.ErrorMessage != null)
-                                    {
-                                        <script>
-                                            Swal.fire({
-                                                title: 'Error',
-                                                text: '@ViewBag.ErrorMessage',
-                                                icon: 'error',
-                                                confirmButtonText: 'Aceptar'
-                                            });
-                                        </script>
-                                    }
-                                    <h1 class="h5 mb-1">Programa de Fidelidad</h1>
-                                   
+                                        <h1 style="margin-left: 15%;" class="h5 mb-1">Programa de Fidelidad</h1>
+
                                         <div class="form-group row">
 
                                             @Html.HiddenFor(m => m.IdUser)
 
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <label>Nombre</label>
-                                                @Html.TextBoxFor(m => m.codeU, new {@class="form-control form-control-user", @placeholder="Nombre",@type="text"})
-                                               
-                                            <div class="col-sm-6">
-                                                <label>Apellido</label>
-                                                @Html.TextBoxFor(m => m.earnedPoints, new {@class="form-control form-control-user", @placeholder="Apellido",@type="text"})
-                                               
-                                            </div>
-                                            <div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Correo electrónico</label>
-                                                @Html.TextBoxFor(m => m.startDate, new {@class="form-control form-control-user", @placeholder="Correo electronico",@type="text"})
-                                                
+                                            <div style="margin-left: 15%;" class="col-sm-6 mb-3 mb-sm-0">
+                                                <label>Código</label>
+                                                @Html.TextBoxFor(m => m.codeU, new {@class="form-control form-control-user", @placeholder="Código",@type="text", @readonly = "readonly", style="font-size: 45px; font-weight: bold; text-align: center;"})
                                             </div>
                                         </div>
-                                        <div>
-                                        </div>
+                                        <div style="margin-left: 15%;" class="form-group row">
+                                            <div class="col-sm-6 mb-3">
+                                                <label>Puntos</label>
+                                                @Html.TextBoxFor(m => m.earnedPoints, new {@class="form-control form-control-user", @placeholder="Puntos", @type="text", @readonly = "readonly", style="font-size: 45px; font-weight: bold; text-align: center;"})
 
-                                        <div class="form-group row">
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <a href="@Url.Action("Index", "User")" class="btn btn-secondary btn-block waves-effect waves-light">Volver</a>
                                             </div>
                                         </div>
-                                   
+                                        <div style="margin-left: 15%;" class="form-group row">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <label>Fecha de registro</label>
+                                                @Html.TextBoxFor(m => m.startDate, new { @class = "form-control form-control-user", @placeholder = "Fecha de registro", @type = "text", @readonly = "readonly", @id = "startDateTextBox" , style="font-size: 45px; font-weight: bold; text-align: center;"})
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div>
+                                    </div>
+
+                                    <div style="margin-left: 15%;" class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <a href="@Url.Action("Index", "User")" class="btn btn-secondary btn-block waves-effect waves-light">Volver</a>
+                                        </div>
+                                    </div>
+
+                                </div>
 
                                     <!-- end row -->
                                 </div> <!-- end .padding-5 -->
