@@ -19,11 +19,12 @@ namespace SRMA.Entities
         public string Id { get; set; } = string.Empty;
 
         //FK Vacations and absence
-        public int DReq { get; set; }
-        public DateOnly InDay { get; set; }
-        public DateOnly EnDay { get; set; } 
-        public bool TypeV { get; set; }
-        public bool AuType { get; set; }
+        public long idVA { get; set; }
+        public int dReq { get; set; }
+        public DateOnly inDay { get; set; }
+        public DateOnly enDay { get; set; } 
+        public bool typeV { get; set; }
+        public bool auType { get; set; }
 
     }
 }

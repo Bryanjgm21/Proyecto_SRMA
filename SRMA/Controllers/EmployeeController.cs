@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Drawing.Charts;
+using DocumentFormat.OpenXml.Vml.Office;
 using Microsoft.AspNetCore.Mvc;
 using SRMA.Entities;
 using SRMA.Interfaces;
@@ -9,13 +10,16 @@ namespace SRMA.Controllers
     public class EmployeeController : Controller
     {
         private readonly IUserModel _userModel;
+        private readonly IEmployeeInfoModel _userEmployeeInfoModel;
 
 
-        public EmployeeController(IUserModel userModel)
+        public EmployeeController(IUserModel userModel, IEmployeeInfoModel userEmployeeInfoModel)
         {
             _userModel = userModel;
+            _userEmployeeInfoModel = userEmployeeInfoModel;
         }
-        //List of Users by Rol
+
+       //List of Users by Rol
 
         [HttpGet]
         public IActionResult Index()
@@ -93,8 +97,6 @@ namespace SRMA.Controllers
             return RedirectToAction("Create");
         }
 
-
-
         [HttpPost]
         public IActionResult Edit(UserEntity entity)
         {
@@ -165,29 +167,127 @@ namespace SRMA.Controllers
             }
         }
 
+        public IActionResult AddInfoEmp(EmployeeInfoEntity entity, long q)
+        {
+            
+            if (!ModelState.IsValid)
+            {
+                 return View("AddInfoEmp", entity);
+            }
+
+            var ver = _userEmployeeInfoModel.AddInfoEmp(entity, q);
+            if (ver != null)
+            {
+               TempData["RegistroExitoso"] = "Se registro correctamente.";
+
+                return RedirectToAction("EmployeeInfo");
+            }
+            else
+            {
+                TempData["MensajeError"] = "Error al registrar el usuario.";
+            }
+
+            return RedirectToAction("EmployeeInfo");
+        }
+
+        public IActionResult ActInfoEmp(EmployeeInfoEntity entity)
+        {
+            var IdUser = entity.IdUser;
+
+            if (!ModelState.IsValid)
+            {
+                return View("ActInfoEmp", entity);
+            }
+
+            var resultado = _userEmployeeInfoModel.ActInfoEmp(entity, IdUser);
+            
+            if (resultado != null)
+            {
+                ViewBag.MensajeExito = "Actualizacion exitosa.";
+               
+                ModelState.AddModelError("RegistroExitoso", "Actualizacion exitosa");
+
+                return View("EmployeeInfo", entity);
+            }
+            else
+            {
+               ViewBag.MensajeError = "Error al actualizar el usuario.";
+            }
+
+            return View("EmployeeInfo", entity);
+        }
+
+        public IActionResult ConsultInfoE(long IdUser)
+        {
+
+            var result = _userEmployeeInfoModel.ConsultInfoE(IdUser);
+
+            if (result != null)
+            {
+                return View(result);
+            }
+
+            return View(result); 
+        }
 
         [HttpGet]
         public IActionResult Absence()
         {
-            return View();
+            {
+                var absence = _userEmployeeInfoModel.ConsultVacAu(false);
+                return View(absence);
+
+            }
         }
 
         [HttpGet]
         public IActionResult Vacation()
         {
-            return View();
+            var vacation = _userEmployeeInfoModel.ConsultVacAu(true);
+            return View(vacation);
+          
         }
 
         [HttpGet]
-        public IActionResult VacationAdd()
+        public IActionResult VacationAdd(EmployeeInfoEntity entity,long q)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View("AddAu", entity);
+            }
+
+            var ver = _userEmployeeInfoModel.AddAu(entity,q);
+            if (ver != null)
+            {
+                TempData["RegistroExitoso"] = "Se registro correctamente.";
+
+                return RedirectToAction("Vacation");
+            }
+            else
+            {
+                TempData["MensajeError"] = "Error al registrar el usuario.";
+            }
+
+            return RedirectToAction("Vacation");
         }
+    
 
         [HttpGet]
-        public IActionResult VacationRefund()
+       
+        public IActionResult DeleteRequest(long idVa)
         {
-            return View();
+
+
+            var result = _userEmployeeInfoModel.DeleteRequest(idVa);
+
+            if (result != null)
+            {
+                return RedirectToAction("Absence");
+            }
+            else
+            {
+                return RedirectToAction("Absence");
+            }
         }
     }
 }

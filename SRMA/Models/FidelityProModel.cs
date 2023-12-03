@@ -56,8 +56,19 @@ namespace SRMA.Models
                     var result= connection.Execute("InsertP",
                        new { pIdUser = q, qty = pQty },
                        commandType: CommandType.StoredProcedure);
+                    if (result == 1)
+                    {
+                        var updatedUser = connection.QueryFirstOrDefault<FidelityProEntity>("SELECT * FROM fidelityProgram WHERE IdUser = @IdUser",
+                            new { IdUser = q }
+                        );
+
+                        return updatedUser;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
-                return null;
             }
             else
             {
@@ -94,9 +105,6 @@ namespace SRMA.Models
                 return null;
             }
         }
-
-
-
 
     }
 }
