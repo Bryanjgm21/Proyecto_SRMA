@@ -273,9 +273,9 @@ namespace SRMA.Models
         public UserEntity? verifUser(UserEntity entity, long q)
         {
 
-            using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
+            using (var connection = new MySqlConnection(_connection))
             {
-                return connection.Query<UserEntity>("verificarCorreo",
+                return connection.Query<UserEntity>("verifyEmail",
                     new { pEmail = entity.email, pId=q},
                     commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
             }
@@ -284,9 +284,9 @@ namespace SRMA.Models
         public UserEntity? verCed(UserEntity entity, long q)
         {
 
-            using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
+            using (var connection = new MySqlConnection(_connection))
             {
-                return connection.Query<UserEntity>("verId",
+                return connection.Query<UserEntity>("verifyId",
                     new { pId = entity.Id, pIdUser = q },
                     commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
             }

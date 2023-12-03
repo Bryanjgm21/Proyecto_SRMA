@@ -21,7 +21,7 @@ namespace SRMA.Entities
 
         public bool statusReser { get; set; }
 
-        public string details { get; set; } = string.Empty;
+        //public string details { get; set; } = string.Empty;
         [Required(ErrorMessage = "El campo observaciones es obligatorio.")]
         public string observations { get; set; } = string.Empty;
 
