@@ -159,6 +159,16 @@ namespace SRMA.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult ChangeStatusProduct(long q)
+        {
+            var entity = new ProductEntity();
+            entity.IdProduct = q;
+
+            _productModel.ChangeStatusProduct(entity);
+            return RedirectToAction("Index", "Product");
+        }
+
         // 
         [HttpGet]
         public async Task<FileResult> ExportProductsToExcel()

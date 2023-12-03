@@ -6,175 +6,292 @@
 }
 
 
-<html>
-<body>
-    <div class="main-content">
 
-        <div class="page-content">
-            <div class="container-fluid">
-            </div>
-            <div class="row">
-                <div class="col-xl-10">
-                    <div class="card">
-                        <div class="card-body">
+<div class="main-content">
 
-                            <h4 class="card-title text-center">Inventario</h4>
-                            <div class="input-group">
+    <div class="page-content">
+        <div class="container-fluid">
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="card-title">Inventario</h4>
+                        @*<p class="card-subtitle mb-4">
+                        The Buttons extension for DataTables provides a common set of options, API methods and styling to display buttons on a page
+                        that will interact with a DataTable. The core library provides the based framework upon which plug-ins can built.
+                        </p>*@
+                        <div class="input-group">
                             <div class="input-group-append">
                                 <a href="@Url.Action("Create", "Product")" class="btn btn-success btn-block waves-effect waves-light"> Agregar producto </a>
                             </div>
-                            </div>
-                            <div>
-                                  
-                            </div>
+                        </div>
 
-                            <div class="table-responsive">
-                                <table class="table table-centered table-striped table-nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th>Codigo</th>
-                                            <th>Nombre</th>
-                                            <th>Cantidad</th>
-                                            <th>Descripción</th>
-                                            <th>Estado</th>
-                                            <th>Precio</th>
-                                            <th>Proveedor</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
+                        <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Nombre</th>
+                                    <th>Cantidad</th>
+                                    <th>Descripción</th>
+                                    <th>Precio</th>
+                                    <th>Proovedor</th>
+                                    <th>Estado</th>
+                                    @*                                    <th>Cambiar Estado</th>
+                                    *@
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="table-user">@item.IdProduct</td>
+                                        <td>@item.productName</td>
+                                        <td>@item.stock</td>
+                                        <td>@item.details</td>
+                                        <td>@item.price</td>
+                                        <td>@item.supplierName</td>
+
+                                        @if (@item.productStatus)
                                         {
-                                            <tr>
-                                                <td class="table-user">@item.IdProduct</td>
-                                                <td>@item.productName</td>
-                                                <td>@item.stock</td>
-                                                <td>@item.details</td>
-                                                <td>@item.productStatus</td>
-                                                <td>@item.price</td>
-                                                <td>@item.supplierName</td>
-                                                @if (item.productCond == true)
-                                                {
-                                                    <td>
-                                                        <div>
-                                                            <a href="@Url.Action("Edit", "Product", new { IdProduct = item.IdProduct })" class="btn btn-info">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
-                                                                </svg>
-                                                            </a>
-                                                            <button class="btn btn-danger delete-product" data-product-id="@item.IdProduct">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"></path>
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                }
-                                                else
-                                                {
-                                                    <td>
-                                                        <div>
-                                                            <a href="@Url.Action("Edit", "Product", new { IdProduct = item.IdProduct })" class="btn btn-info">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                                                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
-                                                                </svg>
-                                                            </a>
-                                                            <a href="@Url.Action("ActivProd", "Product", new { IdProduct = item.IdProduct })" class="btn btn-info">
-                                                                Activar
-                                                            </a>
-                                                        </div>
-                                                    </td>
+                                            <td>Activo</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Inactivo</td>
+                                        }
 
-                                                }
-                                            </tr>
+                                        @*<td style="text-align:center">
+                                    <a href="@Url.Action("ChangeStatusProduct","Product", new { q = item.IdProduct })" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Cambiar Estado">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+                                    <path d="M403.8 34.4c12-5 25.7-2.2 34.9 6.9l64 64c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-64 64c-9.2 9.2-22.9 11.9-34.9 6.9s-19.8-16.6-19.8-29.6V160H352c-10.1 0-19.6 4.7-25.6 12.8L284 229.3 244 176l31.2-41.6C293.3 110.2 321.8 96 352 96h32V64c0-12.9 7.8-24.6 19.8-29.6zM164 282.7L204 336l-31.2 41.6C154.7 401.8 126.2 416 96 416H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H96c10.1 0 19.6-4.7 25.6-12.8L164 282.7zm274.6 188c-9.2 9.2-22.9 11.9-34.9 6.9s-19.8-16.6-19.8-29.6V416H352c-30.2 0-58.7-14.2-76.8-38.4L121.6 172.8c-6-8.1-15.5-12.8-25.6-12.8H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H96c30.2 0 58.7 14.2 76.8 38.4L326.4 339.2c6 8.1 15.5 12.8 25.6 12.8h32V320c0-12.9 7.8-24.6 19.8-29.6s25.7-2.2 34.9 6.9l64 64c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-64 64z" />
+                                    </svg>
+                                    </a>
+                                    </td>*@
+
+                                        @*<td style="text-align:center">
+                                            <div>
+
+                                                <a href="@Url.Action("Edit", "Product", new { IdProduct = item.IdProduct })" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Actualizar">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
+                                                    </svg>
+                                                </a>
+
+                                                <a href="@Url.Action("ChangeStatusProduct","Product", new { q = item.IdProduct })" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Cambiar Estado">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+                                                        <path d="M403.8 34.4c12-5 25.7-2.2 34.9 6.9l64 64c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-64 64c-9.2 9.2-22.9 11.9-34.9 6.9s-19.8-16.6-19.8-29.6V160H352c-10.1 0-19.6 4.7-25.6 12.8L284 229.3 244 176l31.2-41.6C293.3 110.2 321.8 96 352 96h32V64c0-12.9 7.8-24.6 19.8-29.6zM164 282.7L204 336l-31.2 41.6C154.7 401.8 126.2 416 96 416H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H96c10.1 0 19.6-4.7 25.6-12.8L164 282.7zm274.6 188c-9.2 9.2-22.9 11.9-34.9 6.9s-19.8-16.6-19.8-29.6V416H352c-30.2 0-58.7-14.2-76.8-38.4L121.6 172.8c-6-8.1-15.5-12.8-25.6-12.8H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H96c30.2 0 58.7 14.2 76.8 38.4L326.4 339.2c6 8.1 15.5 12.8 25.6 12.8h32V320c0-12.9 7.8-24.6 19.8-29.6s25.7-2.2 34.9 6.9l64 64c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-64 64z" />
+                                                    </svg>
+                                                </a>
+
+                                                
+                                            </div>
+                                        </td>*@
+
+
+
+                                        @if (item.productStatus == true)
+                                        {
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("Edit", "Product", new { IdProduct = item.IdProduct })" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Actualizar">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
+                                                        </svg>
+                                                    </a>
+                                                    <a href="@Url.Action("ChangeStatusProduct","Product", new { q = item.IdProduct })" class="btn btn-danger delete-product" data-product-id="@item.IdProduct" data-toggle="tooltip" data-placement="top" title="Cambiar Estado">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"></path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("Edit", "Product", new { IdProduct = item.IdProduct })" class="btn btn-info">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
+                                                        </svg>
+                                                    </a>
+                                                    
+                                                    <a href="@Url.Action("ChangeStatusProduct","Product", new { q = item.IdProduct })" class="btn btn-success activate-product" data-product-id="@item.IdProduct" data-toggle="tooltip" data-placement="top" title="Cambiar Estado">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                                                            <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </td>
 
                                         }
 
 
+                                        @*@if (item.productStatus == true)
+                                        {
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("Edit", "Product", new { IdProduct = item.IdProduct })" class="btn btn-info">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
+                                                        </svg>
+                                                    </a>
+                                                    <button class="btn btn-danger delete-product" data-product-id="@item.IdProduct">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <div>
+                                                    <a href="@Url.Action("Edit", "Product", new { IdProduct = item.IdProduct })" class="btn btn-info">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
+                                                        </svg>
+                                                    </a>
+                                                    <button class="btn btn-success activate-product" data-product-id="@item.IdProduct">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+                                                            <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </td>
 
-                                        <p>
-                                            Generar Reporte:
-                                            <a href="@Url.Action("ExportProductsToExcel","Product")" id="miBotonEx" class="btn btn-warning"> Excel </a>
-                                         @*   <button href="@Url.Action("Index","Inventory")" id="miBotonEx" class="btn btn-warning">Excel</button>*@
-                                        </p>
-                                    </tbody>
-                                </table>
-                            </div>
+                                        }*@
+                                    </tr>
 
-                        </div> <!-- end card-body-->
-                    </div> <!-- end card-->
-                </div> <!-- end col -->
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div> <!-- end card body-->
+                </div> <!-- end card -->
+            </div><!-- end col-->
+        </div>
+        <!-- end row-->
+
+    </div> <!-- container-fluid -->
+</div>
+<div class="modal" id="confirmationModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <!-- end row-->
-
-        </div> <!-- container-fluid -->
-    </div>
-    <div class="modal" id="confirmationModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Confirmación</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>¿Estás seguro de que deseas eliminar este producto?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" id="confirmDelete">Eliminar</button>
-                </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar este producto?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Eliminar</button>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        $(document).ready(function () {
-            var productIdToDelete;
+<script>
+    $(document).ready(function () {
+        var productIdToDelete;
 
-            $(".delete-product").click(function () {
-                productIdToDelete = $(this).data("product-id");
+        $(".delete-product").click(function () {
+            productIdToDelete = $(this).data("product-id");
 
-                // Utiliza SweetAlert para mostrar el pop-up de confirmación
-                Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: "Esta acción no se puede deshacer",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Sí, eliminar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Realizar una solicitud POST para eliminar el producto
-                        $.ajax({
-                            url: "@Url.Action("Delete", "Product")",
-                            method: "POST",
-                            data: { IdProduct: productIdToDelete },
-                            success: function (result) {
-                                // Manejar la respuesta del servidor
-                                if (result.success) {
-                                    Swal.fire('Error', 'No se pudo eliminar el producto', 'error');
-                                } else {
-                                    Swal.fire('Éxito', 'El producto se ha eliminado', 'success').then(function () {
-                                        window.location.href = "@Url.Action("Index")";
-                                    });
-                                }
-                            },
-                            error: function () {
-                                Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
+            // Utiliza SweetAlert para mostrar el pop-up de confirmación
+            Swal.fire({
+                title: '¿Desea desactivar el producto?',
+                text: "Podra activarlo nuevamente",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, desactivar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Realizar una solicitud POST para eliminar el producto
+                    $.ajax({
+                        url: "@Url.Action("Delete", "Product")",
+                        method: "POST",
+                        data: { IdProduct: productIdToDelete },
+                        success: function (result) {
+                            // Manejar la respuesta del servidor
+                            if (result.success) {
+                                Swal.fire('Error', 'No se pudo desactivar el producto', 'error');
+                            } else {
+                                Swal.fire('Éxito', 'El producto se ha desactivado', 'success').then(function () {
+                                    window.location.href = "@Url.Action("Index")";
+                                });
                             }
-                        });
-                    }
-                });
+                        },
+                        error: function () {
+                            Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
+                        }
+                    });
+                }
             });
         });
-    </script>
+    });
+</script>
 
-</body>
-</html>
+<script>
+    $(document).ready(function () {
+        var productIdToActivate;
 
+        $(".activate-product").click(function () {
+            productIdToActivate = $(this).data("product-id");
 
+            // Utiliza SweetAlert para mostrar el pop-up de confirmación
+            Swal.fire({
+                title: '¿Desea activar el producto?',
+                text: "Podra desactivarlo nuevamente",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, activar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Realizar una solicitud POST para eliminar el producto
+                    $.ajax({
+                        url: "@Url.Action("ActivProd", "Product")",
+                        method: "GET",
+                        data: { IdProduct: productIdToActivate },
+                        success: function (result) {
+                            // Manejar la respuesta del servidor
+                            if (result.success) {
+                                Swal.fire('Error', 'No se pudo activar el producto', 'error');
+                            } else {
+                                Swal.fire('Éxito', 'El producto se ha activado', 'success').then(function () {
+                                    window.location.href = "@Url.Action("Index")";
+                                });
+                            }
+                        },
+                        error: function () {
+                            Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+<!-- Inicializa los tooltips -->
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 
 
 
