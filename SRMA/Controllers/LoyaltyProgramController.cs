@@ -31,23 +31,6 @@ namespace SRMA.Controllers
             return View(result);
         }
 
-
-        [HttpPost]
-        public IActionResult InsertPoints(long IdUser, int qty)
-        {
-
-            var result = _fidelityProModel.InsertPoints(IdUser, qty);
-
-            if (result != null)
-            {
-                return View(result);
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
-        }
-
         [HttpPost]
         public IActionResult RedeemP(string code, int qty)
         {

@@ -153,8 +153,6 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult DeleteAcc(long IdUser)
         {
-           
-            
             var result = _userModel.DeleteAcc(IdUser);
 
             if (result != null)

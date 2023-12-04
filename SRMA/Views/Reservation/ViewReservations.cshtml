@@ -52,7 +52,7 @@
                                             <td>@item.quantity</td>
                                             <td>@item.observations</td>
 
-                                            @if (item.statusReser == true)
+                                            @if (item.statusReser == true && item.dateReservation > DateTime.Now)
                                             {
                                                 <td>Activa</td>
                                             }
@@ -92,45 +92,4 @@
 
     </div> <!-- container-fluid -->
 </div>
-@*<script>
-    $(document).ready(function () {
-        var productIdToDelete;
-
-        $(".delete-product").click(function () {
-            productIdToDelete = $(this).data("product-id");
-
-            // Utiliza SweetAlert para mostrar el pop-up de confirmación
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: "Esta acción no se puede deshacer",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Realizar una solicitud POST para eliminar el producto
-                    $.ajax({
-                        url: "@Url.Action("Delete", "Product")",
-                        method: "POST",
-                        data: { IdProduct: productIdToDelete },
-                        success: function (result) {
-                            // Manejar la respuesta del servidor
-                            if (result.success) {
-                                Swal.fire('Error', 'No se pudo eliminar el producto', 'error');
-                            } else {
-                                Swal.fire('Éxito', 'El producto se ha eliminado', 'success').then(function () {
-                                    window.location.href = "@Url.Action("Index")";
-                                });
-                            }
-                        },
-                        error: function () {
-                            Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
-                        }
-                    });
-                }
-            });
-        });
-    });
-</script>*@
 
