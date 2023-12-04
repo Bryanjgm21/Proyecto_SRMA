@@ -99,7 +99,9 @@ namespace SRMA.Models
                 using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
                 {
                     connection.Execute("AddAu",
+
                        new { pIdUser = q, pDReq = entity.dReq, pInDay = FechaIn, pEnDay = entity.enDay, pTypeV = entity.typeV, pAuType = entity.auType },
+
                        commandType: System.Data.CommandType.StoredProcedure);
 
                     return entity;

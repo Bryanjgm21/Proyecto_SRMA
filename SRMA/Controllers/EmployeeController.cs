@@ -1,6 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Drawing.Charts;
 using DocumentFormat.OpenXml.Vml.Office;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Ocsp;
 using SRMA.Entities;
 using SRMA.Interfaces;
 using static Dapper.SqlMapper;
@@ -279,6 +280,18 @@ namespace SRMA.Controllers
 
             return RedirectToAction("AbsenceAdd");
         }
+
+        [HttpGet]
+        public IActionResult AbsenceEdit()
+        {
+            {
+
+                var absence = _userEmployeeInfoModel.ConsultVacAu(false);
+                return View(absence);
+
+            }
+        }
+
 
 
         [HttpGet]
