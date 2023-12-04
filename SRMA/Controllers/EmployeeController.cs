@@ -239,6 +239,49 @@ namespace SRMA.Controllers
         }
 
         [HttpGet]
+        public IActionResult AbsenceAdd(long IdUser)
+        {
+            var result = _userEmployeeInfoModel.ConsultInfoE(IdUser);
+
+            if (result != null)
+            {
+                return View(result);
+            }
+
+            return View(); // Maneja el caso en el que el usuario no se encuentre
+        }
+
+        [HttpPost]
+        public IActionResult AbsenceAdd(EmployeeInfoEntity entity)
+        {
+            long q = entity.IdUser;
+            entity.typeV = 0;
+            entity.auType = 0;
+            entity.dReq = 2;
+
+
+            if (!ModelState.IsValid)
+            {
+                return View("AbsenceAdd", entity);
+            }
+
+            var ver = _userEmployeeInfoModel.AddAu(entity, q);
+            if (ver != null)
+            {
+                TempData["RegistroExitoso"] = "Se registro correctamente.";
+
+                return RedirectToAction("Absence");
+            }
+            else
+            {
+                TempData["MensajeError"] = "Error al registrar la ausencia.";
+            }
+
+            return RedirectToAction("AbsenceAdd");
+        }
+
+
+        [HttpGet]
         public IActionResult Vacation()
         {
             var vacation = _userEmployeeInfoModel.ConsultVacAu(true);
@@ -247,8 +290,26 @@ namespace SRMA.Controllers
         }
 
         [HttpGet]
-        public IActionResult VacationAdd(EmployeeInfoEntity entity,long q)
+        public IActionResult VacationAdd(long IdUser)
         {
+            var result = _userEmployeeInfoModel.ConsultInfoE(IdUser);
+
+            if (result != null)
+            {
+                return View(result);
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult VacationAdd(EmployeeInfoEntity entity)
+        {
+            long q = entity.IdUser;
+            entity.typeV = 1;
+            entity.auType = 0;
+            
+
             if (!ModelState.IsValid)
             {
                 return View("AddAu", entity);
