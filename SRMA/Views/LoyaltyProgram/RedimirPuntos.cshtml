@@ -1,0 +1,122 @@
+﻿@model SRMA.Entities.FidelityProEntity
+@{
+    ViewData["Title"] = "AdminLoyaltyProgram";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>AdminLoyaltyProgram</h1>
+
+<html>
+<body>
+
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex align-items-center min-vh-100">
+                        <div class="w-100 d-block bg-white shadow-lg rounded my-5">
+                            <div class="row">
+                                <!-- Columna izquierda para la imagen -->
+                                <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center rounded-center">
+                                    <i class="fas fa-box-open" style="font-size: 300px; margin-left: 75px;"></i>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="p-5">
+                                        <div class="text-center mb-5">
+                                            <a href="index.html" class="text-dark font-size-22 font-family-secondary">
+                                                <i class="mdi mdi-album"></i> <b>SRMA</b>
+                                            </a>
+                                        </div>
+                                        <h1 class="h5 mb-1">Redimir Puntos</h1>
+                                        <p class="text-muted mb-4">Realiza los cambios necesarios y pulsa "Guardar cambios".</p>
+                                        @using (Html.BeginForm("RedimirPuntos", "LoyaltyProgram", FormMethod.Post, new { @class = "user" }))
+                                        {
+                                            @Html.HiddenFor(m => m.codeU)
+
+                                            <div class="form-group">
+                                                <label>Codigo</label>
+                                                @Html.TextBoxFor(m => m.codeU, new { @class = "form-control form-control-user", @placeholder = "Codigo Unico", @type = "text", @readonly = "readonly" })
+                                              
+                                            </div>
+
+                                            <div class="form-group row">
+                                             
+
+                                                <div class="col-sm-6">
+                                                    <label>Puntos</label>
+                                                    @Html.TextBoxFor(m => m.earnedPoints, new { @class = "form-control form-control-user", @placeholder = "Puntos", @type = "number", @readonly = "readonly" })
+                                                   
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <label>Cantidad de puntos a redimir</label>
+                                                @Html.TextBoxFor(m => m.qty, new { @class = "form-control form-control-user", @placeholder = "Cantidad", @type = "text" })
+                                               
+                                            </div>
+
+                                            <div>
+                                            </div>
+
+                                            <br />
+                                            <br />
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <a href="@Url.Action("AdminLoyaltyProgram", "LoyaltyProgram")" class="btn btn-secondary btn-block waves-effect waves-light">Volver</a>
+                                                </div>
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <input type="submit" id="guardarCambiosButton" class="btn btn-success btn-block waves-effect waves-light" value="Redimir Puntos" />
+                                                </div>
+                                            </div>
+                                        }
+                                        <!-- end row -->
+                                    </div> <!-- end .padding-5 -->
+                                </div> <!-- end col -->
+                            </div> <!-- end row -->
+                        </div> <!-- end .w-100 -->
+                    </div> <!-- end .d-flex -->
+                </div> <!-- end col-->
+            </div> <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var mensajeExito = '@(TempData["RegistroExitoso"] as string)';
+            var mensajeError = '@(TempData["MensajeError"] as string)';
+
+            if (mensajeExito) {
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: mensajeExito,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '@Url.Action("Index", "Product")';
+                    }
+                });
+
+                // Clear TempData after displaying the success message
+                TempData["RegistroExitoso"] = null;
+            }
+
+            if (mensajeError) {
+                Swal.fire({
+                    title: 'Error',
+                    text: mensajeError,
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+
+                // Clear TempData after displaying the error message
+                TempData["MensajeError"] = null;
+            }
+        });
+    </script>
+
+</body>
+</html>

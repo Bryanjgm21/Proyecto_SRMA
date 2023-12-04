@@ -106,5 +106,23 @@ namespace SRMA.Models
             }
         }
 
+        public List<FidelityProEntity> GetAllFidelity()
+        {
+            using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
+            {
+                var data = connection.Query<FidelityProEntity>("GetAllFidelity",
+
+                    commandType: CommandType.StoredProcedure).ToList();
+
+                if (data != null && data.Count > 0)
+                {
+                    return data;
+                }
+
+                return new List<FidelityProEntity>();
+            }
+        }
+
+
     }
 }

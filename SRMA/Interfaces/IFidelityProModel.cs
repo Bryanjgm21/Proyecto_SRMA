@@ -7,7 +7,7 @@ namespace SRMA.Interfaces
         public FidelityProEntity? ConsultPoints(long q);
         public FidelityProEntity? InsertPoints(long q, int pQty);
         public FidelityProEntity? RedeemPoints(string Code, int pQty);
-
+        public List<FidelityProEntity> GetAllFidelity();
 
     }
 }

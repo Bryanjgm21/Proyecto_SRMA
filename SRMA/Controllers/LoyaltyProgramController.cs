@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.AspNetCore.Mvc;
 using SRMA.Entities;
 using SRMA.Interfaces;
 using SRMA.Models;
@@ -49,8 +50,10 @@ namespace SRMA.Controllers
         }
 
         [HttpPost]
-        public IActionResult RedeemP(string code, int qty)
+        public IActionResult RedimirPuntos(FidelityProEntity entity)
         {
+            string code = entity.codeU;
+            int qty = entity.qty; 
 
             var result = _fidelityProModel.RedeemPoints(code, qty);
 
@@ -60,9 +63,34 @@ namespace SRMA.Controllers
             }
             else
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("AdminLoyaltyProgram");
             }
         }
+
+
+        [HttpGet]
+        public IActionResult AdminLoyaltyProgram()
+        {
+            var data = _fidelityProModel.GetAllFidelity();
+            return View(data);
+        }
+
+
+        public IActionResult RedimirPuntos(long UserId)
+        {
+            var result = _fidelityProModel.ConsultPoints(UserId);
+
+            if (result != null)
+            {
+                return View(result);
+            }
+
+            return View(result);
+         
+        }
+
+
+
 
     }
 }
