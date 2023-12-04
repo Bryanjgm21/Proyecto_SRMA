@@ -24,7 +24,7 @@ namespace SRMA.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var users = _userModel.ListUsers(2);
+            var users = _userModel.ConsultInfoAllEmployees();
             return View(users);
         }
                 
@@ -32,7 +32,7 @@ namespace SRMA.Controllers
         public IActionResult EmployeeInfo(long IdUser)
         {
            
-            var result = _userModel.ConsultAcc(IdUser);
+            var result = _userModel.ConsultInfoEmployee(IdUser);
 
             if (result != null)
             {
@@ -52,9 +52,9 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult RegisterEmployee(UserEntity entity)
         {
-            entity.IdRol = 2;
-            entity.statusU = true;
-            entity.passwordU = "Password123.@";
+            //entity.IdRol = 2;
+            //entity.statusU = true;
+            //entity.passwordU = "Password123.@";
 
             ModelState.Remove("passwordU");
 
@@ -78,7 +78,7 @@ namespace SRMA.Controllers
                 return View("Create", entity);
             }
 
-            var resultado = _userModel.RegisterUser(entity);
+            var resultado = _userModel.RegisterEmployee(entity);
 
             if (resultado != null)
             {

@@ -25,5 +25,12 @@ namespace SRMA.Interfaces
         public int ChangeAccPassword(UserEntity entity);
         public UserEntity? verifUser(UserEntity entity,long q);
         public UserEntity? verCed(UserEntity entity, long q);
+
+        // Methods for Employee Info
+        public List<UserEntity> ConsultInfoAllEmployees();
+        public UserEntity? RegisterEmployee(UserEntity entity);
+        public UserEntity? ConsultInfoEmployee(long q);
+
+
     }
 }

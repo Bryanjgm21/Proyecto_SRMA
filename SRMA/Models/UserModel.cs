@@ -52,7 +52,29 @@ namespace SRMA.Models
                 return null;
             }
         }
-        
+
+        // SignUp Method
+        public UserEntity? RegisterEmployee(UserEntity entity)
+        {
+            if (entity != null)
+            {
+                using (var connection = new MySqlConnection(_connection))
+                {
+                    connection.Execute("RegisterEmployee",
+                       new { entity.userName, entity.lastName, entity.Id, entity.email, entity.cellphone, entity.salary, entity.job, entity.scheduleE, entity.ptoDays },
+                       commandType: System.Data.CommandType.StoredProcedure);
+
+                    return entity;
+
+                }
+            }
+            else
+            {
+
+                return null;
+            }
+        }
+
         // Consult data from all roles users, case Client(3) | q = IdUser
         public UserEntity? ConsultAcc(long q)
 
@@ -79,6 +101,41 @@ namespace SRMA.Models
                     };
 
                     return userViewModel;
+                }
+
+                return null;
+            }
+        }
+
+        public UserEntity? ConsultInfoEmployee(long q)
+
+        {
+            using (var connection = new MySqlConnection(_connection))
+            {
+                var data = connection.Query<UserEntity>("ConsultInfoEmployee",
+                     new { pIdUser = q },
+                     commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
+
+                if (data != null)
+                {
+
+                    var EmployeeViewModel = new UserEntity
+                    {
+                        IdUser = data.IdUser,
+                        userName = data.userName,
+                        lastName = data.lastName,
+                        cellphone = data.cellphone,
+                        email = data.email,
+                        Id = data.Id,
+                        salary = data.salary,
+                        job = data.job,
+                        scheduleE = data.scheduleE,
+                        startDate = data.startDate,
+                        ptoDays = data.ptoDays,
+                        IdE = data.IdE
+                    };
+
+                    return EmployeeViewModel;
                 }
 
                 return null;
@@ -166,6 +223,23 @@ namespace SRMA.Models
                 if (userList != null && userList.Count > 0)
                 {
                     return userList;
+                }
+
+                return new List<UserEntity>();
+            }
+        }
+
+        public List<UserEntity> ConsultInfoAllEmployees()
+        {
+            using (var connection = new MySqlConnection(_connection))
+            {
+                var data = connection.Query<UserEntity>("ConsultInfoAllEmployees",
+
+                    commandType: CommandType.StoredProcedure).ToList();
+
+                if (data != null && data.Count > 0)
+                {
+                    return data;
                 }
 
                 return new List<UserEntity>();

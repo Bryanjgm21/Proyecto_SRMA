@@ -43,6 +43,14 @@ namespace SRMA.Entities
         //FK FidelityProgram
          public long? IdProgram { get; set; }
 
+        //FK InfoEm
+
+        public long IdE { get; set; }
+        public int salary { get; set; }
+        public string job { get; set; } = string.Empty;
+        public string scheduleE { get; set; } = string.Empty;
+        public DateTime startDate { get; set; }
+        public int ptoDays { get; set; }
 
 
     }

@@ -1,5 +1,6 @@
 ﻿using Humanizer;
 using Org.BouncyCastle.Ocsp;
+using System.ComponentModel.DataAnnotations;
 
 namespace SRMA.Entities
 {
@@ -9,7 +10,7 @@ namespace SRMA.Entities
         public int salary { get; set; }
         public string job { get; set; } = string.Empty;
         public string scheduleE { get; set; } = string.Empty;
-        public DateOnly startDate { get; set; }
+        public DateTime startDate { get; set; }
         public int ptoDays { get; set; }
 
         //FK users
