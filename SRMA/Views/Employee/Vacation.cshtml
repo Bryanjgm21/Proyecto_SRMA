@@ -1,8 +1,12 @@
-﻿
+﻿﻿
+@model IEnumerable<SRMA.Entities.EmployeeInfoEntity>
+
 @{
     ViewData["Title"] = "Vacaciones";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+
 
 <html>
 <body>
@@ -16,136 +20,67 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h4 class="card-title">Vacaciones</h4>
+                            <h2 class="card-title text-center">Ausencias</h2>
+                            <br />
+
+                            <div>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table table-centered table-striped table-nowrap">
                                     <thead>
                                         <tr>
-                                            <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>Cedula</th>
-                                            <th>Vacaciones restantes</th>
-                                            <th>Ausencias justificadas</th>
-                                            <th>Ausencias injustificadas</th>
+                                            <th>
+                                                Nombre
+                                            </th>
+                                            <th>
+                                                Apellido
+                                            </th>
+                                            <th>
+                                                Cantidad dias
+                                            </th>
+                                            <th>
+                                                Fecha inicio
+                                            </th>
+                                            <th>
+                                                Fecha finalización
+                                            </th>
+
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="table-user">
-                                                <img src="~/Theme/assets/images/users/avatar-4.jpg" alt="table-user" class="mr-2 avatar-xs rounded-circle">
-                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">Raúl</a>
-                                            </td>
-                                            <td>
-                                                Jimenez
-                                            </td>
-                                            <td>
-                                                65235145
-                                            </td>
-                                            <td>
-                                                6
-                                            </td>
-                                            <td>
-                                                2
-                                            </td>
-                                            <td>
-                                                0
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <a href="@Url.Action("VacationAdd","Employee")" class="btn btn-outline-success"> Solicitar </a>
-                                                    <a href="@Url.Action("VacationRefund","Employee")" class="btn btn-outline-secondary"> Devolver </a>
-                                                    <a href="@Url.Action("Absence","Employee")" class="btn btn-outline-danger "> Ausencia </a>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td class="table-user">@item.userName</td>
 
+                                                <td>
+                                                    @item.lastName
+                                                </td>
+                                                <td>
+                                                    @item.dReq
+                                                </td>
+                                                <td>
+                                                    @item.inDay
+                                                </td>
+                                                <td>
+                                                    @item.enDay
+                                                </td>
+                                                <td>
+                                                    <a href="@Url.Action("AbsenceEdit","Employee", new { IdUser = item.IdUser })" class="btn btn-info">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
+                                                        </svg>
+                                                    </a>
 
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="table-user">
-                                                <img src="~/Theme/assets/images/users/avatar-3.jpg" alt="table-user" class="mr-2 avatar-xs rounded-circle">
-                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">Miriam</a>
-                                            </td>
-                                            <td>
-                                                Elizondo
-                                            </td>
-                                            <td>
-                                                5213654
-                                            </td>
-                                            <td>
-                                                4
-                                            </td>
-                                            <td>
-                                                2
-                                            </td>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <a href="@Url.Action("VacationAdd","Employee")" class="btn btn-outline-success"> Solicitar </a>
-                                                    <a href="@Url.Action("VacationRefund","Employee")" class="btn btn-outline-secondary"> Devolver </a>
-                                                    <a href="@Url.Action("Absence","Employee")" class="btn btn-outline-danger "> Ausencia </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="table-user">
-                                                <img src="~/Theme/assets/images/users/avatar-8.jpg" alt="table-user" class="mr-2 avatar-xs rounded-circle">
-                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">Alexa</a>
-                                            </td>
-                                            <td>
-                                                Toruño
-                                            </td>
-                                            <td>
-                                                40251361
-                                            </td>
-                                            <td>
-                                                8
-                                            </td>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>
-                                                3
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <a href="@Url.Action("VacationAdd","Employee")" class="btn btn-outline-success"> Solicitar </a>
-                                                    <a href="@Url.Action("VacationRefund","Employee")" class="btn btn-outline-secondary"> Devolver </a>
-                                                    <a href="@Url.Action("Absence","Employee")" class="btn btn-outline-danger "> Ausencia </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="table-user">
-                                                <img src="~/Theme/assets/images/users/avatar-1.jpg" alt="table-user" class="mr-2 avatar-xs rounded-circle">
-                                                <a href="javascript:void(0);" class="text-body font-weight-semibold">Sebastian</a>
-                                            </td>
-                                            <td>
-                                                Perez
-                                            </td>
-                                            <td>
-                                                4251563
-                                            </td>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>
-                                                3
-                                            </td>
-                                            <td>
-                                                2
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <a href="@Url.Action("VacationAdd","Employee")" class="btn btn-outline-success"> Solicitar </a>
-                                                    <a href="@Url.Action("VacationRefund","Employee")" class="btn btn-outline-secondary"> Devolver </a>
-                                                    <a href="@Url.Action("Absence","Employee")" class="btn btn-outline-danger "> Ausencia </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                    <button class="btn btn-danger delete-employee" data-employee-id="@item.IdUser">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"></path>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -158,6 +93,67 @@
 
         </div> <!-- container-fluid -->
     </div>
+    <div class="modal" id="confirmationModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas eliminar este producto?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Eliminar</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+    <script>
+        $(document).ready(function () {
+            var employeeIdToDelete;
+
+            $(".delete-employee").click(function () {
+                employeeIdToDelete = $(this).data("employee-id");
+
+                // Utiliza SweetAlert para mostrar el pop-up de confirmación
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "Esta acción no se puede deshacer",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Realizar una solicitud POST para eliminar el producto
+                        $.ajax({
+                            url: "@Url.Action("DeleteAcc", "Employee")",
+                            method: "POST",
+                            data: { IdUser: employeeIdToDelete },
+                            success: function (result) {
+                                // Manejar la respuesta del servidor
+                                if (result.success) {
+                                    Swal.fire('Error', 'No se pudo eliminar el empleado', 'error');
+                                } else {
+                                    Swal.fire('Éxito', 'El empleado se ha eliminado', 'success').then(function () {
+                                        window.location.href = "@Url.Action("Index")";
+                                    });
+                                }
+                            },
+                            error: function () {
+                                Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

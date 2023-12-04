@@ -99,7 +99,9 @@ namespace SRMA.Models
                 using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
                 {
                     connection.Execute("AddAu",
-                       new { pIdUser = q, pDReq=entity.dReq, pInDay = FechaIn, pEnDay = entity.enDay, pTypeV = entity.typeV, pAuType = entity.auType },
+
+                       new { pIdUser = q, pDReq = entity.dReq, pInDay = FechaIn, pEnDay = entity.enDay, pTypeV = entity.typeV, pAuType = entity.auType },
+
                        commandType: System.Data.CommandType.StoredProcedure);
 
                     return entity;
@@ -152,40 +154,6 @@ namespace SRMA.Models
                 return new List<EmployeeInfoEntity> ();
             }
         }
-
-        //public EmployeeInfoEntity? ConsultVacAu(bool q)
-
-        //{
-        //    using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
-        //    {
-        //        var data = connection.Query<EmployeeInfoEntity>("ConsultVacAu",
-        //             new { ptypeV = q },
-        //             commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
-
-        //        if (data != null)
-        //        {
-
-        //            var EmployeeViewModel = new EmployeeInfoEntity
-        //            {
-        //                IdUser = data.IdUser,
-        //                userName = data.userName,
-        //                lastName = data.lastName,
-        //                ptoDays = data.ptoDays,
-        //                idVA = data.idVA,
-        //                inDay = data.inDay,
-        //                enDay = data.enDay,
-        //                dReq = data.dReq,
-        //                auType = data.auType,
-        //                typeV=data.typeV,
-        //            };
-
-        //            return EmployeeViewModel;
-        //        }
-
-        //        return null;
-        //    }
-        //}
-
 
 
     }

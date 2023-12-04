@@ -9,10 +9,12 @@ namespace SRMA.Controllers
     public class ReservationController : Controller
     {
         private readonly IReservationModel _reservationModel;
+        private readonly IFidelityProModel _fidelityProModel;
 
-        public ReservationController(IReservationModel reservationModel)
+        public ReservationController(IReservationModel reservationModel, IFidelityProModel fidelityProModel)
         {
             _reservationModel = reservationModel;
+            _fidelityProModel = fidelityProModel;
         }
 
         [HttpGet]
@@ -69,22 +71,37 @@ namespace SRMA.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult AdminReservation()
         {
-            return View();
+            var reservations = _reservationModel.ListReservations();
+            return View(reservations);
+            
         }
 
-        [HttpGet]
-        public IActionResult Details()
+        [HttpPost]
+        public IActionResult InsertPoints(long IdUser)
         {
-            return View();
+            int qty = 10;
+
+            var data = _fidelityProModel.ConsultPoints(IdUser);
+
+            if (data == null)
+            {
+                ViewBag.MsjError = "Reservación activada";
+            }
+
+            var result = _fidelityProModel.InsertPoints(IdUser, qty);
+
+            if (result != null)
+            {
+                return RedirectToAction("AdminReservation");
+            }
+            else
+            {
+                return RedirectToAction("AdminReservation");
+            }
         }
 
-        [HttpGet]
-        public IActionResult AdminCreate()
-        {
-            return View();
-        }
 
         [HttpGet]
         public IActionResult AdminEdit(long q)
@@ -117,15 +134,6 @@ namespace SRMA.Controllers
             {
                 return RedirectToAction("AdminEdit", "Reservation");
             }
-        }
-
-
-        [HttpGet]
-        public IActionResult AdminReservation()
-        {
-            var reservations = _reservationModel.ListReservations();
-            return View(reservations);
-            
         }
 
 

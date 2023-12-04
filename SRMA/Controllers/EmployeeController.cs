@@ -154,8 +154,6 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult DeleteAcc(long IdUser)
         {
-           
-            
             var result = _userModel.DeleteAcc(IdUser);
 
             if (result != null)
@@ -259,7 +257,7 @@ namespace SRMA.Controllers
         {
             long q = entity.IdUser;
             entity.typeV = 0;
-            entity.auType= 0;
+            entity.auType = 0;
             entity.dReq = 2;
 
 
@@ -295,6 +293,7 @@ namespace SRMA.Controllers
         }
 
 
+
         [HttpGet]
         public IActionResult Vacation()
         {
@@ -304,8 +303,26 @@ namespace SRMA.Controllers
         }
 
         [HttpGet]
-        public IActionResult VacationAdd(EmployeeInfoEntity entity,long q)
+        public IActionResult VacationAdd(long IdUser)
         {
+            var result = _userEmployeeInfoModel.ConsultInfoE(IdUser);
+
+            if (result != null)
+            {
+                return View(result);
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult VacationAdd(EmployeeInfoEntity entity)
+        {
+            long q = entity.IdUser;
+            entity.typeV = 1;
+            entity.auType = 0;
+            
+
             if (!ModelState.IsValid)
             {
                 return View("AddAu", entity);
