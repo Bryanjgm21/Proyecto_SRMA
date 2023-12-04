@@ -1,0 +1,135 @@
+﻿@model SRMA.Entities.EmployeeInfoEntity
+@{
+    ViewData["Title"] = "Editar Ausencia";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{
+    var registroExitoso = ViewData.ModelState["RegistroExitoso"]?.Errors.Any() ?? false;
+}
+
+<html>
+<body>
+
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex align-items-center min-vh-100">
+                        <div class="w-100 d-block bg-white shadow-lg rounded my-5">
+                            <div class="row">
+                                <!-- Columna izquierda para la imagen -->
+                                <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center rounded-center">
+                                    <i class="fas fa-user-tie" style="font-size: 300px; margin-left: 50px;"></i>
+                                </div>
+
+                                <div class="col-lg-7">
+                                    <div class="p-5">
+                                        <div class="text-center mb-5">
+                                            <a href="index.html" class="text-dark font-size-22 font-family-secondary">
+                                                <i class="mdi mdi-album"></i> <b>SRMA</b>
+                                            </a>
+                                        </div>
+
+                                        <h1 class="h5 mb-1">Cambiar los datos de la ausencia</h1>
+                                        <p class="text-muted mb-4">Una vez hayas terminado, utiliza la opción de "Guardar cambios"</p>
+                                        @using (Html.BeginForm("AbsenceEdit", "Employee", FormMethod.Post, new { @class = "user" }))
+                                        {
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    @Html.HiddenFor(m => m.IdUser)
+                                                    <label>Nombre</label>
+                                                    @Html.TextBoxFor(m => m.userName, new { @class = "form-control form-control-user", @placeholder = "Nombre", @type = "text", @readonly = "readonly" })
+                                                    <span asp-validation-for="userName" class="text-danger"> </span>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label>Apellido</label>
+                                                    @Html.TextBoxFor(m => m.lastName, new { @class = "form-control form-control-user", @placeholder = "Apellido", @type = "text", @readonly = "readonly" })
+                                                    <span asp-validation-for="lastName" class="text-danger"> </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <label>Cédula</label>
+                                                    @Html.TextBoxFor(m => m.Id, new { @class = "form-control form-control-user", @placeholder = "Cédula", @type = "number", @readonly = "readonly" })
+                                                    <span asp-validation-for="Id" class="text-danger"> </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <label>Fecha inicio</label>
+                                                    @Html.TextBoxFor(m => m.inDay, new { @class = "form-control form-control-user", @placeholder = "Fecha inicio", @type = "datetime-local" })
+                                                    <span asp-validation-for="inDay" class="text-danger"> </span>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <label>Fecha finalización</label>
+                                                    @Html.TextBoxFor(m => m.enDay, new { @class = "form-control form-control-user", @placeholder = "Fecha finalización", @type = "datetime-local" })
+                                                    <span asp-validation-for="enDay" class="text-danger"> </span>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <a href="@Url.Action("Index", "Employee")" class="btn btn-secondary btn-block waves-effect waves-light">Volver</a>
+                                                </div>
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <input type="submit" id="guardarRegistro" class="btn btn-success btn-block waves-effect waves-light" value="Guardar cambios" />
+                                                </div>
+                                            </div>
+                                        }
+
+
+                                        <!-- end row -->
+                                    </div> <!-- end .padding-5 -->
+                                </div> <!-- end col -->
+                            </div> <!-- end row -->
+                        </div> <!-- end .w-100 -->
+                    </div> <!-- end .d-flex -->
+                </div> <!-- end col-->
+            </div> <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+
+</body>
+</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var mensajeExito = '@(ViewBag.MensajeExito)';
+        var mensajeError = '@(ViewBag.MensajeError)';
+
+        if (mensajeExito) {
+            // Muestra el SweetAlert después de una actualización exitosa
+            Swal.fire({
+                title: '¡Éxito!',
+                text: mensajeExito,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                // Redirige a la página correspondiente al hacer clic en "OK"
+                if (result.isConfirmed) {
+                    // Verifica si la URL contiene "Employee" para redirigir a "Index" de Employee
+                    if (window.location.href.includes("Employee")) {
+                        window.location.href = '@Url.Action("Index", "Employee")';
+                    } else {
+                        // Puedes cambiar la URL de redirección según tus necesidades
+                        window.location.href = '@Url.Action("Index", "Employee")';
+                    }
+                }
+            });
+        } else if (mensajeError) {
+            // Muestra el SweetAlert en caso de un error
+            Swal.fire({
+                title: 'Error',
+                text: mensajeError,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    });
+</script>

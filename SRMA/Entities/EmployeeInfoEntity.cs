@@ -9,7 +9,7 @@ namespace SRMA.Entities
         public int salary { get; set; }
         public string job { get; set; } = string.Empty;
         public string scheduleE { get; set; } = string.Empty;
-        public DateOnly startDate { get; set; }
+        public DateTime startDate { get; set; }
         public int ptoDays { get; set; }
 
         //FK users
@@ -21,10 +21,10 @@ namespace SRMA.Entities
         //FK Vacations and absence
         public long idVA { get; set; }
         public int dReq { get; set; }
-        public DateOnly inDay { get; set; }
-        public DateOnly enDay { get; set; } 
-        public bool typeV { get; set; }
-        public bool auType { get; set; }
+        public DateTime inDay { get; set; }
+        public DateTime enDay { get; set; } 
+        public int typeV { get; set; }
+        public int auType { get; set; }
 
     }
 }

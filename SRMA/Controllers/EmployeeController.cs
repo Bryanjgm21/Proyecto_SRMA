@@ -1,6 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Drawing.Charts;
 using DocumentFormat.OpenXml.Vml.Office;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Ocsp;
 using SRMA.Entities;
 using SRMA.Interfaces;
 using static Dapper.SqlMapper;
@@ -239,6 +240,59 @@ namespace SRMA.Controllers
 
             }
         }
+
+        [HttpGet]
+        public IActionResult AbsenceAdd()
+        {
+            //var result = _userEmployeeInfoModel.ConsultInfoE(IdUser);
+
+            //if (result != null)
+            //{
+            //    return View(result);
+            //}
+
+            return View(); // Maneja el caso en el que el usuario no se encuentre
+        }
+
+        [HttpPost]
+        public IActionResult AbsenceAdd(EmployeeInfoEntity entity, long q)
+        {
+            entity.typeV = 0;
+            entity.auType= 0;
+            entity.dReq = 0;
+
+
+            if (!ModelState.IsValid)
+            {
+                return View("AbsenceAdd", entity);
+            }
+
+            var ver = _userEmployeeInfoModel.AddAu(entity, q);
+            if (ver != null)
+            {
+                TempData["RegistroExitoso"] = "Se registro correctamente.";
+
+                return RedirectToAction("AbsenceAdd");
+            }
+            else
+            {
+                TempData["MensajeError"] = "Error al registrar la ausencia.";
+            }
+
+            return RedirectToAction("AbsenceAdd");
+        }
+
+        [HttpGet]
+        public IActionResult AbsenceEdit()
+        {
+            {
+
+                var absence = _userEmployeeInfoModel.ConsultVacAu(false);
+                return View(absence);
+
+            }
+        }
+
 
         [HttpGet]
         public IActionResult Vacation()

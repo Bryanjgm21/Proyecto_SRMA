@@ -94,10 +94,12 @@ namespace SRMA.Models
         {
             if (entity != null)
             {
+                string FechaIn = entity.inDay.ToString("yyyy-MM-dd");
+                string FechaEn = entity.enDay.ToString("yyyy-MM-dd");
                 using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
                 {
                     connection.Execute("AddAu",
-                       new { pIdUser = q, entity.dReq, entity.inDay, entity.enDay, entity.typeV, entity.auType },
+                       new { pIdUser = q, pDReq=entity.dReq, pInDay = FechaIn, pEnDay = entity.enDay, pTypeV = entity.typeV, pAuType = entity.auType },
                        commandType: System.Data.CommandType.StoredProcedure);
 
                     return entity;

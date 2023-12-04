@@ -1,0 +1,131 @@
+﻿@model SRMA.Entities.EmployeeInfoEntity
+@{
+    ViewData["Title"] = "Registrar Ausencia";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{
+    var registroExitoso = ViewData.ModelState["RegistroExitoso"]?.Errors.Any() ?? false;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex align-items-center min-vh-100">
+                <div class="w-100 d-block bg-white shadow-lg rounded my-5">
+                    <div class="row">
+                        <!-- Columna izquierda para la imagen -->
+                        <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center rounded-center">
+                            <i class="fas fa-user-tie" style="font-size: 300px; margin-left: 50px;"></i>
+                        </div>
+                        <!-- Columna derecha para el contenido -->
+                        <div class="col-lg-7">
+                            <div class="p-5">
+                                <div class="text-center mb-5">
+                                    <a href="index.html" class="text-dark font-size-22 font-family-secondary">
+                                        <i class="mdi mdi-album"></i> <b>SRMA</b>
+                                    </a>
+                                </div>
+                                
+                                <h1 class="h5 mb-1">Agrega una ausencia de empleado</h1>
+                                <div>
+                                </div>
+
+                                @using (Html.BeginForm("AbsenceAdd", "Employee", FormMethod.Post, new { @class = "user" }))
+                                {
+                                    @Html.HiddenFor(m => m.IdUser)
+
+                                    @*<div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            
+                                            <label>Nombre</label>
+                                            @Html.TextBoxFor(m => m.userName, new { @class = "form-control form-control-user", @placeholder = "Nombre", @type = "text", @readonly = "readonly" })
+                                            <span asp-validation-for="userName" class="text-danger"> </span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>Apellido</label>
+                                            @Html.TextBoxFor(m => m.lastName, new { @class = "form-control form-control-user", @placeholder = "Apellido", @type = "text", @readonly = "readonly" })
+                                            <span asp-validation-for="lastName" class="text-danger"> </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <label>Cédula</label>
+                                            @Html.TextBoxFor(m => m.Id, new { @class = "form-control form-control-user", @placeholder = "Cédula", @type = "number", @readonly = "readonly" })
+                                            <span asp-validation-for="Id" class="text-danger"> </span>
+                                        </div>
+                                    </div>*@
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <label>Fecha inicio</label>
+                                            @Html.TextBoxFor(m => m.inDay, new { @class = "form-control form-control-user", @placeholder = "Fecha inicio", @type = "date" })
+                                            <span asp-validation-for="inDay" class="text-danger"> </span>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <label>Fecha finalización</label>
+                                            @Html.TextBoxFor(m => m.enDay, new { @class = "form-control form-control-user", @placeholder = "Fecha finalización", @type = "date" })
+                                            <span asp-validation-for="enDay" class="text-danger"> </span>
+                                        </div>
+                                    </div>
+                                    <br />
+                                   
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <a href="@Url.Action("index", "Employee")" class="btn btn-secondary btn-block waves-effect waves-light">Volver</a>
+                                        </div>
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="submit" id="guardarRegistro" class="btn btn-success btn-block waves-effect waves-light" value="Registrar" />
+
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end .d-flex -->
+        </div> <!-- end col-->
+    </div> <!-- end row -->
+</div>
+<!-- end container -->
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var mensajeExito = '@(TempData["RegistroExitoso"] as string)';
+        var mensajeError = '@(TempData["MensajeError"] as string)';
+
+        if (mensajeExito) {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: mensajeExito,
+                icon: 'success',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("Absence", "Employee")';
+                }
+            });
+
+            // Clear TempData after displaying the success message
+            TempData["RegistroExitoso"] = null;
+        }
+
+        if (mensajeError) {
+            Swal.fire({
+                title: 'Error',
+                text: mensajeError,
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+
+            // Clear TempData after displaying the error message
+            TempData["MensajeError"] = null;
+        }
+    });
+</script>
+
