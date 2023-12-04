@@ -242,24 +242,25 @@ namespace SRMA.Controllers
         }
 
         [HttpGet]
-        public IActionResult AbsenceAdd()
+        public IActionResult AbsenceAdd(long IdUser)
         {
-            //var result = _userEmployeeInfoModel.ConsultInfoE(IdUser);
+            var result = _userEmployeeInfoModel.ConsultInfoE(IdUser);
 
-            //if (result != null)
-            //{
-            //    return View(result);
-            //}
+            if (result != null)
+            {
+                return View(result);
+            }
 
             return View(); // Maneja el caso en el que el usuario no se encuentre
         }
 
         [HttpPost]
-        public IActionResult AbsenceAdd(EmployeeInfoEntity entity, long q)
+        public IActionResult AbsenceAdd(EmployeeInfoEntity entity)
         {
+            long q = entity.IdUser;
             entity.typeV = 0;
             entity.auType= 0;
-            entity.dReq = 0;
+            entity.dReq = 2;
 
 
             if (!ModelState.IsValid)
@@ -272,7 +273,7 @@ namespace SRMA.Controllers
             {
                 TempData["RegistroExitoso"] = "Se registro correctamente.";
 
-                return RedirectToAction("AbsenceAdd");
+                return RedirectToAction("Absence");
             }
             else
             {
