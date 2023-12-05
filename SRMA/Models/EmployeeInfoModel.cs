@@ -115,24 +115,23 @@ namespace SRMA.Models
             }
         }
 
-        public EmployeeInfoEntity? DeleteRequest(long IdReq)
+        public EmployeeInfoEntity? DeleteRequest(long IdReq,int type)
 
         {
             using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
             {
-                var parameters = new { pIdVA = IdReq };
+                var parameters = new { pIdVA = IdReq, ptypeV=type };
 
-                // Ejecuta el procedimiento almacenado o consulta SQL para eliminar el producto
                 var result = connection.Execute("DeleteRequest", parameters, commandType: CommandType.StoredProcedure);
 
                 if (result > 0)
                 {
-                    // La eliminación fue exitosa, puedes devolver una respuesta, por ejemplo, un mensaje de éxito.
+                    
                     return new EmployeeInfoEntity { idVA = IdReq };
                 }
                 else
                 {
-                    // En caso de que no se haya eliminado ningún producto (por ejemplo, si el IdProduct no existe), puedes devolver nulo o algún otro valor para indicar que la operación no fue exitosa.
+                   
                     return null;
                 }
             }

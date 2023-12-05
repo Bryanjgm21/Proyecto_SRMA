@@ -258,8 +258,6 @@ namespace SRMA.Controllers
             long q = entity.IdUser;
             entity.typeV = 0;
             entity.auType = 0;
-            entity.dReq = 2;
-
 
             if (!ModelState.IsValid)
             {
@@ -321,11 +319,17 @@ namespace SRMA.Controllers
             long q = entity.IdUser;
             entity.typeV = 1;
             entity.auType = 0;
+
+            if (entity.ptoDays < entity.dReq)
+            {
+                ViewBag.ErrorMessage = "No cuenta con suficientes dias para realizar la solicitud";
+                return View("VacationAdd", entity);
+            }
             
 
             if (!ModelState.IsValid)
             {
-                return View("AddAu", entity);
+                return View("VacationAdd", entity);
             }
 
             var ver = _userEmployeeInfoModel.AddAu(entity,q);
@@ -337,20 +341,38 @@ namespace SRMA.Controllers
             }
             else
             {
-                TempData["MensajeError"] = "Error al registrar el usuario.";
+                TempData["MensajeError"] = "Error al registrar la solicitud.";
             }
 
-            return RedirectToAction("Vacation");
+            return RedirectToAction("VacationAdd");
         }
     
 
-        [HttpGet]
+        [HttpPost]
        
-        public IActionResult DeleteRequest(long idVa)
+        public IActionResult DeleteRequestVac(long idVa)
         {
+            int type = 1;
 
+            var result = _userEmployeeInfoModel.DeleteRequest(idVa,type);
 
-            var result = _userEmployeeInfoModel.DeleteRequest(idVa);
+            if (result != null)
+            {
+                return RedirectToAction("Vacation");
+            }
+            else
+            {
+                return RedirectToAction("Vacation");
+            }
+        }
+
+        [HttpPost]
+
+        public IActionResult DeleteRequestAbs(long idVa)
+        {
+            int type = 0;
+
+            var result = _userEmployeeInfoModel.DeleteRequest(idVa,type);
 
             if (result != null)
             {
