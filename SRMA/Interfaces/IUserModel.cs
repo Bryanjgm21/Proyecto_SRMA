@@ -31,6 +31,8 @@ namespace SRMA.Interfaces
         public UserEntity? RegisterEmployee(UserEntity entity);
         public UserEntity? ConsultInfoEmployee(long q);
         public int ChangeStatusEmployee(long q);
+        public UserEntity? UpdateEmployee(UserEntity entity, long q);
+
 
 
 

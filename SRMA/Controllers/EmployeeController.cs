@@ -122,7 +122,7 @@ namespace SRMA.Controllers
                 return View("EmployeeInfo", entity);
             }
 
-            var resultado = _userModel.UpdateUser(entity, entity.IdUser);
+            var resultado = _userModel.UpdateEmployee(entity, entity.IdUser);
 
             if (resultado != null)
             {

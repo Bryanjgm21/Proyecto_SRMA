@@ -143,8 +143,27 @@ namespace SRMA.Models
             }
         }
 
-        //Updates data from user by consulting their IdUser = q
         public UserEntity? UpdateUser(UserEntity entity, long q)
+        {
+            if (entity != null)
+            {
+                using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
+                {
+                    var result = connection.Execute("EditAcc",
+                       new { IdUser = q, entity.userName, entity.lastName, entity.cellphone, entity.email, entity.passwordU },
+                       commandType: CommandType.StoredProcedure);
+
+                    return entity;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        //Updates data from user by consulting their IdUser = q
+        public UserEntity? UpdateEmployee(UserEntity entity, long q)
         {
             if (entity != null)
             {
@@ -158,7 +177,7 @@ namespace SRMA.Models
                     {
 
                         connection.Execute("UpdateInfoEmp",
-                           new { pIdUser = q, pSalary= entity.salary, pJob = entity.job, pScheduleE=entity.scheduleE, pPtoDays=entity.ptoDays, pStartDate=entity.startDate },
+                           new { pIdUser = q, pSalary= entity.salary, pJob = entity.job, pScheduleE = entity.scheduleE, pPtoDays=entity.ptoDays },
                            commandType: System.Data.CommandType.StoredProcedure); ;
 
                         return entity;
