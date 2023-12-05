@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<SRMA.Entities.FidelityProEntity>
 @{
-    ViewData["Title"] = "AdminLoyaltyProgram";
+    ViewData["Title"] = "Programa de lealtad";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -29,7 +29,7 @@
                                     <th>Apellido</th>
                                     <th>Puntos</th>
                                     <th>Fecha de registro</th>
-                                    <th>Redimir Puntos</th>
+                                    <th>Canjear Puntos</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,7 +44,7 @@
                                         <td>
                                         @if (item.earnedPoints <= 0)
                                            {
-                                            <a>No hay puntos para redimir</a>
+                                            <a>No hay puntos para canjear.</a>
                                             }
                                             else
                                             {

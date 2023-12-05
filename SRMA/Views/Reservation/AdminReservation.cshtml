@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<SRMA.Entities.ReservationEntity>
 
 @{
-    ViewData["Title"] = "AdminReservation";
+    ViewData["Title"] = "Administrar reservaciones";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -113,43 +113,57 @@
         $(document).ready(function () {
             var employeeIdToDelete;
 
+            // Función para ocultar permanentemente el botón y almacenar el estado en localStorage
+            function hideAndStoreButton(employeeId) {
+                $(".confirmar-asistencia-btn[data-employee-id='" + employeeId + "']").hide();
+                localStorage.setItem("hiddenButton_" + employeeId, true);
+            }
+
             $(".insertar-puntos").click(function () {
                 employeeIdToDelete = $(this).data("employee-id");
 
-                // Utiliza SweetAlert para mostrar el pop-up de confirmación
-                Swal.fire({
-                    title: '¿Desea confirmar la asistencia?',
-                    text: "Se sumaran 10 puntos de fidelidad al usuario",
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonText: 'Sí, Asignar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Realizar una solicitud POST para eliminar el producto
-                        $.ajax({
-                            url: "@Url.Action("InsertPoints", "Reservation")",
-                            method: "POST",
-                            data: { IdUser: employeeIdToDelete },
-                            success: function (result) {
-                                // Manejar la respuesta del servidor
-                                if (result.success) {
-                                    Swal.fire('Error', 'No se pudo confirmar la asistencia', 'error');
-                                } else {
-                                    Swal.fire('Éxito', 'Se ha confirmado la asistencia', 'success').then(function () {
-                                        window.location.href = "@Url.Action("AdminReservation")";
-                                    });
+                if (!localStorage.getItem("hiddenButton_" + employeeIdToDelete)) {
+                    Swal.fire({
+                        title: '¿Desea confirmar la asistencia?',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonText: 'Sí, Asignar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: "@Url.Action("InsertPoints", "Reservation")",
+                                method: "POST",
+                                data: { IdUser: employeeIdToDelete },
+                                success: function (result) {
+                                    if (result.success) {
+                                        Swal.fire('Error', 'No se pudo confirmar la asistencia', 'error');
+                                    } else {
+                                        hideAndStoreButton(employeeIdToDelete);
+                                        Swal.fire('Éxito', 'Se ha confirmado la asistencia', 'success').then(function () {
+                                            window.location.href = "@Url.Action("AdminReservation")";
+                                        });
+                                    }
+                                },
+                                error: function () {
+                                    Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
                                 }
-                            },
-                            error: function () {
-                                Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
-                            }
-                        });
-                    }
-                });
+                            });
+                        }
+                    });
+                }
+            });
+
+            // Oculta permanentemente los botones almacenados en localStorage al cargar la página
+            $(".confirmar-asistencia-btn").each(function () {
+                var employeeId = $(this).data("employee-id");
+                if (localStorage.getItem("hiddenButton_" + employeeId)) {
+                    $(this).hide();
+                }
             });
         });
     </script>
+
 
     <script>
         $(document).ready(function () {

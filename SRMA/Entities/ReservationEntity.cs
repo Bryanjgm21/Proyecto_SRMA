@@ -31,6 +31,7 @@ namespace SRMA.Entities
         public string userName { get; set; } = string.Empty;
         public string lastName { get; set; } = string.Empty;
 
-
+        // New property to track if attendance is confirmed
+        public bool AttendanceConfirmed { get; set; }
     }
 }
