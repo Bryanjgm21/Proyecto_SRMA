@@ -30,6 +30,8 @@ namespace SRMA.Interfaces
         public List<UserEntity> ConsultInfoAllEmployees();
         public UserEntity? RegisterEmployee(UserEntity entity);
         public UserEntity? ConsultInfoEmployee(long q);
+        public int ChangeStatusEmployee(long q);
+
 
 
     }

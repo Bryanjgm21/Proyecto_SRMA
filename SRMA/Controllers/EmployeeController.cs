@@ -3,6 +3,7 @@ using DocumentFormat.OpenXml.Vml.Office;
 using Microsoft.AspNetCore.Mvc;
 using SRMA.Entities;
 using SRMA.Interfaces;
+using SRMA.Models;
 using static Dapper.SqlMapper;
 
 namespace SRMA.Controllers
@@ -144,6 +145,16 @@ namespace SRMA.Controllers
             return View("EmployeeInfo", entity);
         }
 
+
+        [HttpGet]
+        public IActionResult ChangeStatusEmployee(long q)
+        {
+            var entity = new UserEntity();
+            entity.IdUser = q;
+
+            _userModel.ChangeStatusEmployee(q);
+            return RedirectToAction("Index", "Employee");
+        }
 
         [HttpPost]
         public IActionResult DeleteAcc(long IdUser)

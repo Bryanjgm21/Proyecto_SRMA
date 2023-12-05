@@ -32,7 +32,7 @@ namespace SRMA.Entities
         [Required(ErrorMessage = "El campo Teléfono es obligatorio.")]
         [RegularExpression(@"\d{8}", ErrorMessage = "El Teléfono debe tener 8 dígitos y solo ser números")]
         public string cellphone { get; set; } = string.Empty;
-        public bool? statusU { get; set; }
+        public bool statusU { get; set; }
         public byte? IdRol { get; set; }
 
         public string? tempPassword { get; set; } = string.Empty;
@@ -48,7 +48,7 @@ namespace SRMA.Entities
         public long IdE { get; set; }
 
         [Required(ErrorMessage = "El campo salario es obligatorio.")]
-        [RegularExpression(@"\d{6}", ErrorMessage = "El salario debe ser números y no sobrepasar el millón")]
+        [RegularExpression(@"\d{4,6}", ErrorMessage = "El salario debe ser mayor a 10,000 y menor a un millón")]
         public int salary { get; set; }
         [Required(ErrorMessage = "El campo Puesto es obligatorio.")]
         public string job { get; set; } = string.Empty;
@@ -56,8 +56,8 @@ namespace SRMA.Entities
         public string scheduleE { get; set; } = string.Empty;
         public DateTime startDate { get; set; }
 
-        [Required(ErrorMessage = "El campo Cantidad de días es obligatorio.")]
-        [RegularExpression(@"\d{1,12}", ErrorMessage = "Los dias de vacaciones debe ser números y no sobrepasar 12")]
+        [RegularExpression(@"^[1-9]\d{0,1}$", ErrorMessage = "Debe solo ser solo números")]
+        [Range(1, 15, ErrorMessage = "El valor debe estar entre 1 y 12.")]
         public int ptoDays { get; set; }
 
 

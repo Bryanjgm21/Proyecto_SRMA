@@ -49,6 +49,11 @@ namespace SRMA.Controllers
 
             long UserId = (long)IdUser;
 
+            ModelState.Remove("ptoDays");
+            ModelState.Remove("scheduleE");
+            ModelState.Remove("job");
+            ModelState.Remove("salary");
+
             if (!ModelState.IsValid)
             {
                 Thread.Sleep(1500);
