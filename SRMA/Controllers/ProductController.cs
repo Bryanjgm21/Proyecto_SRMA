@@ -165,7 +165,7 @@ namespace SRMA.Controllers
             var entity = new ProductEntity();
             entity.IdProduct = q;
 
-            _productModel.ChangeStatusProduct(entity);
+            _productModel.ChangeStatusProduct(q);
             return RedirectToAction("Index", "Product");
         }
 

@@ -87,6 +87,10 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult SignUp(UserEntity entity)
         {
+            ModelState.Remove("ptoDays");
+            ModelState.Remove("scheduleE");
+            ModelState.Remove("job");
+            ModelState.Remove("salary");
 
             if (!ModelState.IsValid)
             {

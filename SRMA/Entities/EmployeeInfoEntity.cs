@@ -1,5 +1,6 @@
 ﻿using Humanizer;
 using Org.BouncyCastle.Ocsp;
+using System.ComponentModel.DataAnnotations;
 
 namespace SRMA.Entities
 {

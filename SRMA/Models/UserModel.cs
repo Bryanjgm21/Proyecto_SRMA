@@ -4,6 +4,7 @@ using SRMA.Entities;
 using MySql.Data.MySqlClient;
 using System.Data;
 using MimeKit;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace SRMA.Models
 {
@@ -52,7 +53,29 @@ namespace SRMA.Models
                 return null;
             }
         }
-        
+
+        // SignUp Method
+        public UserEntity? RegisterEmployee(UserEntity entity)
+        {
+            if (entity != null)
+            {
+                using (var connection = new MySqlConnection(_connection))
+                {
+                    connection.Execute("RegisterEmployee",
+                       new { entity.userName, entity.lastName, entity.Id, entity.email, entity.cellphone, entity.salary, entity.job, entity.scheduleE, entity.ptoDays },
+                       commandType: System.Data.CommandType.StoredProcedure);
+
+                    return entity;
+
+                }
+            }
+            else
+            {
+
+                return null;
+            }
+        }
+
         // Consult data from all roles users, case Client(3) | q = IdUser
         public UserEntity? ConsultAcc(long q)
 
@@ -85,8 +108,62 @@ namespace SRMA.Models
             }
         }
 
-        //Updates data from user by consulting their IdUser = q
+        public UserEntity? ConsultInfoEmployee(long q)
+
+        {
+            using (var connection = new MySqlConnection(_connection))
+            {
+                var data = connection.Query<UserEntity>("ConsultInfoEmployee",
+                     new { pIdUser = q },
+                     commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
+
+                if (data != null)
+                {
+
+                    var EmployeeViewModel = new UserEntity
+                    {
+                        IdUser = data.IdUser,
+                        userName = data.userName,
+                        lastName = data.lastName,
+                        cellphone = data.cellphone,
+                        email = data.email,
+                        Id = data.Id,
+                        salary = data.salary,
+                        job = data.job,
+                        scheduleE = data.scheduleE,
+                        startDate = data.startDate,
+                        ptoDays = data.ptoDays,
+                        IdE = data.IdE
+                    };
+
+                    return EmployeeViewModel;
+                }
+
+                return null;
+            }
+        }
+
         public UserEntity? UpdateUser(UserEntity entity, long q)
+        {
+            if (entity != null)
+            {
+                using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
+                {
+                    var result = connection.Execute("EditAcc",
+                       new { IdUser = q, entity.userName, entity.lastName, entity.cellphone, entity.email, entity.passwordU },
+                       commandType: CommandType.StoredProcedure);
+
+                    return entity;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        //Updates data from user by consulting their IdUser = q
+        public UserEntity? UpdateEmployee(UserEntity entity, long q)
         {
             if (entity != null)
             {
@@ -96,7 +173,19 @@ namespace SRMA.Models
                        new { IdUser =  q, entity.userName, entity.lastName, entity.cellphone, entity.email, entity.passwordU },
                        commandType: CommandType.StoredProcedure);
 
-                    return entity;
+                    if (result != null)
+                    {
+
+                        connection.Execute("UpdateInfoEmp",
+                           new { pIdUser = q, pSalary= entity.salary, pJob = entity.job, pScheduleE = entity.scheduleE, pPtoDays=entity.ptoDays },
+                           commandType: System.Data.CommandType.StoredProcedure); ;
+
+                        return entity;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
             }
             else
@@ -127,6 +216,41 @@ namespace SRMA.Models
                     return null;
                 }
             }
+        }
+
+        public ProductEntity? ActivProduct(long IdProduct)
+        {
+            using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
+            {
+                var parameters = new { pIdProduct = IdProduct };
+                var result = connection.Execute("ActiveProduct", parameters, commandType: CommandType.StoredProcedure);
+
+                if (result > 0)
+                {
+                    // La eliminación fue exitosa, puedes devolver una respuesta, por ejemplo, un mensaje de éxito.
+                    return new ProductEntity { IdProduct = IdProduct };
+                }
+                else
+                {
+                    // En caso de que no se haya eliminado ningún producto (por ejemplo, si el IdProduct no existe), puedes devolver nulo o algún otro valor para indicar que la operación no fue exitosa.
+                    return null;
+                }
+            }
+        }
+
+        public int ChangeStatusEmployee(long q)
+        {
+
+            using (var connection = new MySqlConnection(_connection))
+            {
+                var parameters = new { pIdUser = q };
+
+                var data = connection.Execute("ChangeStatusEmployee",
+                    parameters, commandType: CommandType.StoredProcedure);
+
+                return data;
+            }
+
         }
 
         // Method to Register a user in the loyalty program, first consult the user id then registers the user in the loyalty program
@@ -166,6 +290,23 @@ namespace SRMA.Models
                 if (userList != null && userList.Count > 0)
                 {
                     return userList;
+                }
+
+                return new List<UserEntity>();
+            }
+        }
+
+        public List<UserEntity> ConsultInfoAllEmployees()
+        {
+            using (var connection = new MySqlConnection(_connection))
+            {
+                var data = connection.Query<UserEntity>("ConsultInfoAllEmployees",
+
+                    commandType: CommandType.StoredProcedure).ToList();
+
+                if (data != null && data.Count > 0)
+                {
+                    return data;
                 }
 
                 return new List<UserEntity>();

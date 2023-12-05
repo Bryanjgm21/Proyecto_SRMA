@@ -136,14 +136,15 @@ namespace SRMA.Models
             }
         }
 
-        public int ChangeStatusProduct(ProductEntity entity)
+        public int ChangeStatusProduct(long q)
         {
 
             using (var connection = new MySqlConnection(_connection))
             {
+                var parameters = new { pIdProduct = q };
+
                 var data = connection.Execute("ChangeStatusProduct",
-                    new { entity.IdProduct },
-                    commandType: CommandType.StoredProcedure);
+                    parameters, commandType: CommandType.StoredProcedure);
 
                 return data;
             }

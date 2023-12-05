@@ -11,6 +11,6 @@ namespace SRMA.Interfaces
         public ProductEntity? DeleteProduct(long IdProduct);
         public List<ProductEntity> GetUrgentProducts();
         public ProductEntity? ActivProduct(long IdProduct);
-        public int ChangeStatusProduct(ProductEntity entity);
+        public int ChangeStatusProduct(long q);
     }
 }

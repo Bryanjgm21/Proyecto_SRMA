@@ -18,6 +18,7 @@ namespace SRMA.Models
             _utilities = utilities;
             _connection = _configuration.GetConnectionString("defaultconnection");
         }
+
         public EmployeeInfoEntity? AddInfoEmp(EmployeeInfoEntity entity, long q)
         {
             if (entity != null)

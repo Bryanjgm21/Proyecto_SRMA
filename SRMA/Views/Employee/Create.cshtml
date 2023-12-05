@@ -9,24 +9,24 @@
     var registroExitoso = ViewData.ModelState["RegistroExitoso"]?.Errors.Any() ?? false;
 }
 
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="d-flex align-items-center min-vh-100">
-                        <div class="w-100 d-block bg-white shadow-lg rounded my-5">
-                                <div class="row">
-                                    <!-- Columna izquierda para la imagen -->
-                                    <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center rounded-center">
-                                        <i class="fas fa-user-tie" style="font-size: 300px; margin-left: 50px;"></i>
-                                    </div>
-                                    <!-- Columna derecha para el contenido -->
-                                    <div class="col-lg-7">
-                                        <div class="p-5">
-                                            <div class="text-center mb-5">
-                                                <a href="index.html" class="text-dark font-size-22 font-family-secondary">
-                                                    <i class="mdi mdi-album"></i> <b>SRMA</b>
-                                                </a>
-                                            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex align-items-center min-vh-100">
+                <div class="w-100 d-block bg-white shadow-lg rounded my-5">
+                    <div class="row">
+                        <!-- Columna izquierda para la imagen -->
+                        <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center rounded-center">
+                            <i class="fas fa-user-tie" style="font-size: 300px; margin-left: 50px;"></i>
+                        </div>
+                        <!-- Columna derecha para el contenido -->
+                        <div class="col-lg-7">
+                            <div class="p-5">
+                                <div class="text-center mb-5">
+                                    <a href="index.html" class="text-dark font-size-22 font-family-secondary">
+                                        <i class="mdi mdi-album"></i> <b>SRMA</b>
+                                    </a>
+                                </div>
                                 @if (ViewBag.ErrorMessage != null)
                                 {
                                     <script>
@@ -38,68 +38,91 @@
                                         });
                                     </script>
                                 }
-                                            <h1 class="h5 mb-1">Agrega la información del empleado</h1>
-                                            <div>
-                                                 
-                                            </div>
+                                <h1 class="h5 mb-1">Información personal del empleado</h1>
+                                <br />
+@*                                <p class="text-muted mb-4">Una vez hayas terminado, utiliza la opción de "Guardar cambios"</p>
+*@                                @using (Html.BeginForm("RegisterEmployee", "Employee", FormMethod.Post, new { @class = "user" }))
+                                {
 
-                                            @using (Html.BeginForm("RegisterEmployee", "Employee", FormMethod.Post, new { @class = "user" }))
-                                            {
-                                                
-                                                
-                                                <div class="form-group row">
-                                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                                        <label>Nombre</label>
-                                                        @Html.TextBoxFor(m => m.userName, new { @class = "form-control form-control-user", @placeholder = "Nombre", @type = "text" })
-                                                        <span asp-validation-for="userName" class="text-danger"> </span>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Apellido</label>
-                                                        @Html.TextBoxFor(m => m.lastName, new { @class = "form-control form-control-user", @placeholder = "Apellido", @type = "text" })
-                                                        <span asp-validation-for="lastName" class="text-danger"> </span>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <label>Cédula</label>
-                                                    @Html.TextBoxFor(m => m.Id, new { @class = "form-control form-control-user", @placeholder = "Cedula", @type = "text" })
-                                                    <span asp-validation-for="Id" class="text-danger"> </span>
-                                                </div>
-                                                
-                                                <div class="col-sm-6">
-                                                        <label>Teléfono</label>
-                                                        @Html.TextBoxFor(m => m.cellphone, new { @class = "form-control form-control-user", @placeholder = "Telefono", @type = "tel" })
-                                                        <span asp-validation-for="cellphone" class="text-danger"> </span>
-                                                    </div>
-                                                    </div>
-                                                <div class="form-group">
-                                                    <label>Correo electrónico</label>
-                                                    @Html.TextBoxFor(m => m.email, new { @class = "form-control form-control-user", @placeholder = "Correo electrónico", @type = "text" })
-                                                    <span asp-validation-for="email" class="text-danger"> </span>
-                                                </div>
-                                                <div>
-                                         
-                                                </div>
 
-                                            <div class="form-group row">
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <a href="@Url.Action("Index", "Employee")" class="btn btn-secondary btn-block waves-effect waves-light">Volver</a>
-                                                        </div>
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="submit" id="guardarRegistro" class="btn btn-success btn-block waves-effect waves-light" value="Registrar" />
-
-                                                </div>
-                                            </div>
-                                            }
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <label>Nombre</label>
+                                            @Html.TextBoxFor(m => m.userName, new { @class = "form-control form-control-user", @placeholder = "Nombre", @type = "text" })
+                                            <span asp-validation-for="userName" class="text-danger"> </span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>Apellido</label>
+                                            @Html.TextBoxFor(m => m.lastName, new { @class = "form-control form-control-user", @placeholder = "Apellido", @type = "text" })
+                                            <span asp-validation-for="lastName" class="text-danger"> </span>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <label>Cédula</label>
+                                            @Html.TextBoxFor(m => m.Id, new { @class = "form-control form-control-user", @placeholder = "Cedula", @type = "text" })
+                                            <span asp-validation-for="Id" class="text-danger"> </span>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <label>Teléfono</label>
+                                            @Html.TextBoxFor(m => m.cellphone, new { @class = "form-control form-control-user", @placeholder = "Telefono", @type = "tel" })
+                                            <span asp-validation-for="cellphone" class="text-danger"> </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Correo electrónico</label>
+                                        @Html.TextBoxFor(m => m.email, new { @class = "form-control form-control-user", @placeholder = "Correo electrónico", @type = "text" })
+                                        <span asp-validation-for="email" class="text-danger"> </span>
+                                    </div>
+
+                                    <br />
+                                    <h1 class="h5 mb-1">Información laboral del empleado</h1>
+                                    <br />
+
+                                    <div class="form-group">
+                                        <label>Salario</label>
+                                        @Html.TextBoxFor(m => m.salary, new { @class = "form-control form-control-user", @placeholder = "Salario", @type = "number" })
+                                        <span asp-validation-for="salary" class="text-danger"> </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Puesto</label>
+                                        @Html.TextBoxFor(m => m.job, new { @class = "form-control form-control-user", @placeholder = "Puesto", @type = "text" })
+                                        <span asp-validation-for="job" class="text-danger"> </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Horario</label>
+                                        @Html.TextBoxFor(m => m.scheduleE, new { @class = "form-control form-control-user", @placeholder = "Horario", @type = "text" })
+                                        <span asp-validation-for="scheduleE" class="text-danger"> </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Días vacaciones</label>
+                                        @Html.TextBoxFor(m => m.ptoDays, new { @class = "form-control form-control-user", @placeholder = "Dias vacaciones", @type = "number" })
+                                        <span asp-validation-for="ptoDays" class="text-danger"> </span>
+                                    </div>
+
+                                    <div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <a href="@Url.Action("Index", "Employee")" class="btn btn-secondary btn-block waves-effect waves-light">Volver</a>
+                                        </div>
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="submit" id="guardarRegistro" class="btn btn-success btn-block waves-effect waves-light" value="Registrar" />
+
+                                        </div>
+                                    </div>
+                                }
                             </div>
-                    </div> <!-- end .d-flex -->
-                </div> <!-- end col-->
-            </div> <!-- end row -->
-        </div>
-        <!-- end container -->
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end .d-flex -->
+        </div> <!-- end col-->
+    </div> <!-- end row -->
+</div>
+<!-- end container -->
 @*<script>
     document.addEventListener("DOMContentLoaded", function () {
         var mensajeExito = '@(registroExitoso ? "Registro exitoso." : "")';
