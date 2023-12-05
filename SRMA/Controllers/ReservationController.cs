@@ -32,8 +32,6 @@ namespace SRMA.Controllers
             return View();
         }
 
-
-
         [HttpPost]
         public IActionResult NewReservation(ReservationEntity entity)
         {
@@ -122,27 +120,50 @@ namespace SRMA.Controllers
             return NotFound();
         }
 
+        [HttpPost]
         public IActionResult EditReser(ReservationEntity entity)
         {
+            var IdUser = HttpContext.Session.GetInt32("IdSession");
+            long UserId = (long)IdUser;
+
             if (!ModelState.IsValid)
             {
-                return View("AdminEdit", entity);
+                return View("ViewReservations", entity);
             }
 
-            var resultado = _reservationModel.UpdateReservation(entity, entity.IdReservation);
+            var resultado = _reservationModel.UpdateReservation(entity, UserId);
 
 
             if (resultado != null)
             {
                 System.Threading.Thread.Sleep(3000);
-                return RedirectToAction("AdminReservation", "Reservation");
+                return RedirectToAction("ViewReservations", "Reservation");
             }
             else
             {
-                return RedirectToAction("AdminEdit", "Reservation");
+                return RedirectToAction("ViewReservations", "Reservation");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult DeleteReser(long IdUser)
+        {
+            var result=_reservationModel.DeleteReser(IdUser);
+
+            if (result != null)
+            {
+                return RedirectToAction("ViewReservations", new { IdReservation = result.IdReservation });
+            }
+            else
+            {
+                return RedirectToAction("ViewReservations");
             }
         }
 
 
     }
+
+    
+
+
 }

@@ -115,7 +115,7 @@ namespace SRMA.Models
                 using (var connection = new MySqlConnection(_connection))
                 {
                     var result = connection.Execute("UpdateReservation",
-                       new { pIdReservation = q, entity.quantity, entity.observations, entity.dateReservation,entity.IdUser},
+                       new { pQuantity=entity.quantity, pObservations=entity.observations, dateR = entity.dateReservation.Date, timeR = entity.dateReservation.TimeOfDay, pStatusReser =entity.statusReser, pIdReservation = entity.IdReservation},
                        commandType: CommandType.StoredProcedure);
 
                     return entity;
@@ -124,6 +124,26 @@ namespace SRMA.Models
             else
             {
                 return null;
+            }
+        }
+
+        public ReservationEntity? DeleteReser(long IdReservation)
+
+        {
+            using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
+            {
+                var parameters = new { pIdReservation = IdReservation };
+
+                var result = connection.Execute("DeleteReser", parameters, commandType: CommandType.StoredProcedure);
+
+                if (result > 0)
+                {
+                    return new ReservationEntity { IdReservation = IdReservation };
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 

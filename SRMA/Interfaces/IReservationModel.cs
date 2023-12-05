@@ -9,5 +9,6 @@ namespace SRMA.Interfaces
         public List<ReservationEntity> ListReservations();
         public ReservationEntity? GetReservationsById(long q);
         public ReservationEntity? UpdateReservation(ReservationEntity entity, long q);
+        public ReservationEntity? DeleteReser(long IdReservation);
     }
 }
