@@ -46,10 +46,18 @@ namespace SRMA.Entities
         //FK InfoEm
 
         public long IdE { get; set; }
+
+        [Required(ErrorMessage = "El campo salario es obligatorio.")]
+        [RegularExpression(@"\d{6}", ErrorMessage = "El salario debe ser números y no sobrepasar el millón")]
         public int salary { get; set; }
+        [Required(ErrorMessage = "El campo Puesto es obligatorio.")]
         public string job { get; set; } = string.Empty;
+        [Required(ErrorMessage = "El campo Horario es obligatorio.")]
         public string scheduleE { get; set; } = string.Empty;
         public DateTime startDate { get; set; }
+
+        [Required(ErrorMessage = "El campo Cantidad de días es obligatorio.")]
+        [RegularExpression(@"\d{1,12}", ErrorMessage = "Los dias de vacaciones debe ser números y no sobrepasar 12")]
         public int ptoDays { get; set; }
 
 

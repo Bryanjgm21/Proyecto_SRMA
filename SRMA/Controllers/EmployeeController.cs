@@ -52,10 +52,7 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult RegisterEmployee(UserEntity entity)
         {
-            //entity.IdRol = 2;
-            //entity.statusU = true;
-            //entity.passwordU = "Password123.@";
-
+          
             ModelState.Remove("passwordU");
 
             if (!ModelState.IsValid)
@@ -101,8 +98,6 @@ namespace SRMA.Controllers
         public IActionResult Edit(UserEntity entity)
         {
             var IdUser = entity.IdUser;
-
-            entity.passwordU = "Password123.@";
 
             ModelState.Remove("passwordU");
 
@@ -167,55 +162,55 @@ namespace SRMA.Controllers
             }
         }
 
-        public IActionResult AddInfoEmp(EmployeeInfoEntity entity, long q)
-        {
+        //public IActionResult AddInfoEmp(EmployeeInfoEntity entity, long q)
+        //{
             
-            if (!ModelState.IsValid)
-            {
-                 return View("AddInfoEmp", entity);
-            }
+        //    if (!ModelState.IsValid)
+        //    {
+        //         return View("AddInfoEmp", entity);
+        //    }
 
-            var ver = _userEmployeeInfoModel.AddInfoEmp(entity, q);
-            if (ver != null)
-            {
-               TempData["RegistroExitoso"] = "Se registro correctamente.";
+        //    var ver = _userEmployeeInfoModel.AddInfoEmp(entity, q);
+        //    if (ver != null)
+        //    {
+        //       TempData["RegistroExitoso"] = "Se registro correctamente.";
 
-                return RedirectToAction("EmployeeInfo");
-            }
-            else
-            {
-                TempData["MensajeError"] = "Error al registrar el usuario.";
-            }
+        //        return RedirectToAction("EmployeeInfo");
+        //    }
+        //    else
+        //    {
+        //        TempData["MensajeError"] = "Error al registrar el usuario.";
+        //    }
 
-            return RedirectToAction("EmployeeInfo");
-        }
+        //    return RedirectToAction("EmployeeInfo");
+        //}
 
-        public IActionResult UpdateInfoEmp(EmployeeInfoEntity entity)
-        {
-            var IdUser = entity.IdUser;
+        //public IActionResult UpdateInfoEmp(EmployeeInfoEntity entity)
+        //{
+        //    var IdUser = entity.IdUser;
 
-            if (!ModelState.IsValid)
-            {
-                return View("ActInfoEmp", entity);
-            }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View("ActInfoEmp", entity);
+        //    }
 
-            var resultado = _userEmployeeInfoModel.UpdateInfoEmp(entity, IdUser);
+        //    var resultado = _userEmployeeInfoModel.UpdateInfoEmp(entity, IdUser);
             
-            if (resultado != null)
-            {
-                ViewBag.MensajeExito = "Actualizacion exitosa.";
+        //    if (resultado != null)
+        //    {
+        //        ViewBag.MensajeExito = "Actualizacion exitosa.";
                
-                ModelState.AddModelError("RegistroExitoso", "Actualizacion exitosa");
+        //        ModelState.AddModelError("RegistroExitoso", "Actualizacion exitosa");
 
-                return View("EmployeeInfo", entity);
-            }
-            else
-            {
-               ViewBag.MensajeError = "Error al actualizar el usuario.";
-            }
+        //        return View("EmployeeInfo", entity);
+        //    }
+        //    else
+        //    {
+        //       ViewBag.MensajeError = "Error al actualizar el usuario.";
+        //    }
 
-            return View("EmployeeInfo", entity);
-        }
+        //    return View("EmployeeInfo", entity);
+        //}
 
         public IActionResult ConsultInfoE(long IdUser)
         {

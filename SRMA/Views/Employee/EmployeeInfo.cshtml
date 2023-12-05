@@ -72,23 +72,27 @@
                                                 @Html.TextBoxFor(m => m.email, new {@class="form-control form-control-user", @placeholder="Correo electronico",@type="email"})
                                                 <span asp-validation-for="email" class="text-danger"> </span>
                                             </div>
-
                                             <div class="form-group">
                                                 <label>Salario</label>
-                                                @Html.TextBoxFor(m => m.salary, new { @class = "form-control form-control-user", @placeholder = "Correo electrónico", @type = "number" })
+                                                @Html.TextBoxFor(m => m.salary, new { @class = "form-control form-control-user", @placeholder = "Salario", @type = "number" })
+                                                <span asp-validation-for="salary" class="text-danger"> </span>
                                             </div>
                                             <div class="form-group">
                                                 <label>Puesto</label>
-                                                @Html.TextBoxFor(m => m.job, new { @class = "form-control form-control-user", @placeholder = "Correo electrónico", @type = "text" })
+                                                @Html.TextBoxFor(m => m.job, new { @class = "form-control form-control-user", @placeholder = "Puesto", @type = "text" })
+                                                <span asp-validation-for="job" class="text-danger"> </span>
                                             </div>
                                             <div class="form-group">
                                                 <label>Horario</label>
-                                                @Html.TextBoxFor(m => m.scheduleE, new { @class = "form-control form-control-user", @placeholder = "Correo electrónico", @type = "text" })
+                                                @Html.TextBoxFor(m => m.scheduleE, new { @class = "form-control form-control-user", @placeholder = "Horario", @type = "text" })
+                                                <span asp-validation-for="scheduleE" class="text-danger"> </span>
                                             </div>
                                             <div class="form-group">
-                                                <label>Cantidad Días</label>
-                                                @Html.TextBoxFor(m => m.ptoDays, new { @class = "form-control form-control-user", @placeholder = "Correo electrónico", @type = "number" })
+                                                <label>Días vacaciones</label>
+                                                @Html.TextBoxFor(m => m.ptoDays, new { @class = "form-control form-control-user", @placeholder = "Dias vacaciones", @type = "number" })
+                                                <span asp-validation-for="ptoDays" class="text-danger"> </span>
                                             </div>
+
 
                                             <div>
                                             </div>
