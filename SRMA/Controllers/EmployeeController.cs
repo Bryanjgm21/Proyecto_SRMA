@@ -269,7 +269,7 @@ namespace SRMA.Controllers
             {
                 TempData["RegistroExitoso"] = "Se registro correctamente.";
 
-                return RedirectToAction("Absence");
+                return RedirectToAction("AbsenceAdd");
             }
             else
             {
@@ -337,7 +337,7 @@ namespace SRMA.Controllers
             {
                 TempData["RegistroExitoso"] = "Se registro correctamente.";
 
-                return RedirectToAction("Vacation");
+                return RedirectToAction("VacationAdd");
             }
             else
             {

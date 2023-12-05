@@ -36,18 +36,26 @@ namespace SRMA.Controllers
         public IActionResult RedimirPuntos(FidelityProEntity entity)
         {
             string code = entity.codeU;
-            int qty = entity.qty; 
+            int qty = entity.qty;
+
+            if (!ModelState.IsValid)
+            {
+                return View("RedimirPuntos", entity);
+            }
 
             var result = _fidelityProModel.RedeemPoints(code, qty);
 
             if (result != null)
             {
-                return View(result);
+                TempData["RegistroExitoso"] = "Se canjearon los puntos exitosamente.";
+                return RedirectToAction("RedimirPuntos");
             }
             else
             {
-                return RedirectToAction("AdminLoyaltyProgram");
+                TempData["MensajeError"] = "Error al registrar la solicitud.";
             }
+
+            return RedirectToAction("RedimirPuntos");
         }
 
 
