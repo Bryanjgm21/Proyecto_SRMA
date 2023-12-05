@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.AspNetCore.Mvc;
 using SRMA.Entities;
 using SRMA.Interfaces;
 using SRMA.Models;
@@ -31,38 +32,62 @@ namespace SRMA.Controllers
             return View(result);
         }
 
-
         [HttpPost]
-        public IActionResult InsertPoints(long IdUser, int qty)
+        public IActionResult RedimirPuntos(FidelityProEntity entity)
         {
+            string code = entity.codeU;
+            int qty = entity.qty;
 
-            var result = _fidelityProModel.InsertPoints(IdUser, qty);
-
-            if (result != null)
+            if (!ModelState.IsValid)
             {
-                return View(result);
+                return View("RedimirPuntos", entity);
             }
-            else
-            {
-                return RedirectToAction("Index");
-            }
-        }
 
-        [HttpPost]
-        public IActionResult RedeemP(string code, int qty)
-        {
+            if (entity.earnedPoints<qty)
+            {
+                ViewBag.ErrorMessage = "No cuenta con suficientes puntos";
+                return View("RedimirPuntos", entity);
+            }
 
             var result = _fidelityProModel.RedeemPoints(code, qty);
 
             if (result != null)
             {
-                return View(result);
+                TempData["RegistroExitoso"] = "Se canjearon los puntos exitosamente.";
+                return RedirectToAction("RedimirPuntos");
             }
             else
             {
-                return RedirectToAction("Index");
+                TempData["MensajeError"] = "Error al registrar la solicitud.";
             }
+
+            return RedirectToAction("RedimirPuntos");
         }
+
+
+        [HttpGet]
+        public IActionResult AdminLoyaltyProgram()
+        {
+            var data = _fidelityProModel.GetAllFidelity();
+            return View(data);
+        }
+
+
+        public IActionResult RedimirPuntos(long UserId)
+        {
+            var result = _fidelityProModel.ConsultPoints(UserId);
+
+            if (result != null)
+            {
+                return View(result);
+            }
+
+            return View(result);
+         
+        }
+
+
+
 
     }
 }

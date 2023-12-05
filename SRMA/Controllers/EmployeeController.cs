@@ -1,6 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Drawing.Charts;
 using DocumentFormat.OpenXml.Vml.Office;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Ocsp;
 using SRMA.Entities;
 using SRMA.Interfaces;
 using SRMA.Models;
@@ -159,8 +160,6 @@ namespace SRMA.Controllers
         [HttpPost]
         public IActionResult DeleteAcc(long IdUser)
         {
-           
-            
             var result = _userModel.DeleteAcc(IdUser);
 
             if (result != null)
@@ -247,6 +246,68 @@ namespace SRMA.Controllers
         }
 
         [HttpGet]
+        public IActionResult AbsenceAdd(long IdUser)
+        {
+            var result = _userEmployeeInfoModel.ConsultInfoE(IdUser);
+
+            if (result != null)
+            {
+                return View(result);
+            }
+
+            return View(); // Maneja el caso en el que el usuario no se encuentre
+        }
+
+        [HttpPost]
+        public IActionResult AbsenceAdd(EmployeeInfoEntity entity)
+        {
+            long q = entity.IdUser;
+            entity.typeV = 0;
+            entity.auType = 0;
+
+            if (!ModelState.IsValid)
+            {
+                if (entity.enDay == DateTime.MinValue && entity.enDay == DateTime.MinValue)
+                {
+                    ViewBag.MsjError = "La fecha de inicio y finalización son obligatorias.";
+                    return View("AbsenceAdd", entity);
+                }
+                else
+                {
+                    return View("AbsenceAdd", entity);
+                }
+                
+            }
+
+            var ver = _userEmployeeInfoModel.AddAu(entity, q);
+            if (ver != null)
+            {
+                TempData["RegistroExitoso"] = "Se registro correctamente.";
+
+                return RedirectToAction("AbsenceAdd");
+            }
+            else
+            {
+                TempData["MensajeError"] = "Error al registrar la ausencia.";
+            }
+
+            return RedirectToAction("AbsenceAdd");
+        }
+
+        [HttpGet]
+        public IActionResult AbsenceEdit()
+        {
+            {
+
+                var absence = _userEmployeeInfoModel.ConsultVacAu(false);
+                return View(absence);
+
+            }
+        }
+
+
+
+        [HttpGet]
         public IActionResult Vacation()
         {
             var vacation = _userEmployeeInfoModel.ConsultVacAu(true);
@@ -255,11 +316,43 @@ namespace SRMA.Controllers
         }
 
         [HttpGet]
-        public IActionResult VacationAdd(EmployeeInfoEntity entity,long q)
+        public IActionResult VacationAdd(long IdUser)
         {
+            var result = _userEmployeeInfoModel.ConsultInfoE(IdUser);
+
+            if (result != null)
+            {
+                return View(result);
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult VacationAdd(EmployeeInfoEntity entity)
+        {
+            long q = entity.IdUser;
+            entity.typeV = 1;
+            entity.auType = 0;
+
+            if (entity.ptoDays < entity.dReq)
+            {
+                ViewBag.ErrorMessage = "No cuenta con suficientes dias para realizar la solicitud";
+                return View("VacationAdd", entity);
+            }
+            
+
             if (!ModelState.IsValid)
             {
-                return View("AddAu", entity);
+                if (entity.enDay == DateTime.MinValue && entity.enDay == DateTime.MinValue)
+                {
+                    ViewBag.MsjError = "La fecha de inicio y finalización son obligatorias.";
+                    return View("VacationAdd", entity);
+                }
+                else
+                {
+                    return View("VacationAdd", entity);
+                }
             }
 
             var ver = _userEmployeeInfoModel.AddAu(entity,q);
@@ -267,24 +360,42 @@ namespace SRMA.Controllers
             {
                 TempData["RegistroExitoso"] = "Se registro correctamente.";
 
+                return RedirectToAction("VacationAdd");
+            }
+            else
+            {
+                TempData["MensajeError"] = "Error al registrar la solicitud.";
+            }
+
+            return RedirectToAction("VacationAdd");
+        }
+    
+
+        [HttpPost]
+       
+        public IActionResult DeleteRequestVac(long idVa)
+        {
+            int type = 1;
+
+            var result = _userEmployeeInfoModel.DeleteRequest(idVa,type);
+
+            if (result != null)
+            {
                 return RedirectToAction("Vacation");
             }
             else
             {
-                TempData["MensajeError"] = "Error al registrar el usuario.";
+                return RedirectToAction("Vacation");
             }
-
-            return RedirectToAction("Vacation");
         }
-    
 
-        [HttpGet]
-       
-        public IActionResult DeleteRequest(long idVa)
+        [HttpPost]
+
+        public IActionResult DeleteRequestAbs(long idVa)
         {
+            int type = 0;
 
-
-            var result = _userEmployeeInfoModel.DeleteRequest(idVa);
+            var result = _userEmployeeInfoModel.DeleteRequest(idVa,type);
 
             if (result != null)
             {

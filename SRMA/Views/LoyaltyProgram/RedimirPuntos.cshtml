@@ -1,0 +1,135 @@
+﻿@model SRMA.Entities.FidelityProEntity
+@{
+    ViewData["Title"] = "Redimir puntos";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<html>
+<body>
+
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex align-items-center min-vh-100">
+                        <div class="w-100 d-block bg-white shadow-lg rounded my-5">
+                            <div class="row">
+                                <!-- Columna izquierda para la imagen -->
+                                <div class="col-lg-5 d-none d-lg-flex align-items-center justify-content-center rounded-center">
+                                    <i class="fas fa-gift" style="font-size: 300px; margin-left: 75px;"></i>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="p-5">
+                                        <div class="text-center mb-5">
+                                            <a href="index.html" class="text-dark font-size-22 font-family-secondary">
+                                                <i class="mdi mdi-album"></i> <b>SRMA</b>
+                                            </a>
+                                        </div>
+                                        @if (ViewBag.ErrorMessage != null)
+                                        {
+                                            <script>
+                                                Swal.fire({
+                                                    title: 'Error',
+                                                    text: '@ViewBag.ErrorMessage',
+                                                    icon: 'error',
+                                                    confirmButtonText: 'Aceptar'
+                                                });
+                                            </script>
+                                        }
+                                        <h1 class="h5 mb-1">Canjear Puntos</h1>
+                                        <br />
+                                        <p class="text-muted mb-4">Selecciona la cantidad de puntos que deseas canjear.</p>
+                                        @using (Html.BeginForm("RedimirPuntos", "LoyaltyProgram", FormMethod.Post, new { @class = "user" }))
+                                        {
+                                            @Html.HiddenFor(m => m.codeU)
+
+                                            <div class="form-group row">
+                                        <div class="col-sm-6">
+                                                <label>Codigo</label>
+                                                @Html.TextBoxFor(m => m.codeU, new { @class = "form-control form-control-user", @placeholder = "Codigo Unico", @type = "text", @readonly = "readonly" })
+                                              
+                                            </div>                                             
+
+                                                <div class="col-sm-6">
+                                                    <label>Puntos disponibles</label>
+                                                    @Html.TextBoxFor(m => m.earnedPoints, new { @class = "form-control form-control-user", @placeholder = "Puntos", @type = "number", @readonly = "readonly" })
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div style="margin-left: 25%;text-align: center;" class="col-sm-6">
+                                                <label>Puntos a canjear</label>
+                                                    @Html.TextBoxFor(m => m.qty, new { @class = "form-control form-control-user", @placeholder = "Cantidad", @type = "number", style="font-size: 30px; font-weight: bold; text-align: center;"})
+                                               
+                                            </div>
+                                            </div>
+
+                                            <br />
+                                            <br />
+
+                                            <div class="form-group row">
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <a href="@Url.Action("AdminLoyaltyProgram", "LoyaltyProgram")" class="btn btn-secondary btn-block waves-effect waves-light" >Volver</a>
+                                                </div>
+                                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                                    <input type="submit" id="guardarCambiosButton" class="btn btn-success btn-block waves-effect waves-light " value="Canjear Puntos" />
+                                                </div>
+                                            </div>
+                                        }
+                                        <!-- end row -->
+                                    </div> <!-- end .padding-5 -->
+                                </div> <!-- end col -->
+                            </div> <!-- end row -->
+                        </div> <!-- end .w-100 -->
+                    </div> <!-- end .d-flex -->
+                </div> <!-- end col-->
+            </div> <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var mensajeExito = '@(TempData["RegistroExitoso"] as string)';
+            var mensajeError = '@(TempData["MensajeError"] as string)';
+
+            if (mensajeExito) {
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: mensajeExito,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '@Url.Action("AdminLoyaltyProgram", "LoyaltyProgram")';
+                    }
+                });
+
+                // Clear TempData after displaying the success message
+                TempData["RegistroExitoso"] = null;
+            }
+
+            if (mensajeError) {
+                Swal.fire({
+                    title: 'Error',
+                    text: mensajeError,
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+
+                // Clear TempData after displaying the error message
+                TempData["MensajeError"] = null;
+            }
+        });
+    </script>
+
+
+</body>
+</html>

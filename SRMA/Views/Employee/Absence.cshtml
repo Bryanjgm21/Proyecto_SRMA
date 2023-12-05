@@ -1,92 +1,162 @@
-﻿
+﻿@model IEnumerable<SRMA.Entities.EmployeeInfoEntity>
+
 @{
-    ViewData["Title"] = "Registrar Ausencia";
+    ViewData["Title"] = "Ausencias";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 
+
+<html>
 <body>
+    <div class="main-content">
 
-    <div>
-        <div class="container">
+        <div class="page-content">
+            <div class="container-fluid">
+            </div>
             <div class="row">
-                <div class="col-12">
-                    <div class="d-flex align-items-center min-vh-100">
-                        <div class="w-100 d-block bg-white shadow-lg rounded my-5">
-                            <div class="row">
-                                <div class="col-lg-5 d-none d-lg-block bg-register rounded-left"></div>
-                                <div class="col-lg-7">
-                                    <div class="p-5">
-                                        <div class="text-center mb-5">
-                                            <a href="" class="text-dark font-size-22 font-family-secondary">
-                                                <i class="mdi mdi-album"></i> <b>SRMA</b>
-                                            </a>
-                                        </div>
-                                        <h1 class="h5 mb-1">Registrar Ausencia</h1>
-                                        <form class="user">
-                                            <div class="form-group row">
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Nombre" readonly>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Apellido" readonly>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <input type="number" class="form-control form-control-user" id="exampleID" placeholder="Cedula" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="number" class="form-control form-control-user" id="exampleAdays" placeholder="Cantidad de días">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="date" class="form-control form-control-user" id="exampleArequestDate" placeholder="Fecha inicio">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="date" class="form-control form-control-user" id="exampleArequestEnd" placeholder="Fecha finalización">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Tipo de ausencia:</label>
-                                                <select class="form-control form-control-user" id="exampleArequestType" placeholder="Tipo">
-                                                    <option value="Justificada">Justificada</option>
-                                                    <option value="Injustificada">Injustificada</option>
-                                                </select>
-                                            </div>
+                <div class="col-xl-10">
+                    <div class="card">
+                        <div class="card-body">
 
-                                            <a href="@Url.Action("Vacation","Employee")" id="miBoton" class="btn btn-success btn-block waves-effect waves-light"> Registrar ausencia </a>
-                                            <a href="@Url.Action("Vacation","Employee")" class="btn btn-info btn-block waves-effect waves-light"> Volver </a>
-                                        </form>
-                                        <!-- end row -->
-                                    </div> <!-- end .padding-5 -->
-                                </div> <!-- end col -->
-                            </div> <!-- end row -->
-                        </div> <!-- end .w-100 -->
-                    </div> <!-- end .d-flex -->
-                </div> <!-- end col-->
-            </div> <!-- end row -->
-        </div>
-        <!-- end container -->
+                            <h2 class="card-title text-center">Ausencias</h2>
+                            <br />
+
+                            <div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-centered table-striped table-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Nombre
+                                            </th>
+                                            <th>
+                                                Apellido
+                                            </th>
+                                            <th>
+                                                Cantidad dias
+                                            </th>
+                                            <th>
+                                                Fecha inicio
+                                            </th>
+                                            <th>
+                                                Fecha finalización
+                                            </th>
+
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var sortedModel = Model.OrderBy(item => Math.Abs((item.inDay - DateTime.Now).TotalDays));
+                                        }
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td class="table-user">@item.userName</td>
+
+                                                <td>
+                                                    @item.lastName
+                                                </td>
+                                                <td>
+                                                    @item.dReq
+                                                </td>
+                                                <td>
+                                                    @item.inDay.ToString("dd-MM-yyyy")
+                                                </td>
+                                                <td>
+                                                    @item.enDay.ToString("dd-MM-yyyy")
+                                                </td>
+                                                <td>
+
+                                                    <button class="btn btn-danger delete-employee" data-employee-id="@item.idVA" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"></path>
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div> <!-- end card-body-->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+            </div>
+            <!-- end row-->
+
+        </div> <!-- container-fluid -->
     </div>
-    <!-- end page -->
+    <div class="modal" id="confirmationModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas eliminar este producto?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script>
-        const miBoton = document.getElementById("miBoton");
+        $(document).ready(function () {
+            var employeeIdToDelete;
 
-        miBoton.addEventListener("click", (event) => {
-            event.preventDefault(); // Prevenir la redirección predeterminada del enlace
+            $(".delete-employee").click(function () {
+                employeeIdToDelete = $(this).data("employee-id");
 
-            Swal.fire({
-                title: '¿Deseas registrar la ausencia?',
-                icon: 'question',
-                showCancelButton: true,
-                cancelButtonText: 'Cancelar',
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '¡Sí, registrar!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = miBoton.getAttribute('href'); // Redireccionar si se confirma
-                }
+                // Utiliza SweetAlert para mostrar el pop-up de confirmación
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "Esta acción no se puede deshacer",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Realizar una solicitud POST para eliminar el producto
+                        $.ajax({
+                            url: "@Url.Action("DeleteRequestAbs", "Employee")",
+                            method: "POST",
+                            data: { idVA: employeeIdToDelete },
+                            success: function (result) {
+                                // Manejar la respuesta del servidor
+                                if (result.success) {
+                                    Swal.fire('Error', 'No se pudo eliminar solicitud', 'error');
+                                } else {
+                                    Swal.fire('Éxito', 'La solicitud se ha eliminado', 'success').then(function () {
+                                        window.location.href = "@Url.Action("Absence")";
+                                    });
+                                }
+                            },
+                            error: function () {
+                                Swal.fire('Error', 'Hubo un error en la solicitud', 'error');
+                            }
+                        });
+                    }
+                });
             });
         });
     </script>
-</body>
 
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+</body>
+</html>

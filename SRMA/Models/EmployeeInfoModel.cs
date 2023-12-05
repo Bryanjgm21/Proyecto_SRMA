@@ -95,10 +95,14 @@ namespace SRMA.Models
         {
             if (entity != null)
             {
+                string FechaIn = entity.inDay.ToString("yyyy-MM-dd");
+                string FechaEn = entity.enDay.ToString("yyyy-MM-dd");
                 using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
                 {
                     connection.Execute("AddAu",
-                       new { pIdUser = q, entity.dReq, entity.inDay, entity.enDay, entity.typeV, entity.auType },
+
+                       new { pIdUser = q, pDReq = entity.dReq, pInDay = FechaIn, pEnDay = entity.enDay, pTypeV = entity.typeV, pAuType = entity.auType },
+
                        commandType: System.Data.CommandType.StoredProcedure);
 
                     return entity;
@@ -112,24 +116,23 @@ namespace SRMA.Models
             }
         }
 
-        public EmployeeInfoEntity? DeleteRequest(long IdReq)
+        public EmployeeInfoEntity? DeleteRequest(long IdReq,int type)
 
         {
             using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
             {
-                var parameters = new { pIdVA = IdReq };
+                var parameters = new { pIdVA = IdReq, ptypeV=type };
 
-                // Ejecuta el procedimiento almacenado o consulta SQL para eliminar el producto
                 var result = connection.Execute("DeleteRequest", parameters, commandType: CommandType.StoredProcedure);
 
                 if (result > 0)
                 {
-                    // La eliminación fue exitosa, puedes devolver una respuesta, por ejemplo, un mensaje de éxito.
+                    
                     return new EmployeeInfoEntity { idVA = IdReq };
                 }
                 else
                 {
-                    // En caso de que no se haya eliminado ningún producto (por ejemplo, si el IdProduct no existe), puedes devolver nulo o algún otro valor para indicar que la operación no fue exitosa.
+                   
                     return null;
                 }
             }
@@ -151,40 +154,6 @@ namespace SRMA.Models
                 return new List<EmployeeInfoEntity> ();
             }
         }
-
-        //public EmployeeInfoEntity? ConsultVacAu(bool q)
-
-        //{
-        //    using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
-        //    {
-        //        var data = connection.Query<EmployeeInfoEntity>("ConsultVacAu",
-        //             new { ptypeV = q },
-        //             commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
-
-        //        if (data != null)
-        //        {
-
-        //            var EmployeeViewModel = new EmployeeInfoEntity
-        //            {
-        //                IdUser = data.IdUser,
-        //                userName = data.userName,
-        //                lastName = data.lastName,
-        //                ptoDays = data.ptoDays,
-        //                idVA = data.idVA,
-        //                inDay = data.inDay,
-        //                enDay = data.enDay,
-        //                dReq = data.dReq,
-        //                auType = data.auType,
-        //                typeV=data.typeV,
-        //            };
-
-        //            return EmployeeViewModel;
-        //        }
-
-        //        return null;
-        //    }
-        //}
-
 
 
     }

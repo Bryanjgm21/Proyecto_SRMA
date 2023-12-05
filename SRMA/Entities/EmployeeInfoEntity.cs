@@ -22,10 +22,10 @@ namespace SRMA.Entities
         //FK Vacations and absence
         public long idVA { get; set; }
         public int dReq { get; set; }
-        public DateOnly inDay { get; set; }
-        public DateOnly enDay { get; set; } 
-        public bool typeV { get; set; }
-        public bool auType { get; set; }
+        public DateTime inDay { get; set; }
+        public DateTime enDay { get; set; } 
+        public int typeV { get; set; }
+        public int auType { get; set; }
 
     }
 }

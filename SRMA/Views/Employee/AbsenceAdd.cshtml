@@ -1,6 +1,4 @@
-﻿
-﻿
-@model SRMA.Entities.EmployeeInfoEntity
+﻿@model SRMA.Entities.EmployeeInfoEntity
 @{
     ViewData["Title"] = "Registrar Ausencia";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -28,25 +26,14 @@
                                         <i class="mdi mdi-album"></i> <b>SRMA</b>
                                     </a>
                                 </div>
-                                @if (ViewBag.ErrorMessage != null)
-                                {
-                                    <script>
-                                        Swal.fire({
-                                            title: 'Error',
-                                            text: '@ViewBag.ErrorMessage',
-                                            icon: 'error',
-                                            confirmButtonText: 'Aceptar'
-                                        });
-                                    </script>
-                                }
-                                <h1 class="h5 mb-1">Agregar vacaciones de empleado</h1>
+                                
+                                <h1 class="h5 mb-1">Agrega una ausencia de empleado</h1>
                                 <div>
                                 </div>
 
-                                @using (Html.BeginForm("VacationAdd", "Employee", FormMethod.Post, new { @class = "user" }))
+                                @using (Html.BeginForm("AbsenceAdd", "Employee", FormMethod.Post, new { @class = "user" }))
                                 {
                                     @Html.HiddenFor(m => m.IdUser)
-                                    @Html.HiddenFor(m => m.ptoDays)
 
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -62,20 +49,14 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label>Cédula</label>
-                                        @Html.TextBoxFor(m => m.Id, new { @class = "form-control form-control-user", @placeholder = "Cédula", @type = "number", @readonly = "readonly" })
-                                        <span asp-validation-for="Id" class="text-danger"> </span>
-                                    </div>
-
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <label>Dias disponibles</label>
-                                            @Html.TextBoxFor(m => m.ptoDays, new { @class = "form-control form-control-user", @placeholder = "Dias disponibles", @type = "number", @readonly = "readonly" })
-                                            <span asp-validation-for="ptoDays" class="text-danger"> </span>
+                                            <label>Cédula</label>
+                                            @Html.TextBoxFor(m => m.Id, new { @class = "form-control form-control-user", @placeholder = "Cédula", @type = "number", @readonly = "readonly" })
+                                            <span asp-validation-for="Id" class="text-danger"> </span>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <label>Dias solicitados</label>
+                                    <div class="col-sm-6">
+                                            <label>Cantidad de días</label>
                                             @Html.TextBoxFor(m => m.dReq, new { @class = "form-control form-control-user", @placeholder = "Cantidad de días", @type = "number", @readonly = "readonly" })
                                             
                                         </div>
@@ -141,7 +122,7 @@
                 confirmButtonText: 'OK'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = '@Url.Action("Vacation", "Employee")';
+                    window.location.href = '@Url.Action("Absence", "Employee")';
                 }
             });
 
