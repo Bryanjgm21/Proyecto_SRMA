@@ -43,9 +43,16 @@ namespace SRMA.Controllers
 
             if (!ModelState.IsValid)
             {
-                ViewBag.MsjError = "La fecha y hora de reservación son obligatorias.";
-
-                return View("NewReservation", entity);
+                if (entity.dateReservation == DateTime.MinValue)
+                {
+                    ViewBag.MsjError = "La fecha y hora de reservación son obligatorias.";
+                    return View("NewReservation", entity);
+                }
+                else
+                {
+                    return View("NewReservation", entity);
+                }
+                
             }
 
             var resp = _reservationModel.InsertReservationByClient(entity, UserId);

@@ -26,6 +26,17 @@
                                                 <i class="mdi mdi-album"></i> <b>SRMA</b>
                                             </a>
                                         </div>
+                                        @if (ViewBag.ErrorMessage != null)
+                                        {
+                                            <script>
+                                                Swal.fire({
+                                                    title: 'Error',
+                                                    text: '@ViewBag.ErrorMessage',
+                                                    icon: 'error',
+                                                    confirmButtonText: 'Aceptar'
+                                                });
+                                            </script>
+                                        }
                                         <h1 class="h5 mb-1">Canjear Puntos</h1>
                                         <br />
                                         <p class="text-muted mb-4">Selecciona la cantidad de puntos que deseas canjear.</p>
@@ -59,10 +70,10 @@
 
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <a href="@Url.Action("AdminLoyaltyProgram", "LoyaltyProgram")" class="btn btn-secondary btn-block waves-effect waves-light">Volver</a>
+                                                    <a href="@Url.Action("AdminLoyaltyProgram", "LoyaltyProgram")" class="btn btn-secondary btn-block waves-effect waves-light" >Volver</a>
                                                 </div>
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <input type="submit" id="guardarCambiosButton" class="btn btn-success btn-block waves-effect waves-light" value="Canjear Puntos" />
+                                                    <input type="submit" id="guardarCambiosButton" class="btn btn-success btn-block waves-effect waves-light " value="Canjear Puntos" />
                                                 </div>
                                             </div>
                                         }
@@ -77,6 +88,11 @@
         </div>
         <!-- end container -->
     </div>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>

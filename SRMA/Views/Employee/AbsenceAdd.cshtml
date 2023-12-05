@@ -66,13 +66,23 @@
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <label>Fecha inicio</label>
                                             @Html.TextBoxFor(m => m.inDay, new { @class = "form-control form-control-user", @placeholder = "Fecha inicio", @type = "date" })
-                                            <span asp-validation-for="inDay" class="text-danger"> </span>
+                                            @if (ViewBag.MsjError != null)
+                                            {
+                                                <div style="color:#dc3545">
+                                                    @ViewBag.MsjError
+                                                </div>
+                                            }
                                         </div>
 
                                         <div class="col-sm-6">
                                             <label>Fecha finalización</label>
                                             @Html.TextBoxFor(m => m.enDay, new { @class = "form-control form-control-user", @placeholder = "Fecha finalización", @type = "date" })
-                                            <span asp-validation-for="enDay" class="text-danger"> </span>
+                                            @if (ViewBag.MsjError != null)
+                                            {
+                                                <div style="color:#dc3545">
+                                                    @ViewBag.MsjError
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                     <br />

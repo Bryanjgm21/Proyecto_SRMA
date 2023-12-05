@@ -30,13 +30,8 @@
                                     <th>Puntos</th>
                                     <th>Fecha de registro</th>
                                     <th>Redimir Puntos</th>
-                                    
-                                 
-                                
                                 </tr>
                             </thead>
-
-
                             <tbody>
                                 @foreach (var item in Model)
                                 {
@@ -47,18 +42,19 @@
                                         <td>@item.earnedPoints</td>
                                         <td class="table-user">@item.startDate.ToString("yyyy-MM-dd")</td>
                                         <td>
-                                            <a href="@Url.Action("RedimirPuntos","LoyaltyProgram", new {UserId = item.IdUser })" class="btn btn-primary">
-                                                <i class="fas fa-gift"></i>
-                                            </a>
+                                        @if (item.earnedPoints <= 0)
+                                           {
+                                            <a>No hay puntos para redimir</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("RedimirPuntos","LoyaltyProgram", new {UserId = item.IdUser })" class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Canjear puntos">
+                                                    <i class="fas fa-gift"></i>
+                                                </a>
 
-                                        
+                                            }
                                         </td>
                                     </tr>
-                            
-
-                                      
-
-
 
                                 }
 
@@ -95,4 +91,8 @@
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>

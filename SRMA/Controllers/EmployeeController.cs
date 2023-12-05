@@ -261,7 +261,16 @@ namespace SRMA.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View("AbsenceAdd", entity);
+                if (entity.enDay == DateTime.MinValue && entity.enDay == DateTime.MinValue)
+                {
+                    ViewBag.MsjError = "La fecha de inicio y finalización son obligatorias.";
+                    return View("AbsenceAdd", entity);
+                }
+                else
+                {
+                    return View("AbsenceAdd", entity);
+                }
+                
             }
 
             var ver = _userEmployeeInfoModel.AddAu(entity, q);
@@ -329,7 +338,15 @@ namespace SRMA.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View("VacationAdd", entity);
+                if (entity.enDay == DateTime.MinValue && entity.enDay == DateTime.MinValue)
+                {
+                    ViewBag.MsjError = "La fecha de inicio y finalización son obligatorias.";
+                    return View("VacationAdd", entity);
+                }
+                else
+                {
+                    return View("VacationAdd", entity);
+                }
             }
 
             var ver = _userEmployeeInfoModel.AddAu(entity,q);

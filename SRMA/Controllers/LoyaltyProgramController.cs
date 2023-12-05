@@ -43,6 +43,12 @@ namespace SRMA.Controllers
                 return View("RedimirPuntos", entity);
             }
 
+            if (entity.earnedPoints<qty)
+            {
+                ViewBag.ErrorMessage = "No cuenta con suficientes puntos";
+                return View("RedimirPuntos", entity);
+            }
+
             var result = _fidelityProModel.RedeemPoints(code, qty);
 
             if (result != null)

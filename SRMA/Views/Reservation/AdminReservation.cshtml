@@ -112,33 +112,21 @@
     <script>
         $(document).ready(function () {
             var employeeIdToDelete;
-            var buttonLocalStorageKey = 'confirmarAsistenciaButtonState';
-
-            // Verificar el estado almacenado en el almacenamiento local
-            var isButtonHidden = localStorage.getItem(buttonLocalStorageKey) === 'hidden';
-
-            if (isButtonHidden) {
-                // Si el botón debería estar oculto, ocultarlo al cargar la página
-                $('.insertar-puntos').hide();
-            }
 
             $(".insertar-puntos").click(function () {
-                var buttonClicked = $(this);
-
-                employeeIdToDelete = buttonClicked.data("employee-id");
-                var reservationId = buttonClicked.data("reservation-id");
+                employeeIdToDelete = $(this).data("employee-id");
 
                 // Utiliza SweetAlert para mostrar el pop-up de confirmación
                 Swal.fire({
                     title: '¿Desea confirmar la asistencia?',
-                    text: "Se sumarán 10 puntos de fidelidad al usuario",
+                    text: "Se sumaran 10 puntos de fidelidad al usuario",
                     icon: 'question',
                     showCancelButton: true,
                     confirmButtonText: 'Sí, Asignar',
                     cancelButtonText: 'Cancelar'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Realizar una solicitud POST para confirmar la asistencia
+                        // Realizar una solicitud POST para eliminar el producto
                         $.ajax({
                             url: "@Url.Action("InsertPoints", "Reservation")",
                             method: "POST",
@@ -148,14 +136,7 @@
                                 if (result.success) {
                                     Swal.fire('Error', 'No se pudo confirmar la asistencia', 'error');
                                 } else {
-                                    // Oculta el botón específico después de confirmar la asistencia
-                                    buttonClicked.hide();
-
-                                    // Almacena el estado en el almacenamiento local
-                                    localStorage.setItem(buttonLocalStorageKey, 'hidden');
-
                                     Swal.fire('Éxito', 'Se ha confirmado la asistencia', 'success').then(function () {
-                                        // Puedes redirigir o hacer lo que sea necesario
                                         window.location.href = "@Url.Action("AdminReservation")";
                                     });
                                 }
@@ -168,7 +149,6 @@
                 });
             });
         });
-
     </script>
 
     <script>
