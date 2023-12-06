@@ -58,11 +58,9 @@
                                             @Html.AntiForgeryToken()
                                             <div class="form-group">
                                                 @Html.TextBoxFor(m => m.email, new {@class="form-control form-control-user", @placeholder="Correo"})
-                                                <span asp-validation-for="email" class="text-danger"> </span>
                                             </div>
                                             <div class="form-group">
                                                 @Html.TextBoxFor(m => m.passwordU, new {@class="form-control form-control-user", @placeholder="Contraseña", @Type = "password"})
-                                                <span asp-validation-for="passwordU" class="text-danger"> </span>
                                             </div>
                                             <div class="form-group">
                                                 <input type="submit" id="miBoton" class="btn btn-success btn-block waves-effect waves-light" value="Iniciar Sesión" />

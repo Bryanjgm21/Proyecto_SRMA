@@ -49,16 +49,17 @@ namespace SRMA.Entities
 
         [Required(ErrorMessage = "El campo salario es obligatorio.")]
         [RegularExpression(@"\d{4,6}", ErrorMessage = "El salario debe ser mayor a 10,000 y menor a un millón")]
-        public int salary { get; set; }
+        public int? salary { get; set; }
         [Required(ErrorMessage = "El campo Puesto es obligatorio.")]
         public string job { get; set; } = string.Empty;
         [Required(ErrorMessage = "El campo Horario es obligatorio.")]
         public string scheduleE { get; set; } = string.Empty;
         public DateTime startDate { get; set; }
 
+        [Required(ErrorMessage = "El campo Dias vacaciones es obligatorio.")]
         [RegularExpression(@"^[1-9]\d{0,1}$", ErrorMessage = "Debe solo ser solo números")]
         [Range(1, 15, ErrorMessage = "El valor debe estar entre 1 y 12.")]
-        public int ptoDays { get; set; }
+        public int? ptoDays { get; set; }
 
 
     }

@@ -154,7 +154,7 @@ namespace SRMA.Controllers
             entity.IdUser = q;
 
             _userModel.ChangeStatusEmployee(q);
-            return RedirectToAction("Index", "Employee");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

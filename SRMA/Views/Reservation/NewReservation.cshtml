@@ -56,15 +56,16 @@
 
                                                 <div class="col-sm-6">
                                                     <label>Cantidad de personas</label>
-                                                    @Html.TextBoxFor(m => m.quantity, new {@class="form-control form-control-user", @placeholder="Cantidad de personas",@type="text"})
+                                                    @Html.TextBoxFor(m => m.quantity, new {@class="form-control form-control-user", @placeholder="Cantidad de personas",@type="number"})
                                                     <span asp-validation-for="quantity" class="text-danger"> </span>
                                                 </div>
                                             </div>
 
                                                 <div class="form-group">
                                                     <label>Observaciones</label>
-                                                    @Html.TextBoxFor(m => m.observations, new {@class="form-control form-control-user", @placeholder="Observaciones",@type="text"})
-                                                    <span asp-validation-for="observations" class="text-danger"> </span>
+                                                <p class="text-muted mb-4">El mensaje tiene un limite de 100 carácteres."</p>
+                                                @Html.TextAreaFor(m => m.observations, new { @class = "form-control form-control-user", @placeholder = "Observaciones", rows = 4, cols = 40 })
+                                                <span asp-validation-for="observations" class="text-danger"> </span>
                                                 </div>
                                                 <div>
                                                      
@@ -159,3 +160,34 @@
         }
     });
 </script>
+
+@*<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var dateReservationInput = document.getElementById('dateReservation');
+        var form = document.querySelector('.user');
+
+        form.addEventListener('submit', function (event) {
+            var selectedDateTime = new Date(dateReservationInput.value);
+
+            // Obtén todas las fechas de reservaciones existentes directamente desde el DOM
+            var existingReservations = document.querySelectorAll('.existing-reservation-date');
+
+            for (var i = 0; i < existingReservations.length; i++) {
+                var reservationDateTime = new Date(existingReservations[i].value);
+
+                if (selectedDateTime.getTime() === reservationDateTime.getTime()) {
+                    event.preventDefault();
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Ya existe una reserva para esta hora. Por favor, elige otra hora.'
+                    });
+
+                    break;
+                }
+            }
+        });
+    });
+</script>
+*@

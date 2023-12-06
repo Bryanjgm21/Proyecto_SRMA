@@ -59,33 +59,10 @@
                     </span>
                 </a>
                 <div class="d-flex align-items-center">
-
-                    <div class="dropdown d-none d-sm-inline-block ml-2">
-                        <button type="button" class="btn header-item noti-icon waves-effect waves-light" id="page-header-search-dropdown"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="mdi mdi-magnify"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
-                             aria-labelledby="page-header-search-dropdown">
-
-                            <form class="p-3">
-                                <div class="form-group m-0">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item noti-icon waves-effect waves-light" id="page-header-notifications-dropdown"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="mdi mdi-bell"></i>
-                            <span class="badge badge-danger badge-pill">3</span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
                              aria-labelledby="page-header-notifications-dropdown">
@@ -93,9 +70,6 @@
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h6 class="m-0"> Notificaciones </h6>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="#!" class="small">Ver todo</a>
                                     </div>
                                 </div>
                             </div>
@@ -107,7 +81,7 @@
                                         <div class="media-body">
                                             <h6 class="mt-0 mb-1">Promo pollo frito 2x1</h6>
                                             <p class="font-size-12 mb-1">Todo el fin de semana</p>
-                                            <p class="font-size-12 mb-0 text-muted"><i class="mdi mdi-clock-outline"></i> 2 min ago</p>
+                                            <p class="font-size-12 mb-0 text-muted"><i class="mdi mdi-clock-outline"></i>Reciente</p>
                                         </div>
                                     </div>
                                 </a>
@@ -117,15 +91,10 @@
                                              class="mr-3 rounded-circle avatar-xs" alt="user-pic">
                                         <div class="media-body">
                                             <h6 class="mt-0 mb-1">Unete a nuestro programa de lealtad</h6>
-                                            <p class="font-size-12 mb-1">Consigue puntos y canjealos por descuentos</p>
-                                            <p class="font-size-12 mb-0 text-muted"><i class="mdi mdi-clock-outline"></i> 1 day ago</p>
+                                            <p class="font-size-12 mb-1">Consigue puntos y canjealos por acompañamientos</p>
+                                            <p class="font-size-12 mb-0 text-muted"><i class="mdi mdi-clock-outline"></i>Reciente</p>
                                         </div>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="p-2 border-top">
-                                <a class="btn btn-sm btn-light btn-block text-center" href="javascript:void(0)">
-                                    <i class="mdi mdi-arrow-down-circle mr-1"></i> Cargar más ...
                                 </a>
                             </div>
                         </div>
@@ -144,9 +113,6 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item d-flex align-items-center justify-content-between" href="@Url.Action("Profile","User")">
                                 <span>Perfil</span>
-                                <span>
-                                    <span class="badge badge-pill badge-warning">1</span>
-                                </span>
                             </a>
                             <a class="dropdown-item d-flex align-items-center justify-content-between" href="@Url.Action("LogOut","Login")">
                                 <span>Cerrar sesion</span>

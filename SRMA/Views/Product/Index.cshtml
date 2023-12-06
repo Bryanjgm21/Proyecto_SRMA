@@ -28,6 +28,7 @@
                             </div>
                         </div>
 
+
                         <table id="datatable-buttons" class="table table-striped dt-responsive nowrap">
                             <thead>
                                 <tr>
@@ -290,5 +291,39 @@
     });
 </script>
 
+<script>
+    $(document).ready(function () {
+        $('#datatable-buttons').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: 'Copiar',  // Personaliza el texto del botón Copiar
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'print',
+                    text: 'Imprimir',  // Personaliza el texto del botón Imprimir
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Exportar a PDF',  // Personaliza el texto del botón PDF
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                // Agrega más botones según sea necesario
+            ],
+            language: {
+                url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json" // Utiliza el archivo de internacionalización en español
+            }
+        });
+    });
 
+</script>
 

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<SRMA.Entities.ReservationEntity>
 
 @{
-    ViewData["Title"] = "ViewReservations";
+    ViewData["Title"] = "Reservaciones";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -20,7 +20,7 @@
                         <h4 class="card-title">Reservaciones</h4>
                         <div class="input-group">
                             <div class="input-group-append">
-                                <a href="@Url.Action("NewReservation", "Reservation")" class="btn btn-success btn-block waves-effect waves-light"> Nueva Reservación </a>
+                                <a> </a><a href="@Url.Action("NewReservation", "Reservation")" class="btn btn-success btn-block waves-effect waves-light"> Nueva Reservación </a>
                             </div>
                         </div>
                         <div>
@@ -38,7 +38,7 @@
                                         <th>Cantidad</th>
                                         <th>Observaciones</th>
                                         <th>Estado</th>
-
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,7 +51,7 @@
                                             <td class="table-user">@item.dateReservation.ToString("yyyy-MM-dd")</td>
                                             <td>@item.dateReservation.ToString("HH:mm:ss")</td>
                                             <td>@item.quantity</td>
-                                            <td>@item.observations</td>
+                                            <td style="overflow-x: auto; white-space: nowrap; max-width: 20px;">@item.observations</td>
                                             @if (item.statusReser == true && item.dateReservation > DateTime.Now)
                                             {
                                                 <td>Activa</td>

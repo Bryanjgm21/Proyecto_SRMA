@@ -8,12 +8,11 @@
 <html>
 <body>
     <div class="main-content">
-
         <div class="page-content">
             <div class="container-fluid">
             </div>
             <div class="row">
-                <div class="col-xl-10">
+                <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
                             @if (ViewBag.MsjError != null)
@@ -23,18 +22,13 @@
                                 </div>
                             }
                             <h2 class="card-title text-center">Reservaciones</h2>
-                            <div class="input-group">
-                                <div class="input-group-append">
-                                </div>
-                            </div>
+                            <br />
                             <div>
-
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-centered table-striped table-nowrap">
+                                <table id="basic-datatable" class="table table-striped dt-responsive nowrap">
                                     <thead>
                                         <tr>
-                                            <th>id</th>
                                             <th>Nombre</th>
                                             <th>Apellido</th>
                                             <th>Fecha</th>
@@ -52,13 +46,12 @@
                                         @foreach (var item in sortedModel)
                                         {
                                             <tr>
-                                                <td>@item.IdReservation</td>
                                                 <td class="table-user">@item.userName</td>
                                                 <td>@item.lastName</td>
                                                 <td class="table-user">@item.dateReservation.ToString("yyyy-MM-dd")</td>
                                                 <td>@item.dateReservation.ToString("HH:mm:ss")</td>
                                                 <td>@item.quantity</td>
-                                                <td>@item.observations</td>
+                                                <td style="overflow-x: auto; white-space: nowrap; max-width: 20px;">@item.observations</td>
 
                                                 @if (item.statusReser == true && item.dateReservation > DateTime.Now)
                                                 {
@@ -122,7 +115,7 @@
                         title: '¿Desea confirmar la asistencia?',
                         icon: 'question',
                         showCancelButton: true,
-                        confirmButtonText: 'Sí, Asignar',
+                        confirmButtonText: 'Sí, confirmar',
                         cancelButtonText: 'Cancelar'
                     }).then((result) => {
                         if (result.isConfirmed) {

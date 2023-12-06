@@ -56,7 +56,6 @@ namespace SRMA.Controllers
 
             if (!ModelState.IsValid)
             {
-                Thread.Sleep(1500);
                 return View("Profile", entity);
             }
 
@@ -74,7 +73,6 @@ namespace SRMA.Controllers
             }
 
             var resultado = _userModel.UpdateUser(entity, UserId);
-            Thread.Sleep(2000);
 
             if (resultado != null)
             {
@@ -120,12 +118,14 @@ namespace SRMA.Controllers
 
             if (result != null)
             {
-                return RedirectToAction("Profile", "User");
+                TempData["Registro"] = "Se registro correctamente.";
+                return RedirectToAction("Profile");
             }
             else
             {
-                return RedirectToAction("Profile", "User");
+                TempData["Error"] = "Error al registrar. Por favor, inténtelo de nuevo.";
             }
+            return RedirectToAction("Profile");
         }
 
         [HttpGet]
