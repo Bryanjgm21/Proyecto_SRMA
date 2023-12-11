@@ -52,6 +52,13 @@ namespace SRMA.Controllers
                 }
                 
             }
+            var result= _reservationModel.VerifyReservation(entity, UserId);
+
+            if (result == 1)
+            {
+                TempData["MensajeError"] = "Error al agregar la reservacion. Ya cuenta con una reserva para esa fecha y hora";
+                return RedirectToAction("NewReservation");
+            }
 
             var resp = _reservationModel.InsertReservationByClient(entity, UserId);
 

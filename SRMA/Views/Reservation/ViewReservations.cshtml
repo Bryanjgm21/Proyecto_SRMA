@@ -49,7 +49,7 @@
                                     {
                                         <tr>
                                             <td class="table-user">@item.dateReservation.ToString("yyyy-MM-dd")</td>
-                                            <td>@item.dateReservation.ToString("HH:mm:ss")</td>
+                                            <td>@item.dateReservation.ToString("HH:mm")</td>
                                             <td>@item.quantity</td>
                                             <td style="overflow-x: auto; white-space: nowrap; max-width: 20px;">@item.observations</td>
                                             @if (item.statusReser == true && item.dateReservation > DateTime.Now)

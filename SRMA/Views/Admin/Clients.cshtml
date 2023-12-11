@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SRMA.Entities.UserEntity>
+@{
+    ViewData["Title"] = "Clients";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="main-content">
+
+    <div class="page-content">
+        <div class="container-fluid">
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="card-title text-center">Clientes</h4>
+
+                        <table id="basic-datatable" class="table table-striped dt-responsive nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Cedula</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="table-user">@item.userName</td>
+                                        <td>@item.lastName</td>
+                                        <td>@item.email</td>
+                                        <td>@item.cellphone</td>
+                                        <td>@item.Id</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div> <!-- end card body-->
+                </div> <!-- end card -->
+            </div><!-- end col-->
+        </div>
+        <!-- end row-->
+
+    </div> <!-- container-fluid -->
+</div>

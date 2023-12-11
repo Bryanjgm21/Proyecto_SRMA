@@ -20,11 +20,6 @@ namespace SRMA.Controllers
 
         }
 
-
-
-
-
-
         [HttpGet]
         public IActionResult LogIn()
         {
@@ -41,9 +36,6 @@ namespace SRMA.Controllers
 
             return View();
         }
-
-
-
 
         [HttpGet]
         public IActionResult Profile()
@@ -70,25 +62,42 @@ namespace SRMA.Controllers
             var IdUser = HttpContext.Session.GetInt32("IdSession");
 
             long UserId = (long)IdUser;
+            ModelState.Remove("ptoDays");
+            ModelState.Remove("scheduleE");
+            ModelState.Remove("job");
+            ModelState.Remove("salary");
 
             if (!ModelState.IsValid)
             {
-                Thread.Sleep(1500);
+               return View("Profile", entity);
+            }
+            var ver = _userModel.verifUser(entity, UserId);
+            if (ver != null)
+            {
+                ViewBag.ErrorMessage = "El correo ya esta en uso.";
                 return View("Profile", entity);
             }
-
-
+           
             var resultado = _userModel.UpdateUser(entity, UserId);
-            Thread.Sleep(5000);
-
+            
             if (resultado != null)
             {
-                return RedirectToAction("AdminDashboard", "Admin");
+                TempData["RegistroExitoso"] = "El usuario se modifico correctamente.";
+                return RedirectToAction("Profile");
             }
             else
             {
-                return RedirectToAction("Profile", "Admin");
+               TempData["MensajeError"] = "Error al modificar el usuario. Por favor, inténtelo de nuevo.";
+                
             }
+            return RedirectToAction("Profile");
         }
+        [HttpGet]
+        public IActionResult Clients()
+        {
+            var users = _userModel.ListUsers(3);
+            return View(users);
+        }
+
     }
 }

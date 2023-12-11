@@ -5,6 +5,7 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using MimeKit;
 using static Dapper.SqlMapper;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace SRMA.Models
 {
@@ -146,8 +147,24 @@ namespace SRMA.Models
                 }
             }
         }
+        public int? VerifyReservation(ReservationEntity entity,long q)
 
+        {
+            using (var connection = new MySqlConnection(_connection))
+            {
+               var result= connection.Execute("VerifyReservation",
+                   new { p_UsuarioId = q, dateR = entity.dateReservation.Date, timeR = entity.dateReservation.TimeOfDay},
+                   commandType: System.Data.CommandType.StoredProcedure);
 
+                if (result > 0)
+                {
+                    return 1;
+                }
 
+                return 0;
+            }
+            
+        }
+     
     }
 }
