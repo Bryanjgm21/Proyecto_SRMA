@@ -5,6 +5,7 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using MimeKit;
 using DocumentFormat.OpenXml.Spreadsheet;
+using System.Reflection.PortableExecutable;
 
 namespace SRMA.Models
 {
@@ -169,17 +170,13 @@ namespace SRMA.Models
             {
                 using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
                 {
-                    var result = connection.Execute("EditAcc",
-                       new { IdUser =  q, entity.userName, entity.lastName, entity.cellphone, entity.email, entity.passwordU },
+                    var result = connection.Execute("UpdateEmployee",
+                       new {pIdUser =  q, pUserName =entity.userName,pLastName =entity.lastName,pCellphone = entity.cellphone,pEmail=entity.email, 
+                           pSalary = entity.salary, pJob = entity.job, pScheduleE = entity.scheduleE, pPtoDays = entity.ptoDays },
                        commandType: CommandType.StoredProcedure);
 
                     if (result != null)
                     {
-
-                        connection.Execute("UpdateInfoEmp",
-                           new { pIdUser = q, pSalary= entity.salary, pJob = entity.job, pScheduleE = entity.scheduleE, pPtoDays=entity.ptoDays },
-                           commandType: System.Data.CommandType.StoredProcedure); ;
-
                         return entity;
                     }
                     else

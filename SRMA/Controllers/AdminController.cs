@@ -66,6 +66,7 @@ namespace SRMA.Controllers
             ModelState.Remove("scheduleE");
             ModelState.Remove("job");
             ModelState.Remove("salary");
+            ModelState.Remove("Id");
 
             if (!ModelState.IsValid)
             {

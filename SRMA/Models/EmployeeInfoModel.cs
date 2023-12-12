@@ -39,24 +39,24 @@ namespace SRMA.Models
                 return null;
             }
         }
-        public EmployeeInfoEntity? UpdateInfoEmp(EmployeeInfoEntity entity, long q)
-        {
-            if (entity != null)
-            {
-                using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
-                {
-                    var result = connection.Execute("UpdateInfoEmp",
-                       new { IdUser = q, entity.salary, entity.job, entity.scheduleE, entity.startDate,entity.ptoDays},
-                       commandType: CommandType.StoredProcedure);
+        //public EmployeeInfoEntity? UpdateInfoEmp(EmployeeInfoEntity entity, long q)
+        //{
+        //    if (entity != null)
+        //    {
+        //        using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
+        //        {
+        //            var result = connection.Execute("UpdateInfoEmp",
+        //               new { IdUser = q, entity.salary, entity.job, entity.scheduleE, entity.startDate,entity.ptoDays},
+        //               commandType: CommandType.StoredProcedure);
 
-                    return entity;
-                }
-            }
-            else
-            {
-                return null;
-            }
-        }
+        //            return entity;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
 
         public EmployeeInfoEntity? ConsultInfoE(long q)
 

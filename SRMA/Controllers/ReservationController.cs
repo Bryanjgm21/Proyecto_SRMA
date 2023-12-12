@@ -135,7 +135,23 @@ namespace SRMA.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View("ViewReservations", entity);
+                if (entity.dateReservation == DateTime.MinValue)
+                {
+                    ViewBag.MsjError = "La fecha y hora de reservación son obligatorias.";
+                    return View("AdminEdit", entity);
+                }
+                else
+                {
+                    return View("AdminEdit", entity);
+                }
+               
+            }
+            var result = _reservationModel.VerifyReservation(entity, UserId);
+
+            if (result == 1)
+            {
+                TempData["MensajeError"] = "Error al agregar la reservacion. Ya cuenta con una reserva para esa fecha y hora";
+                return RedirectToAction("AdminEdit");
             }
 
             var resultado = _reservationModel.UpdateReservation(entity, UserId);
@@ -144,11 +160,11 @@ namespace SRMA.Controllers
             if (resultado != null)
             {
                 System.Threading.Thread.Sleep(3000);
-                return RedirectToAction("ViewReservations", "Reservation");
+                return RedirectToAction("AdminEdit", "Reservation");
             }
             else
             {
-                return RedirectToAction("ViewReservations", "Reservation");
+                return RedirectToAction("AdminEdit", "Reservation");
             }
         }
 
