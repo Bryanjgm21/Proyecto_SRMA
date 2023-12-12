@@ -31,11 +31,18 @@ namespace SRMA.Controllers
         {
             // Llamar al procedimiento almacenado para obtener los productos urgentes
             var urgentProducts = _productModel.GetUrgentProducts();
-
             ViewData["UrgentProducts"] = urgentProducts;
+
+            var users = _userModel.ListUsers(3);
+            var employees = _userModel.ListUsers(2);
+
+            ViewBag.Users = users;
+            ViewBag.Employees = employees;
 
             return View();
         }
+
+
 
         [HttpGet]
         public IActionResult Profile()

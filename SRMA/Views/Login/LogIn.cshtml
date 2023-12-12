@@ -59,9 +59,17 @@
                                             <div class="form-group">
                                                 @Html.TextBoxFor(m => m.email, new {@class="form-control form-control-user", @placeholder="Correo"})
                                             </div>
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(m => m.passwordU, new {@class="form-control form-control-user", @placeholder="Contraseña", @Type = "password"})
+                                        <div>
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(m => m.passwordU, new { @class = "form-control form-control-user", @placeholder = "Contraseña", @type = "password" })
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="showPassword">
+                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    </span>
+                                                </div>
                                             </div>
+                                        </div>
+                                        <br />
                                             <div class="form-group">
                                                 <input type="submit" id="miBoton" class="btn btn-success btn-block waves-effect waves-light" value="Iniciar Sesión" />
                                             </div>
@@ -87,3 +95,18 @@
 <!-- end page -->
 
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#showPassword").on('click', function () {
+            var passwordField = $("#passwordU");
+            var passwordFieldType = passwordField.attr('type');
+
+            if (passwordFieldType === 'password') {
+                passwordField.attr('type', 'text');
+            } else {
+                passwordField.attr('type', 'password');
+            }
+        });
+    });
+</script>

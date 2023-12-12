@@ -21,7 +21,7 @@
                                     @ViewBag.MsjError
                                 </div>
                             }
-                            <h2 class="card-title text-center">Reservaciones</h2>
+                            <h2 class="card-title text-center" style="font-size: 40px;">Reservaciones</h2>
                             <br />
                             <div>
                             </div>
@@ -156,6 +156,16 @@
     <script>
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#basic-datatable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+                }
+            });
         });
     </script>
 

@@ -14,7 +14,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="card-title text-center">Clientes</h4>
+                        <h4 class="card-title text-center" style="font-size: 40px;">Clientes</h4>
 
                         <table id="basic-datatable" class="table table-striped dt-responsive nowrap">
                             <thead>
@@ -49,3 +49,13 @@
 
     </div> <!-- container-fluid -->
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#basic-datatable').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+            }
+        });
+    });
+</script>

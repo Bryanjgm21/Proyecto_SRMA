@@ -16,7 +16,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h2 class="card-title text-center">Empleados</h2>
+                        <h2 class="card-title text-center" style="font-size: 40px;">Empleados</h2>
                         <div class="input-group">
                             <div class="input-group-append">
                                 <a> </a><a href="@Url.Action("Create","Employee")" class="btn btn-success btn-block waves-effect waves-light"> Agregar empleado </a>
@@ -235,5 +235,15 @@
             });
         });
 
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#basic-datatable').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+            }
+        });
     });
 </script>
