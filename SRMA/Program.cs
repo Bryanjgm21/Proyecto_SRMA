@@ -12,6 +12,7 @@ builder.Services.AddSingleton<IReservationModel, ReservationModel>();
 builder.Services.AddSingleton<IUtilities, Utilities>();
 builder.Services.AddSingleton<IFidelityProModel,FidelityProModel>();
 builder.Services.AddSingleton<IEmployeeInfoModel, EmployeeInfoModel>();
+builder.Services.AddSingleton<ILogBookModel, LogBookModel>();
 builder.Services.AddSession();
 
 var app = builder.Build();
