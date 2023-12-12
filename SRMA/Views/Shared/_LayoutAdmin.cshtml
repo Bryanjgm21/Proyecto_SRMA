@@ -60,66 +60,10 @@
                 </a>
 
                 <div class="d-flex align-items-center">
-                    <div class="dropdown d-inline-block">
-                        <button type="button" class="btn header-item noti-icon waves-effect waves-light" id="page-header-notifications-dropdown"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="mdi mdi-bell"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
-                             aria-labelledby="page-header-notifications-dropdown">
-                            <div class="p-3">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h6 class="m-0"> Notificaciones </h6>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="#!" class="small"></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div data-simplebar style="max-height: 230px;">
-                                <a href="" class="text-reset notification-item">
-                                    <div class="media">
-                                        <img src="~/Theme/assets/images/media/sm-1.jpg"
-                                             class="mr-3 rounded-circle avatar-xs" alt="user-pic">
-                                        <div class="media-body">
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#urgentProductsModal">
-                                                Mostrar Productos Urgentes
-                                            </button>
-                                            <p class="font-size-12 mb-0 text-muted"><i class="mdi mdi-clock-outline"></i> Ahora </p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="" class="text-reset notification-item">
-                                    <div class="media">
-                                        <img src="~/Theme/assets/images/users/avatar-2.jpg"
-                                             class="mr-3 rounded-circle avatar-xs" alt="user-pic">
-                                        <div class="media-body">
-                                            <h6 class="mt-0 mb-1">Manuel Herrera</h6>
-                                            <p class="font-size-12 mb-1">Vacaciones 12/09/2023</p>
-                                            <p class="font-size-12 mb-0 text-muted"><i class="mdi mdi-clock-outline"></i> Hace 5 minutos</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="" class="text-reset notification-item">
-                                    <div class="media">
-                                        <img src="~/Theme/assets/images/users/avatar-3.jpg"
-                                             class="mr-3 rounded-circle avatar-xs" alt="user-pic">
-                                        <div class="media-body">
-                                            <h6 class="mt-0 mb-1">Victoria Mendis</h6>
-                                            <p class="font-size-12 mb-1">Se ha unido al programa de lealtad.</p>
-                                            <p class="font-size-12 mb-0 text-muted"><i class="mdi mdi-clock-outline"></i> Hace un día </p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="dropdown d-inline-block ml-2">
                         <button type="button" class="btn header-item waves-effect waves-light" id="page-header-user-dropdown"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="mdi mdi-account waves-effect waves-light" style="color: white; font-size: 175%;"></i>
+                            <i class="mdi mdi-account waves-effect waves-light" style="color: white; font-size: 250%;"></i>
                             <i class="mdi mdi-chevron-down d-none d-sm-inline-block"></i>
                         </button>
                         @*HACER UNA VISTA PARA EDITAR O ELIMINAR LA CUENTA DE ADMIN*@
@@ -170,6 +114,9 @@
                         </li>
                         <li>
                             <a href="@Url.Action("AdminLoyaltyProgram","LoyaltyProgram")" class="waves-effect"><i class="fas fa-gift"></i><span>Programa de lealtad</span></a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Clients","Admin")" class="waves-effect"><i class="fas fa-user"></i><span>Clientes</span></a>
                         </li>
                     </ul>
                 </div>

@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Perfil";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <html>
@@ -72,19 +72,24 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Cedula</label>
-                                                    @Html.TextBoxFor(m => m.Id, new {@class="form-control form-control-user", @placeholder="cedula",@Type = "text"})
+                                                    @Html.TextBoxFor(m => m.Id, new {@class="form-control form-control-user", @placeholder="cedula",@Type = "text",@readonly = "readonly"})
                                                     <span asp-validation-for="Id" class="text-danger"> </span>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Contraseña</label>
-                                                    @Html.TextBoxFor(m => m.passwordU, new {@class="form-control form-control-user", @placeholder="Contraseña",@Type = "password"})
-                                                    <span asp-validation-for="passwordU" class="text-danger"> </span>
+                                                    <div class="input-group">
+                                                        @Html.TextBoxFor(m => m.passwordU, new { @class = "form-control form-control-user", @placeholder = "Contraseña", @Type = "password" })
+                                                        <div class="input-group-append">
+                                                            <span class="input-group-text" id="showPassword">
+                                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <span asp-validation-for="passwordU" class="text-danger"></span>
                                                 </div>
                                                 
                                             </div>
-                                            <div>
-                                                 
-                                            </div>
+                                            <br />
                                             
                                             <div class="form-group row">
                                                 <div class="col-sm-6 mb-3 mb-sm-0">
@@ -227,6 +232,22 @@
                 // Clear TempData after displaying the error message
                 TempData["Error"] = null;
             }
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#showPassword").on('click', function () {
+                var passwordField = $("#passwordU");
+                var passwordFieldType = passwordField.attr('type');
+
+                if (passwordFieldType === 'password') {
+                    passwordField.attr('type', 'text');
+                } else {
+                    passwordField.attr('type', 'password');
+                }
+            });
         });
     </script>
 </body>
