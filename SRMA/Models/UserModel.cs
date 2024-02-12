@@ -114,7 +114,7 @@ namespace SRMA.Models
         {
             using (var connection = new MySqlConnection(_connection))
             {
-                var data = connection.Query<UserEntity>("ConsultInfoEmployee",
+                var data = connection.Query<UserEntity>("ConsultInfoE",
                      new { pIdUser = q },
                      commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
 
