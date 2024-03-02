@@ -104,7 +104,7 @@ namespace SRMA.Controllers
 
             var result = _fidelityProModel.InsertPoints(IdUser, qty);
 
-            if (result != null)
+            if (result == 1)
             {
                 return RedirectToAction("AdminReservation");
             }

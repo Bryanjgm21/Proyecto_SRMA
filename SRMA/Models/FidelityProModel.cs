@@ -47,33 +47,24 @@ namespace SRMA.Models
             }
         }
 
-        public FidelityProEntity? InsertPoints(long q, int pQty)
+        public int InsertPoints(long q, int pQty)
         {
             if (q != 0 && pQty != 0)
             {
                 using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
                 {
-                    var result= connection.Execute("InsertPoints",
+                    var res= connection.Execute("InsertPoints",
                        new { pIdUser = q, qty = pQty },
                        commandType: CommandType.StoredProcedure);
-                    if (result == 1)
-                    {
-                        var updatedUser = connection.QueryFirstOrDefault<FidelityProEntity>("SELECT * FROM fidelityProgram WHERE IdUser = @IdUser",
-                            new { IdUser = q }
-                        );
-
-                        return updatedUser;
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                   
+                    return res;
                 }
             }
             else
             {
-                return null;
+                return 0;
             }
+            
         }
 
         public FidelityProEntity? RedeemPoints(string Code, int pQty)

@@ -170,7 +170,7 @@ namespace SRMA.Models
             {
                 using (var connection = new MySqlConnection(_configuration.GetConnectionString("defaultconnection")))
                 {
-                    var result = connection.Execute("UpdateEmployee",
+                    var result = connection.Execute("UpdateInfoEmp",
                        new {pIdUser =  q, pUserName =entity.userName,pLastName =entity.lastName,pCellphone = entity.cellphone,pEmail=entity.email, 
                            pSalary = entity.salary, pJob = entity.job, pScheduleE = entity.scheduleE, pPtoDays = entity.ptoDays },
                        commandType: CommandType.StoredProcedure);
