@@ -18,6 +18,7 @@ namespace SRMA.Entities
         public string userName { get; set; } = string.Empty;
         public string lastName { get; set; } = string.Empty;
         public string Id { get; set; } = string.Empty;
+        public bool statusU { get; set; }
 
         //FK Vacations and absence
         public long idVA { get; set; }
